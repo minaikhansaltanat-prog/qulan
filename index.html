@@ -911,6 +911,17 @@
           <li><a href="https://wa.me/77479545771" target="_blank" rel="noopener" class="hover:text-white transition-colors">WhatsApp</a></li>
           <li><a href="https://www.instagram.com/quan_travel_/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Instagram · @quan_travel_</a></li>
         </ul>
+        <div class="mt-6 flex items-center gap-3">
+          <img src="logo/wechat-qr.jpg" alt="WeChat QR коды" class="w-20 h-20 rounded-lg object-cover border border-white/15 shrink-0">
+          <div>
+            <p class="text-white/85 text-xs font-bold flex items-center gap-1.5">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#07C160"><path d="M8.7 3.5C4.6 3.5 1.4 6.3 1.4 9.7c0 2 1 3.7 2.6 4.9l-.6 2 2.2-1.1c.8.2 1.4.3 2 .3h.5a5.6 5.6 0 01-.2-1.5c0-3.5 3.3-6.3 7.5-6.3h.4c-.6-3-3.9-4.5-7.1-4.5zm-2.6 3.9a1 1 0 110 2 1 1 0 010-2zm5.2 0a1 1 0 110 2 1 1 0 010-2z"/><path d="M16.1 9.9c-3.6 0-6.5 2.4-6.5 5.4s2.9 5.4 6.5 5.4c.6 0 1.2 0 1.7-.2l1.9.9-.5-1.7c1.3-1 2.1-2.3 2.1-3.9 0-3-2.9-5.4-6.5-5.4h.3zm-2.3 3.3a.85.85 0 110 1.7.85.85 0 010-1.7zm4.5 0a.85.85 0 110 1.7.85.85 0 010-1.7z"/></svg>
+              WeChat
+            </p>
+            <p class="text-white/50 text-[11px] mt-1.5 leading-relaxed" data-i18n="footer.wechat_caption">QR кодты сканерлеп, WeChat-та бізге қосылыңыз</p>
+            <p class="text-white/40 text-[11px] mt-0.5">ID: gb890105</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
@@ -930,9 +941,20 @@
 
 <!-- ============================= WHATSAPP / TELEGRAM / WECHAT FAB ============================= -->
 <div id="fab" class="fixed z-[150] bottom-5 right-5 md:bottom-8 md:right-8 flex flex-col items-end gap-3">
-  <a href="#" id="fabWechat" target="_blank" rel="noopener" class="fab-item w-12 h-12 rounded-full bg-[#07C160] shadow-lift flex items-center justify-center" aria-label="WeChat">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8.7 3.5C4.6 3.5 1.4 6.3 1.4 9.7c0 2 1 3.7 2.6 4.9l-.6 2 2.2-1.1c.8.2 1.4.3 2 .3h.5a5.6 5.6 0 01-.2-1.5c0-3.5 3.3-6.3 7.5-6.3h.4c-.6-3-3.9-4.5-7.1-4.5zm-2.6 3.9a1 1 0 110 2 1 1 0 010-2zm5.2 0a1 1 0 110 2 1 1 0 010-2z"/><path d="M16.1 9.9c-3.6 0-6.5 2.4-6.5 5.4s2.9 5.4 6.5 5.4c.6 0 1.2 0 1.7-.2l1.9.9-.5-1.7c1.3-1 2.1-2.3 2.1-3.9 0-3-2.9-5.4-6.5-5.4h.3zm-2.3 3.3a.85.85 0 110 1.7.85.85 0 010-1.7zm4.5 0a.85.85 0 110 1.7.85.85 0 010-1.7z"/></svg>
-  </a>
+  <div class="relative">
+    <button type="button" id="fabWechat" class="fab-item w-12 h-12 rounded-full bg-[#07C160] shadow-lift flex items-center justify-center" aria-label="WeChat" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8.7 3.5C4.6 3.5 1.4 6.3 1.4 9.7c0 2 1 3.7 2.6 4.9l-.6 2 2.2-1.1c.8.2 1.4.3 2 .3h.5a5.6 5.6 0 01-.2-1.5c0-3.5 3.3-6.3 7.5-6.3h.4c-.6-3-3.9-4.5-7.1-4.5zm-2.6 3.9a1 1 0 110 2 1 1 0 010-2zm5.2 0a1 1 0 110 2 1 1 0 010-2z"/><path d="M16.1 9.9c-3.6 0-6.5 2.4-6.5 5.4s2.9 5.4 6.5 5.4c.6 0 1.2 0 1.7-.2l1.9.9-.5-1.7c1.3-1 2.1-2.3 2.1-3.9 0-3-2.9-5.4-6.5-5.4h.3zm-2.3 3.3a.85.85 0 110 1.7.85.85 0 010-1.7zm4.5 0a.85.85 0 110 1.7.85.85 0 010-1.7z"/></svg>
+    </button>
+    <div id="wechatPopover" class="hidden absolute bottom-0 right-16 w-64 bg-white rounded-2xl shadow-lift p-5 text-center">
+      <img src="logo/wechat-qr.jpg" alt="WeChat QR коды" class="w-40 h-40 mx-auto rounded-lg object-cover border border-line">
+      <p class="text-ink font-bold text-sm mt-3" data-i18n="wechat.title">WeChat арқылы қосылыңыз</p>
+      <p class="text-muted text-xs mt-1" data-i18n="wechat.sub">QR кодты сканерлеңіз немесе ID бойынша іздеңіз</p>
+      <button type="button" id="wechatCopyId" class="mt-3 w-full flex items-center justify-center gap-2 border border-line rounded-xl py-2 text-sm font-semibold hover:border-bred/50 transition-colors">
+        <span>ID: gb890105</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M5 15V5a2 2 0 012-2h10" stroke="currentColor" stroke-width="1.7"/></svg>
+      </button>
+    </div>
+  </div>
   <a href="#" id="fabTelegram" target="_blank" rel="noopener" class="fab-item w-12 h-12 rounded-full bg-[#26A5E4] shadow-lift flex items-center justify-center" aria-label="Telegram">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M21.9 4.3L2.5 11.9c-1 .4-1 1.7.1 2l4.6 1.4 1.8 5.6c.2.7 1.1.9 1.6.3l2.6-2.8 4.9 3.6c.7.5 1.7.1 1.9-.7l3.5-15.6c.2-.9-.7-1.7-1.6-1.4zM8.5 14.8l9.4-7c.3-.2.6.2.3.4l-7.8 7.5-.3 3.3-1.6-4.2z"/></svg>
   </a>
@@ -1030,7 +1052,8 @@ kk: {
   "footer.desc":"Қазақстаннан Қытайдың кез келген қаласына жеке гид-аудармашымен сенімді саяхат.",
   "footer.h_tours":"Турлар","footer.l_tours":"Барлық турлар","footer.l_dest":"Бағыттар","footer.l_gallery":"Галерея",
   "footer.h_company":"Компания","footer.l_about":"Біз туралы","footer.l_reviews":"Пікірлер",
-  "footer.h_contact":"Байланыс","footer.copyright":"© 2026 Quan Travel. Барлық құқықтар қорғалған.","footer.legal":"Пайдаланушы келісімі · Құпиялылық саясаты",
+  "footer.h_contact":"Байланыс","footer.wechat_caption":"QR кодты сканерлеп, WeChat-та бізге қосылыңыз","footer.copyright":"© 2026 Quan Travel. Барлық құқықтар қорғалған.","footer.legal":"Пайдаланушы келісімі · Құпиялылық саясаты",
+  "wechat.title":"WeChat арқылы қосылыңыз","wechat.sub":"QR кодты сканерлеңіз немесе ID бойынша іздеңіз","wechat.copied":"Көшірілді!",
   "gallery.alt":"Quan Travel — саяхат сәті","video.alt":"Quan Travel — видео",
   "faq.kicker":"Сұрақ-жауап","faq.title":"Жиі қойылатын сұрақтар","faq.sub":"Сапарыңызды жоспарлау алдында туындайтын ең жиі сұрақтарға жауап дайындадық. Жауабын таппасаңыз — WhatsApp арқылы тікелей сұраңыз.",
   "faq.q1":"Қытайға баруға виза керек пе?","faq.a1":"Соңғы жылдары Қазақстан азаматтары үшін Қытайға қысқа мерзімді туристік сапарларда визасыз кіру мүмкіндігі қолданыста. Дегенмен ережелер жиі жаңартылып тұрады, сондықтан дәл ағымдағы талаптарды және қажет құжаттар тізімін сапар алдында WhatsApp арқылы бізден жеке растап алыңыз.",
@@ -1081,7 +1104,8 @@ ru: {
   "footer.desc":"Надёжные путешествия из Казахстана в любой город Китая с личным гидом-переводчиком.",
   "footer.h_tours":"Туры","footer.l_tours":"Все туры","footer.l_dest":"Направления","footer.l_gallery":"Галерея",
   "footer.h_company":"Компания","footer.l_about":"О нас","footer.l_reviews":"Отзывы",
-  "footer.h_contact":"Контакты","footer.copyright":"© 2026 Quan Travel. Все права защищены.","footer.legal":"Пользовательское соглашение · Политика конфиденциальности",
+  "footer.h_contact":"Контакты","footer.wechat_caption":"Отсканируйте QR-код, чтобы добавить нас в WeChat","footer.copyright":"© 2026 Quan Travel. Все права защищены.","footer.legal":"Пользовательское соглашение · Политика конфиденциальности",
+  "wechat.title":"Добавьте нас в WeChat","wechat.sub":"Отсканируйте QR-код или найдите по ID","wechat.copied":"Скопировано!",
   "gallery.alt":"Quan Travel — момент путешествия","video.alt":"Quan Travel — видео",
   "faq.kicker":"Вопросы и ответы","faq.title":"Часто задаваемые вопросы","faq.sub":"Мы собрали ответы на самые частые вопросы, которые возникают при планировании поездки. Не нашли ответ — спросите напрямую в WhatsApp.",
   "faq.q1":"Нужна ли виза для поездки в Китай?","faq.a1":"В последние годы для граждан Казахстана действует безвизовый въезд в Китай для краткосрочных туристических поездок. Однако правила регулярно обновляются, поэтому актуальные требования и список документов уточняйте у нас в WhatsApp перед поездкой.",
@@ -1132,7 +1156,8 @@ en: {
   "footer.desc":"Trusted journeys from Kazakhstan to any city in China with a personal guide-translator.",
   "footer.h_tours":"Tours","footer.l_tours":"All tours","footer.l_dest":"Destinations","footer.l_gallery":"Gallery",
   "footer.h_company":"Company","footer.l_about":"About us","footer.l_reviews":"Reviews",
-  "footer.h_contact":"Contact","footer.copyright":"© 2026 Quan Travel. All rights reserved.","footer.legal":"Terms of use · Privacy policy",
+  "footer.h_contact":"Contact","footer.wechat_caption":"Scan the QR code to add us on WeChat","footer.copyright":"© 2026 Quan Travel. All rights reserved.","footer.legal":"Terms of use · Privacy policy",
+  "wechat.title":"Add us on WeChat","wechat.sub":"Scan the QR code or search by ID","wechat.copied":"Copied!",
   "gallery.alt":"Quan Travel — travel moment","video.alt":"Quan Travel — video",
   "faq.kicker":"Q&A","faq.title":"Frequently asked questions","faq.sub":"We've answered the questions that come up most often when planning a trip. Can't find yours — just ask us directly on WhatsApp.",
   "faq.q1":"Do I need a visa to travel to China?","faq.a1":"In recent years, Kazakhstan citizens have generally been able to enter China visa-free for short tourist trips. However, rules are updated regularly, so please confirm the current requirements and document list with us on WhatsApp before your trip.",
@@ -1183,7 +1208,8 @@ zh: {
   "footer.desc":"由专属导游兼翻译陪同，从哈萨克斯坦安心前往中国任意城市。",
   "footer.h_tours":"行程","footer.l_tours":"全部行程","footer.l_dest":"目的地","footer.l_gallery":"图库",
   "footer.h_company":"公司","footer.l_about":"关于我们","footer.l_reviews":"评价",
-  "footer.h_contact":"联系方式","footer.copyright":"© 2026 Quan Travel。保留所有权利。","footer.legal":"用户协议 · 隐私政策",
+  "footer.h_contact":"联系方式","footer.wechat_caption":"扫描二维码，添加我们的微信","footer.copyright":"© 2026 Quan Travel。保留所有权利。","footer.legal":"用户协议 · 隐私政策",
+  "wechat.title":"添加我们的微信","wechat.sub":"扫描二维码或通过 ID 搜索添加","wechat.copied":"已复制！",
   "gallery.alt":"Quan Travel —— 旅行瞬间","video.alt":"Quan Travel —— 视频",
   "faq.kicker":"常见问答","faq.title":"常见问题","faq.sub":"我们整理了规划行程时最常被问到的问题。如果没有找到您想问的，欢迎直接通过 WhatsApp 联系我们。",
   "faq.q1":"去中国需要签证吗？","faq.a1":"近年来，哈萨克斯坦公民通常可免签短期赴华旅游。但相关政策会不时调整，请在出行前通过 WhatsApp 与我们确认最新要求及所需材料。",
@@ -1506,9 +1532,34 @@ fabMain.addEventListener('click', ()=> fab.classList.toggle('fab-open'));
 document.addEventListener('click', (e)=>{
   if(!fab.contains(e.target)) fab.classList.remove('fab-open');
 });
-/* TODO: replace with real Telegram / WeChat links when provided */
+/* TODO: replace with the real Telegram link when provided */
 document.getElementById('fabTelegram').href = '#';
-document.getElementById('fabWechat').href = '#';
+
+/* WeChat: no reliable web deep-link exists, so show the QR + ID to scan/search instead */
+const wechatBtn = document.getElementById('fabWechat');
+const wechatPopover = document.getElementById('wechatPopover');
+wechatBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  const isHidden = wechatPopover.classList.contains('hidden');
+  wechatPopover.classList.toggle('hidden');
+  wechatBtn.setAttribute('aria-expanded', isHidden);
+});
+document.addEventListener('click', (e)=>{
+  if(!wechatPopover.contains(e.target) && e.target !== wechatBtn){
+    wechatPopover.classList.add('hidden');
+    wechatBtn.setAttribute('aria-expanded','false');
+  }
+});
+const wechatCopyBtn = document.getElementById('wechatCopyId');
+wechatCopyBtn.addEventListener('click', async ()=>{
+  try{
+    await navigator.clipboard.writeText('gb890105');
+    const span = wechatCopyBtn.querySelector('span');
+    const original = span.textContent;
+    span.textContent = I18N[currentLang]['wechat.copied'] || 'Copied!';
+    setTimeout(()=> span.textContent = original, 1500);
+  }catch(e){}
+});
 
 /* ======================================================================
    SCROLL REVEAL (GSAP)
