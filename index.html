@@ -9,6 +9,22 @@
 <meta property="og:description" content="Қазақ тілінде сөйлейтін жеке гид-аудармашымен Қытайды ашыңыз.">
 <meta property="og:type" content="website">
 <link rel="icon" href="logo/favicon-256.png" type="image/png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Қытайға баруға виза керек пе?", "acceptedAnswer": { "@type": "Answer", "text": "Соңғы жылдары Қазақстан азаматтары үшін Қытайға қысқа мерзімді туристік сапарларда визасыз кіру мүмкіндігі қолданыста. Дегенмен ережелер жиі жаңартылып тұрады, сондықтан дәл ағымдағы талаптарды сапар алдында WhatsApp арқылы бізден жеке растап алыңыз." } },
+    { "@type": "Question", "name": "Тур бағасына не кіреді?", "acceptedAnswer": { "@type": "Answer", "text": "Әдетте гид-аудармашы қызметі, бағдарламаны жоспарлау және сапар барысындағы толық сүйемелдеу кіреді. Авиабилет, қонақүй және кіру билеттері жеке ұсыныс дайындау кезінде бірге талқыланады." } },
+    { "@type": "Question", "name": "Топтық және жеке турдың айырмашылығы қандай?", "acceptedAnswer": { "@type": "Answer", "text": "Жеке турда бағдарлама толығымен сізге бейімделеді. Топтық турда басқа саяхатшылармен бірге, алдын ала белгіленген бағдарлама бойынша жүресіз." } },
+    { "@type": "Question", "name": "Мен қытай немесе ағылшын тілін білмеймін, бұл мәселе бола ма?", "acceptedAnswer": { "@type": "Answer", "text": "Жоқ. Саяхат бойы сізбен бірге жүретін қазақ тілінде сөйлейтін жеке гид-аудармашы бар." } },
+    { "@type": "Question", "name": "Турды қалай брондауға болады?", "acceptedAnswer": { "@type": "Answer", "text": "WhatsApp арқылы хабарласыңыз — қалаған бағыт пен болжамды күндерді айтыңыз, біз жеке бағдарлама мен бағаны ұсынамыз." } },
+    { "@type": "Question", "name": "Төлем қалай жүзеге асырылады?", "acceptedAnswer": { "@type": "Answer", "text": "Төлем шарттары әр бағдарламаға байланысты жеке анықталады және WhatsApp-та бірге талқыланады." } },
+    { "@type": "Question", "name": "Қытайда саяхаттау қауіпсіз бе?", "acceptedAnswer": { "@type": "Answer", "text": "Иә. Қытай инфрақұрылымы дамыған, қылмыс деңгейі төмен ел, әрі сапар бойы гид үнемі қасыңызда немесе байланыста болады." } },
+    { "@type": "Question", "name": "Қытайға баруға ең қолайлы мезгіл қашан?", "acceptedAnswer": { "@type": "Answer", "text": "Бұл таңдаған бағытыңызға байланысты — мысалы, Чжанцзяцзе тауларына көктем мен күз ерекше қолайлы." } }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -170,6 +186,14 @@
   .tab-btn.active{ color:var(--ink); }
   .tab-btn.active::after{ content:''; position:absolute; left:0; right:0; bottom:-10px; height:3px; border-radius:2px; background:var(--red); }
 
+  /* FAQ accordion */
+  .faq-q{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1.5rem 0; text-align:left; font-weight:700; font-size:1.05rem; cursor:pointer; color:var(--ink); }
+  .faq-q svg{ flex-shrink:0; color:var(--red); transition:transform .35s cubic-bezier(.2,.8,.2,1); }
+  .faq-item.open .faq-q svg{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; opacity:0; transition:max-height .45s cubic-bezier(.2,.8,.2,1), opacity .3s ease; }
+  .faq-item.open .faq-a{ max-height:320px; opacity:1; }
+  .faq-a p{ color:var(--muted); line-height:1.75; padding:0 2rem 1.75rem 0; }
+
   video::-webkit-media-controls-fullscreen-button{ display:block; }
 
   input,select,textarea{ font-family:inherit; }
@@ -190,18 +214,19 @@
         <img src="logo/logo.png" alt="Quan Travel logo" class="h-9 md:h-11 w-auto object-contain">
       </a>
 
-      <nav class="hidden lg:flex items-center gap-8 text-[15px] font-semibold">
+      <nav class="hidden lg:flex items-center gap-4 xl:gap-7 text-[13.5px] xl:text-[15px] font-semibold whitespace-nowrap">
         <a href="#home" class="nav-link active" data-i18n="nav.home">Басты бет</a>
         <a href="#tours" class="nav-link" data-i18n="nav.tours">Турлар</a>
         <a href="#destinations" class="nav-link" data-i18n="nav.destinations">Бағыттар</a>
         <a href="#gallery" class="nav-link" data-i18n="nav.gallery">Галерея</a>
         <a href="#reviews" class="nav-link" data-i18n="nav.reviews">Пікірлер</a>
         <a href="#about" class="nav-link" data-i18n="nav.about">Біз туралы</a>
+        <a href="#faq" class="nav-link" data-i18n="nav.faq">Сұрақтар</a>
         <a href="#contact" class="nav-link" data-i18n="nav.contact">Байланыс</a>
       </nav>
 
       <div class="flex items-center gap-3 md:gap-4">
-        <a href="tel:+77479545771" class="hidden md:flex items-center gap-2 text-[15px] font-bold hover:text-bred transition-colors">
+        <a href="tel:+77479545771" class="hidden xl:flex items-center gap-2 text-[15px] font-bold hover:text-bred transition-colors">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" fill="currentColor"/></svg>
           <span>+7&nbsp;747&nbsp;954&nbsp;57&nbsp;71</span>
         </a>
@@ -221,7 +246,7 @@
           </div>
         </div>
 
-        <a href="#tours" class="hidden md:inline-flex btn btn-primary rounded-full px-5 py-2.5 text-sm" data-i18n="nav.cta">Турларды көру</a>
+        <a href="#tours" class="hidden md:inline-flex btn btn-primary rounded-full px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm whitespace-nowrap" data-i18n="nav.cta">Турларды көру</a>
 
         <button id="burgerBtn" class="lg:hidden burger" aria-label="Мәзір" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -239,6 +264,7 @@
       <a href="#gallery" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.gallery">Галерея</a>
       <a href="#reviews" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.reviews">Пікірлер</a>
       <a href="#about" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.about">Біз туралы</a>
+      <a href="#faq" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.faq">Сұрақтар</a>
       <a href="#contact" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.contact">Байланыс</a>
 
       <div class="mt-8 flex flex-col gap-3">
@@ -328,13 +354,13 @@
         <label class="block text-[11px] uppercase tracking-wider text-white/50 font-bold mb-1.5" data-i18n="search.city">Қала</label>
         <select id="fCity" class="w-full bg-transparent text-white font-semibold text-[15px] outline-none cursor-pointer">
           <option value="" data-i18n="search.city_all">Барлық қала</option>
-          <option value="zhangjiajie">Чжанцзяцзе</option>
-          <option value="shanghai">Шанхай</option>
-          <option value="chongqing">Чунцин</option>
-          <option value="xian">Сиань</option>
-          <option value="guangzhou">Гуанчжоу</option>
-          <option value="hongkong">Гонконг</option>
-          <option value="chengdu">Чэнду</option>
+          <option value="zhangjiajie" data-i18n="dest.city.zhangjiajie">Чжанцзяцзе</option>
+          <option value="shanghai" data-i18n="dest.city.shanghai">Шанхай</option>
+          <option value="chongqing" data-i18n="dest.city.chongqing">Чунцин</option>
+          <option value="xian" data-i18n="dest.city.xian">Сиань</option>
+          <option value="guangzhou" data-i18n="dest.city.guangzhou">Гуанчжоу</option>
+          <option value="hongkong" data-i18n="dest.city.hongkong">Гонконг</option>
+          <option value="chengdu" data-i18n="dest.city.chengdu">Чэнду</option>
         </select>
       </div>
       <div class="px-0 md:px-6">
@@ -478,7 +504,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-7">
           <p class="text-white/60 font-serif text-3xl mb-1">张家界</p>
-          <h3 class="text-white font-serif font-semibold text-3xl">Чжанцзяцзе</h3>
+          <h3 class="text-white font-serif font-semibold text-3xl" data-i18n="dest.city.zhangjiajie">Чжанцзяцзе</h3>
           <p class="text-white/75 text-sm mt-2 max-w-xs" data-i18n="dest.zhangjiajie">«Аватар» фильміндегі тау бағаны, шыны көпір мен аспалы жолдар.</p>
         </div>
       </a>
@@ -489,7 +515,7 @@
         <div class="absolute bottom-0 left-0 p-6 flex items-end justify-between w-full">
           <div>
             <p class="text-white/60 font-serif text-xl mb-1">上海</p>
-            <h3 class="text-white font-serif font-semibold text-2xl">Шанхай</h3>
+            <h3 class="text-white font-serif font-semibold text-2xl" data-i18n="dest.city.shanghai">Шанхай</h3>
           </div>
         </div>
       </a>
@@ -499,7 +525,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"></div>
         <div class="absolute inset-0 flex flex-col items-start justify-end p-5">
           <p class="text-white/60 font-serif text-base">重庆</p>
-          <h3 class="text-white font-serif font-semibold text-lg">Чунцин</h3>
+          <h3 class="text-white font-serif font-semibold text-lg" data-i18n="dest.city.chongqing">Чунцин</h3>
         </div>
       </a>
       <a href="#contact" class="group relative rounded-3xl overflow-hidden md:col-span-1 h-40 md:h-[290px] shadow-card">
@@ -507,7 +533,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"></div>
         <div class="absolute inset-0 flex flex-col items-start justify-end p-5">
           <p class="text-white/60 font-serif text-base">西安</p>
-          <h3 class="text-white font-serif font-semibold text-lg">Сиань</h3>
+          <h3 class="text-white font-serif font-semibold text-lg" data-i18n="dest.city.xian">Сиань</h3>
         </div>
       </a>
     </div>
@@ -518,7 +544,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"></div>
         <div class="absolute inset-0 flex flex-col items-start justify-end p-4 md:p-5">
           <p class="text-white/60 font-serif text-sm">广州</p>
-          <h3 class="text-white font-serif font-semibold text-base md:text-lg">Гуанчжоу</h3>
+          <h3 class="text-white font-serif font-semibold text-base md:text-lg" data-i18n="dest.city.guangzhou">Гуанчжоу</h3>
         </div>
       </a>
       <a href="#contact" class="group relative rounded-3xl overflow-hidden h-32 md:h-40 shadow-card">
@@ -526,7 +552,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"></div>
         <div class="absolute inset-0 flex flex-col items-start justify-end p-4 md:p-5">
           <p class="text-white/60 font-serif text-sm">香港</p>
-          <h3 class="text-white font-serif font-semibold text-base md:text-lg">Гонконг</h3>
+          <h3 class="text-white font-serif font-semibold text-base md:text-lg" data-i18n="dest.city.hongkong">Гонконг</h3>
         </div>
       </a>
       <a href="#contact" class="group relative rounded-3xl overflow-hidden h-32 md:h-40 shadow-card">
@@ -534,7 +560,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent"></div>
         <div class="absolute inset-0 flex flex-col items-start justify-end p-4 md:p-5">
           <p class="text-white/60 font-serif text-sm">成都</p>
-          <h3 class="text-white font-serif font-semibold text-base md:text-lg">Чэнду</h3>
+          <h3 class="text-white font-serif font-semibold text-base md:text-lg" data-i18n="dest.city.chengdu">Чэнду</h3>
         </div>
       </a>
     </div>
@@ -757,6 +783,88 @@
   </div>
 </section>
 
+<!-- ============================= FAQ ============================= -->
+<section id="faq" class="py-20 md:py-28 bg-white">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8">
+    <div class="max-w-2xl mb-12 reveal" data-reveal>
+      <p class="kicker mb-3" data-i18n="faq.kicker">Сұрақ-жауап</p>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="faq.title">Жиі қойылатын сұрақтар</h2>
+      <p class="text-muted mt-4" data-i18n="faq.sub">Сапарыңызды жоспарлау алдында туындайтын ең жиі сұрақтарға жауап дайындадық. Жауабын таппасаңыз — WhatsApp арқылы тікелей сұраңыз.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1.3fr_1fr] gap-14 items-start">
+      <div id="faqList" class="reveal" data-reveal>
+        <div class="faq-item border-t border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q1">Қытайға баруға виза керек пе?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a1">Соңғы жылдары Қазақстан азаматтары үшін Қытайға қысқа мерзімді туристік сапарларда визасыз кіру мүмкіндігі қолданыста. Дегенмен ережелер жиі жаңартылып тұрады, сондықтан дәл ағымдағы талаптарды және қажет құжаттар тізімін сапар алдында WhatsApp арқылы бізден жеке растап алыңыз.</p></div>
+        </div>
+        <div class="faq-item border-t border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q2">Тур бағасына не кіреді?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a2">Әр бағдарлама жеке жасалатындықтан, құрамы да әр түрлі болуы мүмкін. Әдетте гид-аудармашы қызметі, бағдарламаны жоспарлау және сапар барысындағы толық сүйемелдеу кіреді. Авиабилет, қонақүй және кіру билеттері сияқты бөлшектер жеке ұсыныс дайындау кезінде бірге талқыланады.</p></div>
+        </div>
+        <div class="faq-item border-t border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q3">Топтық және жеке турдың айырмашылығы қандай?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a3">Жеке турда бағдарлама толығымен сізге және жақындарыңызға бейімделеді — уақыт кестесі мен бағыттарды өзгертуге болады. Топтық турда басқа саяхатшылармен бірге, алдын ала белгіленген бағдарлама бойынша жүресіз. Екеуінде де гид-аудармашы қызметі бірдей деңгейде қамтамасыз етіледі.</p></div>
+        </div>
+        <div class="faq-item border-t border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q4">Мен қытай немесе ағылшын тілін білмеймін, бұл мәселе бола ма?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a4">Жоқ. Quan Travel-дың негізгі ерекшелігі — саяхат бойы сізбен бірге жүретін қазақ тілінде сөйлейтін жеке гид-аудармашы. Дүкенде, мейрамханада, көлікте — барлық жерде тілдік кедергі болмайды.</p></div>
+        </div>
+        <div class="faq-item border-t border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q5">Турды қалай брондауға болады?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a5">WhatsApp арқылы хабарласыңыз — қалаған бағыт пен болжамды күндерді айтыңыз, біз соған сай жеке бағдарлама мен бағаны ұсынамыз. Барлық сұрақтар мен келісім тікелей жеке байланыс арқылы шешіледі.</p></div>
+        </div>
+        <div class="faq-item border-t border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q6">Төлем қалай жүзеге асырылады?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a6">Төлем шарттары әр бағдарламаға байланысты жеке анықталады. Дәл шарттарды бағдарламаны келісу барысында WhatsApp-та бірге талқылаймыз.</p></div>
+        </div>
+        <div class="faq-item border-t border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q7">Қытайда саяхаттау қауіпсіз бе?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a7">Иә. Қытай — инфрақұрылымы дамыған, қылмыс деңгейі төмен елдердің бірі. Оған қоса, сіз бүкіл сапар бойы жалғыз емессіз — жергілікті жағдайды жақсы білетін гид үнемі қасыңызда болады немесе байланыста болады.</p></div>
+        </div>
+        <div class="faq-item border-t border-b border-line">
+          <button class="faq-q" aria-expanded="false">
+            <span data-i18n="faq.q8">Қытайға баруға ең қолайлы мезгіл қашан?</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p data-i18n="faq.a8">Бұл таңдаған бағытыңызға байланысты. Мысалы, Чжанцзяцзе тауларына көктем мен күз ерекше әдемі — ауа райы жайлы, тау шыңдары бұлт арасынан анық көрінеді. Нақты бағытыңызға сай ең қолайлы мезгілді таңдауға көмектесеміз.</p></div>
+        </div>
+      </div>
+
+      <aside class="rounded-3xl overflow-hidden shadow-lift relative hidden lg:block h-full min-h-[520px] reveal" data-reveal>
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-26-1.jpg" alt="Quan Travel гиді" class="w-full h-full object-cover absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-8">
+          <p class="font-serif text-2xl text-white leading-snug" data-i18n="faq.aside_title">Басқа сұрағыңыз бар ма?</p>
+          <p class="text-white/70 text-sm mt-3" data-i18n="faq.aside_sub">Тікелей маманмен сөйлесіп, барлық сұрағыңызға жауап алыңыз.</p>
+          <a href="https://wa.me/77479545771" target="_blank" rel="noopener" class="btn btn-primary rounded-full px-6 py-3.5 text-sm mt-6" data-i18n="faq.aside_btn">WhatsApp-қа жазу</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- ============================= CTA ============================= -->
 <section class="bg-ink noise relative overflow-hidden">
   <div class="max-w-[1360px] mx-auto px-5 md:px-8 py-16 md:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
@@ -885,7 +993,7 @@ const GALLERY_PHOTOS = [
 ====================================================================== */
 const I18N = {
 kk: {
-  "nav.home":"Басты бет","nav.tours":"Турлар","nav.destinations":"Бағыттар","nav.gallery":"Галерея","nav.reviews":"Пікірлер","nav.about":"Біз туралы","nav.contact":"Байланыс","nav.cta":"Турларды көру",
+  "nav.home":"Басты бет","nav.tours":"Турлар","nav.destinations":"Бағыттар","nav.gallery":"Галерея","nav.reviews":"Пікірлер","nav.about":"Біз туралы","nav.faq":"Сұрақтар","nav.contact":"Байланыс","nav.cta":"Турларды көру",
   "hero.kicker":"ҚЫТАЙҒА САЯХАТ","hero.h1_1":"ҚЫТАЙДЫ","hero.h1_2":"БІРГЕ АШУҒА","hero.h1_3":"ДАЙЫНСЫҢ БА?",
   "hero.sub":"Quan Travel — Қазақстаннан Қытайдың кез келген қаласына қазақ тілінде сөйлейтін жеке гид-аудармашымен сенімді саяхат. Аудармашы, гид және бағдарлама — бір қолда.",
   "hero.cta1":"Турларды көру","hero.cta2":"Бейнеролик көру",
@@ -902,6 +1010,7 @@ kk: {
   "tours.t4.title":"Шанхай: кескінді мегаполис","tours.t4.desc":"Бунд жағалауы, Пудун панорамасы және заманауи Қытайдың жүрегі.",
   "dest.kicker":"География","dest.title":"7 бағыт — бір гидпен",
   "dest.zhangjiajie":"«Аватар» фильміндегі тау бағаны, шыны көпір мен аспалы жолдар.",
+  "dest.city.zhangjiajie":"Чжанцзяцзе","dest.city.shanghai":"Шанхай","dest.city.chongqing":"Чунцин","dest.city.xian":"Сиань","dest.city.guangzhou":"Гуанчжоу","dest.city.hongkong":"Гонконг","dest.city.chengdu":"Чэнду",
   "why.kicker":"Артықшылықтар","why.title":"Неге бізді таңдайды?","why.sub":"Сапалы қызмет пен жеке көзқарас — саяхатыңыздың әр қадамын бірге сүйемелдейміз.",
   "why.ig":"Instagram жазылушысы · Meta Verified","why.s1":"Instagram жазылушы","why.s2":"Тікелей бағыт","why.s3":"Жеке гид-аудармашы, делдалсыз","why.s4":"WhatsApp қолдауы",
   "story.kicker":"Тәжірибе","story.title":"Қытайды басқа қырынан таны","story.sub":"Тау шыңдары ғана емес — дәстүрлі шай рәсімі, түнгі базарлар мен қала ырғағы.",
@@ -922,10 +1031,20 @@ kk: {
   "footer.h_tours":"Турлар","footer.l_tours":"Барлық турлар","footer.l_dest":"Бағыттар","footer.l_gallery":"Галерея",
   "footer.h_company":"Компания","footer.l_about":"Біз туралы","footer.l_reviews":"Пікірлер",
   "footer.h_contact":"Байланыс","footer.copyright":"© 2026 Quan Travel. Барлық құқықтар қорғалған.","footer.legal":"Пайдаланушы келісімі · Құпиялылық саясаты",
-  "gallery.alt":"Quan Travel — саяхат сәті","video.alt":"Quan Travel — видео"
+  "gallery.alt":"Quan Travel — саяхат сәті","video.alt":"Quan Travel — видео",
+  "faq.kicker":"Сұрақ-жауап","faq.title":"Жиі қойылатын сұрақтар","faq.sub":"Сапарыңызды жоспарлау алдында туындайтын ең жиі сұрақтарға жауап дайындадық. Жауабын таппасаңыз — WhatsApp арқылы тікелей сұраңыз.",
+  "faq.q1":"Қытайға баруға виза керек пе?","faq.a1":"Соңғы жылдары Қазақстан азаматтары үшін Қытайға қысқа мерзімді туристік сапарларда визасыз кіру мүмкіндігі қолданыста. Дегенмен ережелер жиі жаңартылып тұрады, сондықтан дәл ағымдағы талаптарды және қажет құжаттар тізімін сапар алдында WhatsApp арқылы бізден жеке растап алыңыз.",
+  "faq.q2":"Тур бағасына не кіреді?","faq.a2":"Әр бағдарлама жеке жасалатындықтан, құрамы да әр түрлі болуы мүмкін. Әдетте гид-аудармашы қызметі, бағдарламаны жоспарлау және сапар барысындағы толық сүйемелдеу кіреді. Авиабилет, қонақүй және кіру билеттері сияқты бөлшектер жеке ұсыныс дайындау кезінде бірге талқыланады.",
+  "faq.q3":"Топтық және жеке турдың айырмашылығы қандай?","faq.a3":"Жеке турда бағдарлама толығымен сізге және жақындарыңызға бейімделеді — уақыт кестесі мен бағыттарды өзгертуге болады. Топтық турда басқа саяхатшылармен бірге, алдын ала белгіленген бағдарлама бойынша жүресіз. Екеуінде де гид-аудармашы қызметі бірдей деңгейде қамтамасыз етіледі.",
+  "faq.q4":"Мен қытай немесе ағылшын тілін білмеймін, бұл мәселе бола ма?","faq.a4":"Жоқ. Quan Travel-дың негізгі ерекшелігі — саяхат бойы сізбен бірге жүретін қазақ тілінде сөйлейтін жеке гид-аудармашы. Дүкенде, мейрамханада, көлікте — барлық жерде тілдік кедергі болмайды.",
+  "faq.q5":"Турды қалай брондауға болады?","faq.a5":"WhatsApp арқылы хабарласыңыз — қалаған бағыт пен болжамды күндерді айтыңыз, біз соған сай жеке бағдарлама мен бағаны ұсынамыз. Барлық сұрақтар мен келісім тікелей жеке байланыс арқылы шешіледі.",
+  "faq.q6":"Төлем қалай жүзеге асырылады?","faq.a6":"Төлем шарттары әр бағдарламаға байланысты жеке анықталады. Дәл шарттарды бағдарламаны келісу барысында WhatsApp-та бірге талқылаймыз.",
+  "faq.q7":"Қытайда саяхаттау қауіпсіз бе?","faq.a7":"Иә. Қытай — инфрақұрылымы дамыған, қылмыс деңгейі төмен елдердің бірі. Оған қоса, сіз бүкіл сапар бойы жалғыз емессіз — жергілікті жағдайды жақсы білетін гид үнемі қасыңызда болады немесе байланыста болады.",
+  "faq.q8":"Қытайға баруға ең қолайлы мезгіл қашан?","faq.a8":"Бұл таңдаған бағытыңызға байланысты. Мысалы, Чжанцзяцзе тауларына көктем мен күз ерекше әдемі — ауа райы жайлы, тау шыңдары бұлт арасынан анық көрінеді. Нақты бағытыңызға сай ең қолайлы мезгілді таңдауға көмектесеміз.",
+  "faq.aside_title":"Басқа сұрағыңыз бар ма?","faq.aside_sub":"Тікелей маманмен сөйлесіп, барлық сұрағыңызға жауап алыңыз.","faq.aside_btn":"WhatsApp-қа жазу"
 },
 ru: {
-  "nav.home":"Главная","nav.tours":"Туры","nav.destinations":"Направления","nav.gallery":"Галерея","nav.reviews":"Отзывы","nav.about":"О нас","nav.contact":"Контакты","nav.cta":"Смотреть туры",
+  "nav.home":"Главная","nav.tours":"Туры","nav.destinations":"Направления","nav.gallery":"Галерея","nav.reviews":"Отзывы","nav.about":"О нас","nav.faq":"Вопросы","nav.contact":"Контакты","nav.cta":"Смотреть туры",
   "hero.kicker":"ПУТЕШЕСТВИЕ В КИТАЙ","hero.h1_1":"ГОТОВЫ","hero.h1_2":"ОТКРЫТЬ КИТАЙ","hero.h1_3":"ВМЕСТЕ С НАМИ?",
   "hero.sub":"Quan Travel — надёжные путешествия из Казахстана в любой город Китая с личным гидом-переводчиком, говорящим на казахском языке. Переводчик, гид и программа — в одних руках.",
   "hero.cta1":"Смотреть туры","hero.cta2":"Смотреть видео",
@@ -942,6 +1061,7 @@ ru: {
   "tours.t4.title":"Шанхай: живописный мегаполис","tours.t4.desc":"Набережная Бунд, панорама Пудуна и сердце современного Китая.",
   "dest.kicker":"География","dest.title":"7 направлений — один гид",
   "dest.zhangjiajie":"Горные колонны из фильма «Аватар», стеклянный мост и подвесные тропы.",
+  "dest.city.zhangjiajie":"Чжанцзяцзе","dest.city.shanghai":"Шанхай","dest.city.chongqing":"Чунцин","dest.city.xian":"Сиань","dest.city.guangzhou":"Гуанчжоу","dest.city.hongkong":"Гонконг","dest.city.chengdu":"Чэнду",
   "why.kicker":"Преимущества","why.title":"Почему выбирают нас?","why.sub":"Качественный сервис и индивидуальный подход на каждом этапе вашего путешествия.",
   "why.ig":"подписчиков в Instagram · Meta Verified","why.s1":"подписчиков в Instagram","why.s2":"прямых направлений","why.s3":"личный гид-переводчик, без посредников","why.s4":"поддержка в WhatsApp",
   "story.kicker":"Впечатления","story.title":"Откройте Китай с другой стороны","story.sub":"Не только горные вершины — традиционная чайная церемония, ночные рынки и ритм города.",
@@ -962,10 +1082,20 @@ ru: {
   "footer.h_tours":"Туры","footer.l_tours":"Все туры","footer.l_dest":"Направления","footer.l_gallery":"Галерея",
   "footer.h_company":"Компания","footer.l_about":"О нас","footer.l_reviews":"Отзывы",
   "footer.h_contact":"Контакты","footer.copyright":"© 2026 Quan Travel. Все права защищены.","footer.legal":"Пользовательское соглашение · Политика конфиденциальности",
-  "gallery.alt":"Quan Travel — момент путешествия","video.alt":"Quan Travel — видео"
+  "gallery.alt":"Quan Travel — момент путешествия","video.alt":"Quan Travel — видео",
+  "faq.kicker":"Вопросы и ответы","faq.title":"Часто задаваемые вопросы","faq.sub":"Мы собрали ответы на самые частые вопросы, которые возникают при планировании поездки. Не нашли ответ — спросите напрямую в WhatsApp.",
+  "faq.q1":"Нужна ли виза для поездки в Китай?","faq.a1":"В последние годы для граждан Казахстана действует безвизовый въезд в Китай для краткосрочных туристических поездок. Однако правила регулярно обновляются, поэтому актуальные требования и список документов уточняйте у нас в WhatsApp перед поездкой.",
+  "faq.q2":"Что входит в стоимость тура?","faq.a2":"Поскольку каждая программа создаётся индивидуально, её состав может отличаться. Обычно в стоимость входят услуги гида-переводчика, разработка программы и полное сопровождение в поездке. Авиабилеты, отель и входные билеты обсуждаются отдельно при подготовке персонального предложения.",
+  "faq.q3":"В чём разница между групповым и индивидуальным туром?","faq.a3":"В индивидуальном туре программа полностью подстраивается под вас и ваших близких — можно менять маршрут и график. В групповом туре вы путешествуете вместе с другими туристами по заранее составленной программе. Уровень сопровождения гида-переводчика одинаково высокий в обоих форматах.",
+  "faq.q4":"Я не знаю китайский или английский — это проблема?","faq.a4":"Нет. Главная особенность Quan Travel — личный гид-переводчик, говорящий на казахском языке, который сопровождает вас на протяжении всей поездки. В магазине, ресторане, транспорте — языкового барьера не будет нигде.",
+  "faq.q5":"Как забронировать тур?","faq.a5":"Напишите нам в WhatsApp — укажите желаемое направление и примерные даты, и мы подготовим персональную программу и стоимость. Все вопросы и договорённости решаются напрямую, в личном общении.",
+  "faq.q6":"Как происходит оплата?","faq.a6":"Условия оплаты определяются индивидуально для каждой программы. Точные условия мы обсуждаем вместе в WhatsApp на этапе согласования тура.",
+  "faq.q7":"Безопасно ли путешествовать по Китаю?","faq.a7":"Да. Китай — одна из стран с развитой инфраструктурой и низким уровнем преступности. Кроме того, вы не остаётесь одни на протяжении поездки — рядом всегда гид, хорошо знающий местные условия.",
+  "faq.q8":"Когда лучше всего ехать в Китай?","faq.a8":"Это зависит от выбранного направления. Например, горы Чжанцзяцзе особенно красивы весной и осенью — комфортная погода и чёткая видимость вершин сквозь облака. Мы поможем подобрать оптимальное время для вашего маршрута.",
+  "faq.aside_title":"Остались вопросы?","faq.aside_sub":"Поговорите напрямую со специалистом и получите ответы на все вопросы.","faq.aside_btn":"Написать в WhatsApp"
 },
 en: {
-  "nav.home":"Home","nav.tours":"Tours","nav.destinations":"Destinations","nav.gallery":"Gallery","nav.reviews":"Reviews","nav.about":"About","nav.contact":"Contact","nav.cta":"View tours",
+  "nav.home":"Home","nav.tours":"Tours","nav.destinations":"Destinations","nav.gallery":"Gallery","nav.reviews":"Reviews","nav.about":"About","nav.faq":"FAQ","nav.contact":"Contact","nav.cta":"View tours",
   "hero.kicker":"TRAVEL TO CHINA","hero.h1_1":"READY TO","hero.h1_2":"DISCOVER CHINA","hero.h1_3":"TOGETHER?",
   "hero.sub":"Quan Travel — trusted journeys from Kazakhstan to any city in China with a personal Kazakh-speaking guide-translator. Translator, guide and itinerary — all in one hand.",
   "hero.cta1":"View tours","hero.cta2":"Watch video",
@@ -982,6 +1112,7 @@ en: {
   "tours.t4.title":"Shanghai: the picturesque megacity","tours.t4.desc":"The Bund waterfront, the Pudong skyline and the heart of modern China.",
   "dest.kicker":"Geography","dest.title":"7 destinations — one guide",
   "dest.zhangjiajie":"The mountain pillars from Avatar, a glass bridge and skywalks.",
+  "dest.city.zhangjiajie":"Zhangjiajie","dest.city.shanghai":"Shanghai","dest.city.chongqing":"Chongqing","dest.city.xian":"Xi'an","dest.city.guangzhou":"Guangzhou","dest.city.hongkong":"Hong Kong","dest.city.chengdu":"Chengdu",
   "why.kicker":"Advantages","why.title":"Why choose us?","why.sub":"Quality service and a personal approach at every step of your journey.",
   "why.ig":"Instagram followers · Meta Verified","why.s1":"Instagram followers","why.s2":"direct destinations","why.s3":"personal guide-translator, no intermediaries","why.s4":"WhatsApp support",
   "story.kicker":"Experience","story.title":"Discover China from another side","story.sub":"Not just mountain peaks — traditional tea ceremony, night markets and city rhythm.",
@@ -1002,10 +1133,20 @@ en: {
   "footer.h_tours":"Tours","footer.l_tours":"All tours","footer.l_dest":"Destinations","footer.l_gallery":"Gallery",
   "footer.h_company":"Company","footer.l_about":"About us","footer.l_reviews":"Reviews",
   "footer.h_contact":"Contact","footer.copyright":"© 2026 Quan Travel. All rights reserved.","footer.legal":"Terms of use · Privacy policy",
-  "gallery.alt":"Quan Travel — travel moment","video.alt":"Quan Travel — video"
+  "gallery.alt":"Quan Travel — travel moment","video.alt":"Quan Travel — video",
+  "faq.kicker":"Q&A","faq.title":"Frequently asked questions","faq.sub":"We've answered the questions that come up most often when planning a trip. Can't find yours — just ask us directly on WhatsApp.",
+  "faq.q1":"Do I need a visa to travel to China?","faq.a1":"In recent years, Kazakhstan citizens have generally been able to enter China visa-free for short tourist trips. However, rules are updated regularly, so please confirm the current requirements and document list with us on WhatsApp before your trip.",
+  "faq.q2":"What's included in the tour price?","faq.a2":"Since every itinerary is custom-built, what's included can vary. It typically covers guide-translator services, itinerary planning, and full support throughout the trip. Flights, hotels and entrance tickets are discussed separately while preparing your personal offer.",
+  "faq.q3":"What's the difference between a group and a private tour?","faq.a3":"On a private tour, the itinerary is fully tailored to you and your companions — the route and schedule can be changed. On a group tour, you travel together with other travellers on a pre-set itinerary. Guide-translator support is equally thorough in both formats.",
+  "faq.q4":"I don't speak Chinese or English — will that be a problem?","faq.a4":"No. Quan Travel's core feature is a personal Kazakh-speaking guide-translator who stays with you throughout the trip. In shops, restaurants, transport — there's no language barrier anywhere.",
+  "faq.q5":"How do I book a tour?","faq.a5":"Message us on WhatsApp with your desired destination and approximate dates, and we'll prepare a personal itinerary and price. All questions and arrangements are handled directly, one-on-one.",
+  "faq.q6":"How does payment work?","faq.a6":"Payment terms are set individually for each itinerary. We'll discuss the exact terms together on WhatsApp while finalizing your tour.",
+  "faq.q7":"Is it safe to travel in China?","faq.a7":"Yes. China has well-developed infrastructure and a low crime rate. On top of that, you're never on your own during the trip — a guide who knows the local conditions is always nearby or reachable.",
+  "faq.q8":"When's the best time to visit China?","faq.a8":"It depends on your chosen destination. For example, the Zhangjiajie mountains are especially beautiful in spring and autumn, with comfortable weather and clear views of the peaks through the clouds. We'll help you pick the best timing for your route.",
+  "faq.aside_title":"Have another question?","faq.aside_sub":"Talk directly to a specialist and get answers to all your questions.","faq.aside_btn":"Message on WhatsApp"
 },
 zh: {
-  "nav.home":"首页","nav.tours":"行程","nav.destinations":"目的地","nav.gallery":"图库","nav.reviews":"评价","nav.about":"关于我们","nav.contact":"联系方式","nav.cta":"查看行程",
+  "nav.home":"首页","nav.tours":"行程","nav.destinations":"目的地","nav.gallery":"图库","nav.reviews":"评价","nav.about":"关于我们","nav.faq":"常见问题","nav.contact":"联系方式","nav.cta":"查看行程",
   "hero.kicker":"中国之旅","hero.h1_1":"准备好","hero.h1_2":"一起探索中国","hero.h1_3":"了吗？",
   "hero.sub":"Quan Travel —— 由讲哈萨克语的专属导游兼翻译陪同，从哈萨克斯坦出发，安心前往中国任意城市。翻译、向导与行程安排，一站式服务。",
   "hero.cta1":"查看行程","hero.cta2":"观看视频",
@@ -1022,6 +1163,7 @@ zh: {
   "tours.t4.title":"上海：如画的国际大都会","tours.t4.desc":"外滩江畔、浦东天际线，感受现代中国的心脏地带。",
   "dest.kicker":"目的地","dest.title":"7 大目的地 · 一位向导",
   "dest.zhangjiajie":"电影《阿凡达》取景的悬浮山峰、玻璃桥与云端栈道。",
+  "dest.city.zhangjiajie":"张家界","dest.city.shanghai":"上海","dest.city.chongqing":"重庆","dest.city.xian":"西安","dest.city.guangzhou":"广州","dest.city.hongkong":"香港","dest.city.chengdu":"成都",
   "why.kicker":"我们的优势","why.title":"为什么选择我们？","why.sub":"优质的服务与个性化的关怀，陪伴您旅程的每一步。",
   "why.ig":"Instagram 粉丝 · Meta 已认证","why.s1":"Instagram 粉丝","why.s2":"直达目的地","why.s3":"专属导游兼翻译，无中间商","why.s4":"WhatsApp 全天候支持",
   "story.kicker":"深度体验","story.title":"从另一个角度认识中国","story.sub":"不只是高山峻岭 —— 还有传统茶道、夜市与城市的节奏。",
@@ -1042,7 +1184,17 @@ zh: {
   "footer.h_tours":"行程","footer.l_tours":"全部行程","footer.l_dest":"目的地","footer.l_gallery":"图库",
   "footer.h_company":"公司","footer.l_about":"关于我们","footer.l_reviews":"评价",
   "footer.h_contact":"联系方式","footer.copyright":"© 2026 Quan Travel。保留所有权利。","footer.legal":"用户协议 · 隐私政策",
-  "gallery.alt":"Quan Travel —— 旅行瞬间","video.alt":"Quan Travel —— 视频"
+  "gallery.alt":"Quan Travel —— 旅行瞬间","video.alt":"Quan Travel —— 视频",
+  "faq.kicker":"常见问答","faq.title":"常见问题","faq.sub":"我们整理了规划行程时最常被问到的问题。如果没有找到您想问的，欢迎直接通过 WhatsApp 联系我们。",
+  "faq.q1":"去中国需要签证吗？","faq.a1":"近年来，哈萨克斯坦公民通常可免签短期赴华旅游。但相关政策会不时调整，请在出行前通过 WhatsApp 与我们确认最新要求及所需材料。",
+  "faq.q2":"行程价格包含哪些内容？","faq.a2":"由于每个行程都是量身定制，具体包含内容会有所不同。通常包括导游兼翻译服务、行程规划以及全程陪同支持。机票、酒店和门票等费用会在制定个人方案时另行商定。",
+  "faq.q3":"团队游和私人定制游有什么区别？","faq.a3":"私人定制游的行程完全根据您和同行者的需求安排，路线和时间都可以调整。团队游则与其他旅行者一起，按照预先安排好的行程出行。两种形式下导游兼翻译的陪同服务同样细致周到。",
+  "faq.q4":"我不会说中文或英文，会有问题吗？","faq.a4":"不会。Quan Travel 的核心优势就是全程陪同的哈萨克语导游兼翻译。无论是购物、用餐还是乘车，都不会遇到语言障碍。",
+  "faq.q5":"如何预订行程？","faq.a5":"请通过 WhatsApp 联系我们，告诉我们您想去的目的地和大致日期，我们会为您准备专属行程方案和报价。所有问题和安排都通过一对一沟通直接解决。",
+  "faq.q6":"如何付款？","faq.a6":"付款方式根据每个行程单独确定。具体条款会在确认行程时通过 WhatsApp 与您详细商定。",
+  "faq.q7":"在中国旅行安全吗？","faq.a7":"安全。中国基础设施完善，犯罪率较低。此外，整个行程中您都不会孤身一人——熟悉当地情况的向导会一直陪伴在侧或保持联系。",
+  "faq.q8":"什么时候去中国旅游最合适？","faq.a8":"这取决于您选择的目的地。例如，张家界的山峰在春秋两季格外美丽，气候宜人，云雾缭绕间山峰清晰可见。我们会根据您的行程帮您挑选最佳出行时间。",
+  "faq.aside_title":"还有其他问题？","faq.aside_sub":"直接与我们的专属顾问沟通，获取所有问题的答案。","faq.aside_btn":"通过 WhatsApp 联系"
 }
 };
 
@@ -1096,7 +1248,7 @@ document.querySelectorAll('[data-close-menu]').forEach(el=>{
 });
 
 /* nav active link on scroll */
-const sections = ['home','tours','destinations','gallery','reviews','about','contact'];
+const sections = ['home','tours','destinations','gallery','reviews','about','faq','contact'];
 const navLinks = document.querySelectorAll('.nav-link');
 window.addEventListener('scroll', ()=>{
   let current = 'home';
@@ -1307,6 +1459,22 @@ document.querySelectorAll('.review-tab').forEach(btn=>{
 
 /* TODO: replace with the real 2GIS office link when provided */
 document.getElementById('gisLink').href = '#';
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const btn = item.querySelector('.faq-q');
+  btn.addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el=>{
+      el.classList.remove('open');
+      el.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
 
 /* ======================================================================
    TOUR SEARCH FILTER
