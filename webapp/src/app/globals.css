@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Quan Travel brand palette — matches the public site's Tailwind config
+     (see index.html) so the admin panel stays visually consistent. */
+  --color-bred: #9f2b25;
+  --color-bred-dark: #7c211c;
+  --color-bred-light: #b8443d;
+  --color-bgold: #b8860b;
+  --color-bgold-light: #d2a53a;
+  --color-bgreen: #1f3a2e;
+  --color-bgreen-light: #2b5443;
+  --color-bgreen-dark: #142722;
+  --color-paper: #f4efe6;
+  --color-paper-dim: #ece4d6;
+  --color-ink: #111111;
+  --color-muted: #6b6b6b;
+  --color-line: #e6e1d9;
+  --font-display: var(--font-pt-serif);
+  --font-body: var(--font-golos);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
