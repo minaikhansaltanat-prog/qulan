@@ -1,0 +1,32 @@
+node_modules/
+package-lock.json.bak
+npm-debug.log*
+
+# QA / dev screenshots
+temporary screenshots/
+
+# Raw source assets (large; optimized derivatives in Photo/web, Video/web,
+# Video/gallery and Video/posters are what the site actually serves)
+Photo/*.jpg
+Photo/*.jpeg
+Video/*.mp4
+
+# Reference-only mockup, not part of the shipped site
+ava/
+
+# Unrelated tooling that happened to live in this folder
+core.py
+search.py
+design_system.py
+core.cpython-*.pyc
+search.cpython-*.pyc
+design_system.cpython-*.pyc
+__pycache__/
+plugin.json
+SKILL.md
+SKILL а.md
+data/
+
+# OS
+Thumbs.db
+.DS_Store

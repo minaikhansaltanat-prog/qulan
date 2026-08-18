@@ -1,0 +1,1361 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quan Travel — Қытайға саяхат</title>
+<meta name="description" content="Quan Travel — Қазақстаннан Қытайдың кез келген қаласына жеке гид-аудармашымен сенімді саяхат. Чжанцзяцзе, Шанхай, Гонконг, Гуанчжоу, Чунцин, Сиань, Чэнду.">
+<meta property="og:title" content="Quan Travel — Қытайға саяхат">
+<meta property="og:description" content="Қазақ тілінде сөйлейтін жеке гид-аудармашымен Қытайды ашыңыз.">
+<meta property="og:type" content="website">
+<link rel="icon" href="logo/favicon-256.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bred:   { DEFAULT: '#9F2B25', dark: '#7C211C', light: '#B8443D' },
+          bgold:  { DEFAULT: '#B8860B', light: '#D2A53A' },
+          bgreen: { DEFAULT: '#1F3A2E', light: '#2B5443', dark: '#142722' },
+          paper:  { DEFAULT: '#F4EFE6', dim: '#ECE4D6' },
+          bblue:  { DEFAULT: '#3E6B84' },
+          ink:    { DEFAULT: '#111111' },
+          muted:  { DEFAULT: '#6B6B6B' },
+          line:   { DEFAULT: '#E6E1D9' },
+        },
+        fontFamily: {
+          sans: ['Manrope', 'system-ui', 'sans-serif'],
+          serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        },
+        boxShadow: {
+          soft: '0 1px 2px rgba(17,17,17,.04), 0 8px 24px -8px rgba(17,17,17,.10)',
+          card: '0 2px 6px rgba(31,58,46,.06), 0 16px 40px -16px rgba(17,17,17,.18)',
+          lift: '0 4px 10px rgba(159,43,37,.08), 0 24px 48px -20px rgba(17,17,17,.28)',
+          glow: '0 0 0 1px rgba(255,255,255,.5), 0 20px 50px -12px rgba(17,17,17,.35)',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root{
+    --red:#9F2B25; --red-dark:#7C211C;
+    --gold:#B8860B;
+    --green:#1F3A2E; --green-light:#2B5443;
+    --paper:#F4EFE6;
+    --blue:#3E6B84;
+    --ink:#111111;
+    --muted:#6B6B6B;
+    --line:#E6E1D9;
+    --hdr-h: 76px;
+  }
+  html{scroll-behavior:smooth;}
+  html,body{overflow-x:hidden; width:100%;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.7;
+    position:relative;
+  }
+  .font-serif{font-family:'Playfair Display',Georgia,serif;}
+  ::selection{background:var(--red); color:#fff;}
+
+  /* noise texture */
+  .noise{position:relative; isolation:isolate;}
+  .noise::after{
+    content:''; position:absolute; inset:0; pointer-events:none; z-index:1;
+    opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* header */
+  .hdr{ position:sticky; top:0; z-index:100; }
+  .hdr-bg{ position:relative; z-index:95; background:rgba(244,239,230,.86); backdrop-filter:blur(14px) saturate(1.2); -webkit-backdrop-filter:blur(14px) saturate(1.2); border-bottom:1px solid rgba(230,225,217,.9); }
+  .menu-open .hdr-bg{ background:rgba(244,239,230,.98); }
+  .nav-link{ position:relative; }
+  .nav-link::after{ content:''; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .28s cubic-bezier(.2,.8,.2,1); }
+  .nav-link:hover::after, .nav-link.active::after{ transform:scaleX(1); }
+
+  /* hamburger morph */
+  .burger{ width:26px; height:18px; position:relative; }
+  .burger span{ position:absolute; left:0; right:0; height:2px; background:var(--ink); border-radius:2px; transition:transform .32s cubic-bezier(.2,.8,.2,1), opacity .2s ease, top .32s cubic-bezier(.2,.8,.2,1); }
+  .burger span:nth-child(1){ top:0; }
+  .burger span:nth-child(2){ top:8px; }
+  .burger span:nth-child(3){ top:16px; }
+  .menu-open .burger span:nth-child(1){ top:8px; transform:rotate(45deg); }
+  .menu-open .burger span:nth-child(2){ opacity:0; }
+  .menu-open .burger span:nth-child(3){ top:8px; transform:rotate(-45deg); }
+
+  /* mobile menu panel */
+  .mobile-panel{ position:fixed; inset:0; top:0; z-index:90; background:var(--paper);
+    transform:translateX(100%); transition:transform .42s cubic-bezier(.2,.85,.2,1); overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  .menu-open .mobile-panel{ transform:translateX(0); }
+
+  /* hero video crossfade */
+  .hero-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; opacity:0; transition:opacity 1.4s ease; }
+  .hero-video.is-active{ opacity:1; }
+  .hero-scrim-l{ background:linear-gradient(100deg, rgba(17,17,17,.82) 0%, rgba(17,17,17,.6) 32%, rgba(17,17,17,.18) 62%, rgba(17,17,17,0) 82%); }
+  .hero-scrim-b{ background:linear-gradient(0deg, rgba(17,17,17,.55) 0%, rgba(17,17,17,0) 35%); }
+  .glass-dark{ background:rgba(17,17,17,.38); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+  .glass-light{ background:rgba(255,255,255,.9); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+
+  /* buttons */
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.55rem; font-weight:700; letter-spacing:.01em; transition:transform .25s cubic-bezier(.3,.7,.2,1), box-shadow .25s ease, background-color .2s ease, color .2s ease; cursor:pointer; }
+  .btn:active{ transform:scale(.97); }
+  .btn-primary{ background:var(--red); color:#fff; box-shadow:0 10px 24px -10px rgba(159,43,37,.55); }
+  .btn-primary:hover{ background:var(--red-dark); box-shadow:0 14px 30px -10px rgba(159,43,37,.6); transform:translateY(-2px); }
+  .btn-primary:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+  .btn-ghost{ background:transparent; color:var(--ink); }
+  .btn-ghost:hover{ color:var(--red); }
+  .btn-outline{ border:1.5px solid rgba(255,255,255,.55); color:#fff; }
+  .btn-outline:hover{ border-color:#fff; background:rgba(255,255,255,.1); transform:translateY(-2px); }
+  .btn-dark{ background:var(--ink); color:#fff; }
+  .btn-dark:hover{ background:#000; transform:translateY(-2px); }
+
+  /* section kicker */
+  .kicker{ letter-spacing:.16em; text-transform:uppercase; font-size:.75rem; font-weight:700; color:var(--red); }
+  .kicker::before{ content:''; display:inline-block; width:22px; height:2px; background:var(--gold); margin-right:.6rem; vertical-align:middle; transform:translateY(-2px); }
+
+  /* cards */
+  .card{ background:#fff; border:1px solid var(--line); border-radius:20px; transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; }
+  .card:hover{ transform:translateY(-6px); box-shadow:var(--tw-shadow, 0 20px 40px -20px rgba(17,17,17,.25)); }
+  .img-zoom{ overflow:hidden; }
+  .img-zoom img, .img-zoom video{ transition:transform .8s cubic-bezier(.2,.8,.2,1); }
+  .img-zoom:hover img, .img-zoom:hover video{ transform:scale(1.045); }
+
+  /* carousels: manual-only, snap */
+  .carousel{ display:flex; overflow-x:auto; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; scrollbar-width:none; -ms-overflow-style:none; scroll-behavior:smooth; }
+  .carousel::-webkit-scrollbar{ display:none; }
+  .carousel > *{ scroll-snap-align:start; flex-shrink:0; }
+  .car-btn{ width:46px; height:46px; border-radius:999px; background:#fff; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; transition:background .2s, color .2s, transform .2s; color:var(--ink); }
+  .car-btn:hover{ background:var(--red); color:#fff; border-color:var(--red); transform:scale(1.06); }
+
+  /* FAB */
+  .fab-pulse{ position:absolute; inset:0; border-radius:999px; animation:fabpulse 2.6s ease-out infinite; }
+  .fab-pulse.p2{ animation-delay:.9s; }
+  @keyframes fabpulse{
+    0%{ box-shadow:0 0 0 0 rgba(184,134,11,.55), 0 0 0 0 rgba(31,84,67,.35); }
+    70%{ box-shadow:0 0 0 18px rgba(184,134,11,0), 0 0 0 30px rgba(31,84,67,0); }
+    100%{ box-shadow:0 0 0 0 rgba(184,134,11,0), 0 0 0 0 rgba(31,84,67,0); }
+  }
+  .fab-item{ transform:translateY(12px) scale(.85); opacity:0; pointer-events:none; transition:transform .32s cubic-bezier(.3,1.3,.4,1), opacity .24s ease; }
+  .fab-open .fab-item{ transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+  .fab-plus{ transition:transform .35s cubic-bezier(.3,1.3,.4,1); }
+  .fab-open .fab-plus{ transform:rotate(135deg); }
+
+  /* language dropdown */
+  .lang-menu{ transform-origin:top right; transform:scale(.95); opacity:0; pointer-events:none; transition:transform .18s ease, opacity .18s ease; }
+  .lang-open .lang-menu{ transform:scale(1); opacity:1; pointer-events:auto; }
+
+  /* stat numbers */
+  .stat-num{ font-variant-numeric:tabular-nums; }
+
+  /* reveal */
+  .reveal{ opacity:0; transform:translateY(28px); }
+  .reveal.in{ opacity:1; transform:translateY(0); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+
+  /* dragon scroll thread (signature element) */
+  .thread-line{ stroke-dasharray:1; stroke-dashoffset:1; }
+
+  /* tabs */
+  .tab-btn{ position:relative; color:var(--muted); font-weight:700; transition:color .2s ease; }
+  .tab-btn.active{ color:var(--ink); }
+  .tab-btn.active::after{ content:''; position:absolute; left:0; right:0; bottom:-10px; height:3px; border-radius:2px; background:var(--red); }
+
+  video::-webkit-media-controls-fullscreen-button{ display:block; }
+
+  input,select,textarea{ font-family:inherit; }
+  select{ appearance:none; -webkit-appearance:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body class="bg-paper text-ink antialiased">
+
+<!-- ============================= HEADER ============================= -->
+<header id="site-header" class="hdr">
+  <div class="hdr-bg">
+    <div class="max-w-[1360px] mx-auto px-5 md:px-8 h-[76px] flex items-center justify-between gap-4">
+      <a href="#home" class="flex items-center gap-2 shrink-0" aria-label="Quan Travel — басты бет">
+        <img src="logo/logo.png" alt="Quan Travel logo" class="h-9 md:h-11 w-auto object-contain">
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-[15px] font-semibold">
+        <a href="#home" class="nav-link active" data-i18n="nav.home">Басты бет</a>
+        <a href="#tours" class="nav-link" data-i18n="nav.tours">Турлар</a>
+        <a href="#destinations" class="nav-link" data-i18n="nav.destinations">Бағыттар</a>
+        <a href="#gallery" class="nav-link" data-i18n="nav.gallery">Галерея</a>
+        <a href="#reviews" class="nav-link" data-i18n="nav.reviews">Пікірлер</a>
+        <a href="#about" class="nav-link" data-i18n="nav.about">Біз туралы</a>
+        <a href="#contact" class="nav-link" data-i18n="nav.contact">Байланыс</a>
+      </nav>
+
+      <div class="flex items-center gap-3 md:gap-4">
+        <a href="tel:+77014407499" class="hidden md:flex items-center gap-2 text-[15px] font-bold hover:text-bred transition-colors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" fill="currentColor"/></svg>
+          <span>+7&nbsp;701&nbsp;440&nbsp;74&nbsp;99</span>
+        </a>
+
+        <!-- language switcher -->
+        <div id="langSwitch" class="relative">
+          <button id="langBtn" class="flex items-center gap-1.5 border border-line rounded-full pl-3 pr-2.5 py-1.5 text-xs font-bold hover:border-bred/50 transition-colors" aria-haspopup="true" aria-expanded="false" aria-label="Тілді таңдау">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.6 3.8 6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-6-3.8-9s1.3-6.4 3.8-9z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span id="langLabel">ҚАЗ</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+          <div class="lang-menu absolute right-0 mt-2 w-40 bg-white border border-line rounded-2xl shadow-lift py-2 z-50">
+            <button class="lang-opt w-full text-left px-4 py-2 text-sm font-semibold hover:bg-paper flex items-center justify-between" data-lang="kk">Қазақша <span class="text-muted font-normal">ҚАЗ</span></button>
+            <button class="lang-opt w-full text-left px-4 py-2 text-sm font-semibold hover:bg-paper flex items-center justify-between" data-lang="ru">Русский <span class="text-muted font-normal">РУС</span></button>
+            <button class="lang-opt w-full text-left px-4 py-2 text-sm font-semibold hover:bg-paper flex items-center justify-between" data-lang="en">English <span class="text-muted font-normal">ENG</span></button>
+            <button class="lang-opt w-full text-left px-4 py-2 text-sm font-semibold hover:bg-paper flex items-center justify-between" data-lang="zh">中文 <span class="text-muted font-normal">ZH</span></button>
+          </div>
+        </div>
+
+        <a href="#tours" class="hidden md:inline-flex btn btn-primary rounded-full px-5 py-2.5 text-sm" data-i18n="nav.cta">Турларды көру</a>
+
+        <button id="burgerBtn" class="lg:hidden burger" aria-label="Мәзір" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile panel -->
+  <div class="mobile-panel lg:hidden">
+    <div class="max-w-[1360px] mx-auto px-6 pt-28 pb-12 flex flex-col gap-1 min-h-full">
+      <a href="#home" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.home">Басты бет</a>
+      <a href="#tours" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.tours">Турлар</a>
+      <a href="#destinations" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.destinations">Бағыттар</a>
+      <a href="#gallery" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.gallery">Галерея</a>
+      <a href="#reviews" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.reviews">Пікірлер</a>
+      <a href="#about" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.about">Біз туралы</a>
+      <a href="#contact" data-close-menu class="py-4 text-2xl font-serif font-semibold border-b border-line" data-i18n="nav.contact">Байланыс</a>
+
+      <div class="mt-8 flex flex-col gap-3">
+        <a href="tel:+77014407499" class="flex items-center gap-3 font-bold text-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" fill="currentColor"/></svg>
+          +7 701 440 74 99
+        </a>
+        <a href="https://wa.me/77014407499" target="_blank" rel="noopener" class="btn btn-primary rounded-full px-6 py-3.5 text-base w-full mt-2" data-i18n="nav.cta">Турларды көру</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================= HERO ============================= -->
+<section id="home" class="relative min-h-[100svh] flex items-end md:items-center overflow-hidden bg-ink">
+  <div id="heroVideos" class="absolute inset-0">
+    <!-- videos injected by JS -->
+  </div>
+  <div class="absolute inset-0 hero-scrim-l"></div>
+  <div class="absolute inset-0 hero-scrim-b"></div>
+
+  <div class="relative z-10 max-w-[1360px] mx-auto w-full px-5 md:px-8 pb-10 md:pb-0 pt-32 md:pt-24">
+    <div class="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
+      <div class="glass-dark md:bg-transparent md:backdrop-blur-0 rounded-3xl p-6 md:p-0 max-w-2xl reveal" data-reveal>
+        <p class="kicker text-white/90 mb-4" data-i18n="hero.kicker">ҚЫТАЙҒА САЯХАТ</p>
+        <h1 class="font-black text-[2.6rem] leading-[1.04] sm:text-6xl md:text-7xl tracking-tight text-white">
+          <span data-i18n="hero.h1_1">ҚЫТАЙДЫ</span><br>
+          <span class="text-bred" data-i18n="hero.h1_2">БІРГЕ АШУҒА</span><br>
+          <span data-i18n="hero.h1_3">ДАЙЫНСЫҢ БА?</span>
+        </h1>
+        <p class="mt-6 text-white/85 text-base md:text-lg max-w-lg" data-i18n="hero.sub">Quan Travel — Қазақстаннан Қытайдың кез келген қаласына қазақ тілінде сөйлейтін жеке гид-аудармашымен сенімді саяхат. Аудармашы, гид және бағдарлама — бір қолда.</p>
+        <div class="mt-8 flex flex-wrap items-center gap-5">
+          <a href="#tours" class="btn btn-primary rounded-full px-7 py-4 text-[15px]" data-i18n="hero.cta1">Турларды көру<svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <button id="openVideoBtn" class="btn btn-ghost text-white text-[15px]">
+            <span class="w-11 h-11 rounded-full border border-white/50 flex items-center justify-center shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span data-i18n="hero.cta2">Бейнеролик көру</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- trust panel -->
+      <aside class="glass-light rounded-3xl shadow-glow p-6 w-full lg:w-[320px] shrink-0 reveal" data-reveal>
+        <ul class="space-y-5">
+          <li class="flex gap-3.5 items-start">
+            <span class="w-10 h-10 rounded-xl bg-bred/10 text-bred flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <p class="font-bold text-[15px]" data-i18n="trust.t1">Сенімді әрі тексерілген</p>
+              <p class="text-sm text-muted mt-0.5" data-i18n="trust.d1">Instagram-да 87 600+ жазылушы, Meta Verified мәртебесі</p>
+            </div>
+          </li>
+          <li class="flex gap-3.5 items-start">
+            <span class="w-10 h-10 rounded-xl bg-bgold/10 text-bgold flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <p class="font-bold text-[15px]" data-i18n="trust.t2">7 бағыт, бір гид</p>
+              <p class="text-sm text-muted mt-0.5" data-i18n="trust.d2">Чжанцзяцзе, Шанхай, Гонконг, Гуанчжоу, Чунцин, Сиань, Чэнду</p>
+            </div>
+          </li>
+          <li class="flex gap-3.5 items-start">
+            <span class="w-10 h-10 rounded-xl bg-bgreen/10 text-bgreen flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 13a8 8 0 0116 0" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13" width="4" height="6" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="17" y="13" width="4" height="6" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <div>
+              <p class="font-bold text-[15px]" data-i18n="trust.t3">Қазақ тілінде тікелей байланыс</p>
+              <p class="text-sm text-muted mt-0.5" data-i18n="trust.d3">WhatsApp арқылы жедел жауап, делдалсыз</p>
+            </div>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <!-- slide dots -->
+  <div id="heroDots" class="absolute z-10 bottom-5 right-5 md:right-8 flex gap-1.5"></div>
+</section>
+
+<!-- ============================= SEARCH BAR ============================= -->
+<section class="bg-ink relative z-20">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8 py-6">
+    <form id="tourSearch" class="grid md:grid-cols-[1fr_1fr_1fr_auto] gap-3 md:gap-0 md:divide-x md:divide-white/10">
+      <div class="px-0 md:px-6 first:pl-0">
+        <label class="block text-[11px] uppercase tracking-wider text-white/50 font-bold mb-1.5" data-i18n="search.city">Қала</label>
+        <select id="fCity" class="w-full bg-transparent text-white font-semibold text-[15px] outline-none cursor-pointer">
+          <option value="" data-i18n="search.city_all">Барлық қала</option>
+          <option value="zhangjiajie">Чжанцзяцзе</option>
+          <option value="shanghai">Шанхай</option>
+          <option value="chongqing">Чунцин</option>
+          <option value="xian">Сиань</option>
+          <option value="guangzhou">Гуанчжоу</option>
+          <option value="hongkong">Гонконг</option>
+          <option value="chengdu">Чэнду</option>
+        </select>
+      </div>
+      <div class="px-0 md:px-6">
+        <label class="block text-[11px] uppercase tracking-wider text-white/50 font-bold mb-1.5" data-i18n="search.type">Тур түрі</label>
+        <select id="fType" class="w-full bg-transparent text-white font-semibold text-[15px] outline-none cursor-pointer">
+          <option value="" data-i18n="search.type_all">Барлық түрі</option>
+          <option value="group" data-i18n="search.type_group">Топтық тур</option>
+          <option value="private" data-i18n="search.type_private">Жеке тур</option>
+        </select>
+      </div>
+      <div class="px-0 md:px-6">
+        <label class="block text-[11px] uppercase tracking-wider text-white/50 font-bold mb-1.5" data-i18n="search.date">Күні</label>
+        <select id="fDate" class="w-full bg-transparent text-white font-semibold text-[15px] outline-none cursor-pointer">
+          <option value="" data-i18n="search.date_any">Кез келген уақыт</option>
+          <option value="soon" data-i18n="search.date_soon">Жақын арада</option>
+          <option value="season" data-i18n="search.date_season">Маусымдық топ</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary rounded-xl md:rounded-2xl px-7 py-4 text-sm mt-2 md:mt-0 md:ml-6" data-i18n="search.submit">
+        <span data-i18n="search.submit">Тур іздеу</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================= POPULAR TOURS ============================= -->
+<section id="tours" class="py-20 md:py-28 bg-paper">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-12 reveal" data-reveal>
+      <div>
+        <p class="kicker mb-3" data-i18n="tours.kicker">Бағдарламалар</p>
+        <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="tours.title">Ең танымал турлар</h2>
+        <p class="text-muted mt-3 max-w-xl" data-i18n="tours.sub">Әр саяхат жеке жасалады — сондықтан бағаны WhatsApp арқылы дәл сұрап алыңыз.</p>
+      </div>
+      <a href="#contact" class="hidden md:inline-flex btn btn-ghost font-bold text-[15px] border-b-2 border-bred pb-0.5" data-i18n="tours.all">Барлық турлар туралы сұрау →</a>
+    </div>
+
+    <div id="tourGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Tour 1 -->
+      <article class="card overflow-hidden flex flex-col shadow-card" data-city="zhangjiajie chongqing" data-type="group private">
+        <div class="img-zoom relative h-56">
+          <img src="Photo/web/sergio-kian-np-zf7h7c2c-unsplash.jpg" alt="Чжанцзяцзе Аватар таулары" class="w-full h-full object-cover" loading="lazy">
+          <span class="absolute top-4 left-4 bg-bgold text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full" data-i18n="tours.badge_flagship">Флагман тур</span>
+        </div>
+        <div class="p-6 flex flex-col grow">
+          <h3 class="font-serif font-semibold text-xl leading-snug" data-i18n="tours.t1.title">Чжанцзяцзе + Чунцин: Аватар таулары</h3>
+          <p class="text-sm text-muted mt-2 grow" data-i18n="tours.t1.desc">Шыны көпір, Тяньмэнь тауының 999 баспалдағы және Аватар таулары — бір бағдарламада.</p>
+          <p class="text-xs text-muted mt-4" data-i18n="tours.duration_custom">Ұзақтығы жеке кестеге сай</p>
+          <div class="flex items-end justify-between mt-2 pt-4 border-t border-line">
+            <div>
+              <p class="text-[11px] text-muted uppercase tracking-wide" data-i18n="tours.price_from">Бастап</p>
+              <p class="font-serif font-bold text-2xl text-bred">480 000 ₸</p>
+            </div>
+            <a href="https://wa.me/77014407499?text=Сәлеметсіз бе! Чжанцзяцзе %2B Чунцин турына қызығушылық танытамын." target="_blank" rel="noopener" class="car-btn" aria-label="Сұрау жіберу">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour 2 -->
+      <article class="card overflow-hidden flex flex-col shadow-card" data-city="zhangjiajie" data-type="group private">
+        <div class="img-zoom relative h-56">
+          <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-15.jpg" alt="Тяньмэнь тауы, Аспан қақпасы" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="p-6 flex flex-col grow">
+          <h3 class="font-serif font-semibold text-xl leading-snug" data-i18n="tours.t2.title">Тяньмэнь тауы: Аспан қақпасы</h3>
+          <p class="text-sm text-muted mt-2 grow" data-i18n="tours.t2.desc">Әлемдегі ең ұзын аспалы жол мен табиғи тас қақпаға дейінгі 999 баспалдақ.</p>
+          <p class="text-xs text-muted mt-4" data-i18n="tours.duration_custom">Ұзақтығы жеке кестеге сай</p>
+          <div class="flex items-end justify-between mt-2 pt-4 border-t border-line">
+            <div>
+              <p class="text-[11px] text-muted uppercase tracking-wide" data-i18n="tours.price_ask">Бағасы</p>
+              <p class="font-serif font-bold text-lg" data-i18n="tours.price_request">Сұраныс бойынша</p>
+            </div>
+            <a href="https://wa.me/77014407499?text=Сәлеметсіз бе! Тяньмэнь тауы турына қызығушылық танытамын." target="_blank" rel="noopener" class="car-btn" aria-label="Сұрау жіберу">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour 3 -->
+      <article class="card overflow-hidden flex flex-col shadow-card" data-city="zhangjiajie" data-type="group private">
+        <div class="img-zoom relative h-56">
+          <img src="Photo/web/sergio-kian-tpyud2-lupc-unsplash.jpg" alt="Чжанцзяцзе шыны көпірі" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="p-6 flex flex-col grow">
+          <h3 class="font-serif font-semibold text-xl leading-snug" data-i18n="tours.t3.title">Шыны көпір және канатты жол</h3>
+          <p class="text-sm text-muted mt-2 grow" data-i18n="tours.t3.desc">Әлемдегі ең биік әрі ұзын шыны көпірден өту — адреналинге толы тәжірибе.</p>
+          <p class="text-xs text-muted mt-4" data-i18n="tours.duration_custom">Ұзақтығы жеке кестеге сай</p>
+          <div class="flex items-end justify-between mt-2 pt-4 border-t border-line">
+            <div>
+              <p class="text-[11px] text-muted uppercase tracking-wide" data-i18n="tours.price_ask">Бағасы</p>
+              <p class="font-serif font-bold text-lg" data-i18n="tours.price_request">Сұраныс бойынша</p>
+            </div>
+            <a href="https://wa.me/77014407499?text=Сәлеметсіз бе! Шыны көпір турына қызығушылық танытамын." target="_blank" rel="noopener" class="car-btn" aria-label="Сұрау жіберу">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tour 4 -->
+      <article class="card overflow-hidden flex flex-col shadow-card" data-city="shanghai" data-type="group private">
+        <div class="img-zoom relative h-56">
+          <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-28-2.jpg" alt="Шанхай, Бунд жағалауы" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="p-6 flex flex-col grow">
+          <h3 class="font-serif font-semibold text-xl leading-snug" data-i18n="tours.t4.title">Шанхай: кескінді мегаполис</h3>
+          <p class="text-sm text-muted mt-2 grow" data-i18n="tours.t4.desc">Бунд жағалауы, Пудун панорамасы және заманауи Қытайдың жүрегі.</p>
+          <p class="text-xs text-muted mt-4" data-i18n="tours.duration_custom">Ұзақтығы жеке кестеге сай</p>
+          <div class="flex items-end justify-between mt-2 pt-4 border-t border-line">
+            <div>
+              <p class="text-[11px] text-muted uppercase tracking-wide" data-i18n="tours.price_ask">Бағасы</p>
+              <p class="font-serif font-bold text-lg" data-i18n="tours.price_request">Сұраныс бойынша</p>
+            </div>
+            <a href="https://wa.me/77014407499?text=Сәлеметсіз бе! Шанхай турына қызығушылық танытамын." target="_blank" rel="noopener" class="car-btn" aria-label="Сұрау жіберу">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <a href="#contact" class="md:hidden mt-8 inline-flex btn btn-ghost font-bold text-[15px] border-b-2 border-bred pb-0.5" data-i18n="tours.all">Барлық турлар туралы сұрау →</a>
+  </div>
+</section>
+
+<!-- ============================= DESTINATIONS ============================= -->
+<section id="destinations" class="py-20 md:py-28 bg-white">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8">
+    <div class="mb-12 reveal" data-reveal>
+      <p class="kicker mb-3" data-i18n="dest.kicker">География</p>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="dest.title">7 бағыт — бір гидпен</h2>
+    </div>
+
+    <div class="grid md:grid-cols-4 md:grid-rows-2 gap-5">
+      <a href="#contact" class="group relative rounded-3xl overflow-hidden md:col-span-2 md:row-span-2 h-72 md:h-[600px] shadow-card">
+        <img src="Photo/web/chenyang1912-hjf36lehxy8-unsplash.jpg" alt="Чжанцзяцзе" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-7">
+          <p class="text-white/60 font-serif text-3xl mb-1">张家界</p>
+          <h3 class="text-white font-serif font-semibold text-3xl">Чжанцзяцзе</h3>
+          <p class="text-white/75 text-sm mt-2 max-w-xs" data-i18n="dest.zhangjiajie">«Аватар» фильміндегі тау бағаны, шыны көпір мен аспалы жолдар.</p>
+        </div>
+      </a>
+
+      <a href="#contact" class="group relative rounded-3xl overflow-hidden md:col-span-2 h-56 md:h-[290px] shadow-card">
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-28-2.jpg" alt="Шанхай" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-6 flex items-end justify-between w-full">
+          <div>
+            <p class="text-white/60 font-serif text-xl mb-1">上海</p>
+            <h3 class="text-white font-serif font-semibold text-2xl">Шанхай</h3>
+          </div>
+        </div>
+      </a>
+
+      <a href="#contact" class="group relative rounded-3xl overflow-hidden md:col-span-1 h-40 md:h-[290px] shadow-card bg-bgreen">
+        <div class="absolute inset-0 flex items-center justify-center font-serif text-white/10 text-7xl select-none">重</div>
+        <div class="absolute inset-0 flex flex-col items-start justify-end p-5">
+          <p class="text-white/50 font-serif text-base">重庆</p>
+          <h3 class="text-white font-serif font-semibold text-lg">Чунцин</h3>
+        </div>
+      </a>
+      <a href="#contact" class="group relative rounded-3xl overflow-hidden md:col-span-1 h-40 md:h-[290px] shadow-card bg-bred">
+        <div class="absolute inset-0 flex items-center justify-center font-serif text-white/10 text-7xl select-none">西</div>
+        <div class="absolute inset-0 flex flex-col items-start justify-end p-5">
+          <p class="text-white/50 font-serif text-base">西安</p>
+          <h3 class="text-white font-serif font-semibold text-lg">Сиань</h3>
+        </div>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-3 gap-5 mt-5">
+      <a href="#contact" class="group relative rounded-3xl overflow-hidden h-32 md:h-40 shadow-card" style="background:linear-gradient(135deg,#3E6B84,#1F3A2E)">
+        <div class="absolute inset-0 flex items-center justify-center font-serif text-white/10 text-6xl select-none">广</div>
+        <div class="absolute inset-0 flex flex-col items-start justify-end p-4 md:p-5">
+          <p class="text-white/50 font-serif text-sm">广州</p>
+          <h3 class="text-white font-serif font-semibold text-base md:text-lg">Гуанчжоу</h3>
+        </div>
+      </a>
+      <a href="#contact" class="group relative rounded-3xl overflow-hidden h-32 md:h-40 shadow-card" style="background:linear-gradient(135deg,#B8860B,#7C211C)">
+        <div class="absolute inset-0 flex items-center justify-center font-serif text-white/10 text-6xl select-none">港</div>
+        <div class="absolute inset-0 flex flex-col items-start justify-end p-4 md:p-5">
+          <p class="text-white/50 font-serif text-sm">香港</p>
+          <h3 class="text-white font-serif font-semibold text-base md:text-lg">Гонконг</h3>
+        </div>
+      </a>
+      <a href="#contact" class="group relative rounded-3xl overflow-hidden h-32 md:h-40 shadow-card" style="background:linear-gradient(135deg,#2B5443,#111111)">
+        <div class="absolute inset-0 flex items-center justify-center font-serif text-white/10 text-6xl select-none">成</div>
+        <div class="absolute inset-0 flex flex-col items-start justify-end p-4 md:p-5">
+          <p class="text-white/50 font-serif text-sm">成都</p>
+          <h3 class="text-white font-serif font-semibold text-base md:text-lg">Чэнду</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= WHY US ============================= -->
+<section id="why" class="py-20 md:py-28 bg-paper">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8 grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
+    <div class="relative reveal" data-reveal>
+      <div class="rounded-[2rem] overflow-hidden shadow-lift aspect-[4/5]">
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-26.jpg" alt="Quan Travel гиді Қытайда" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="hidden md:block absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-card px-6 py-5 max-w-[220px]">
+        <p class="font-serif text-3xl font-bold text-bred">87 600+</p>
+        <p class="text-xs text-muted mt-1" data-i18n="why.ig">Instagram жазылушысы · Meta Verified</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="kicker mb-3" data-i18n="why.kicker">Артықшылықтар</p>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="why.title">Неге бізді таңдайды?</h2>
+      <p class="text-muted mt-4 max-w-lg" data-i18n="why.sub">Сапалы қызмет пен жеке көзқарас — саяхатыңыздың әр қадамын бірге сүйемелдейміз.</p>
+
+      <div class="grid sm:grid-cols-2 gap-6 mt-10">
+        <div class="reveal" data-reveal>
+          <p class="font-serif font-bold text-4xl stat-num">87 600+</p>
+          <p class="text-sm text-muted mt-1.5" data-i18n="why.s1">Instagram жазылушы</p>
+        </div>
+        <div class="reveal" data-reveal>
+          <p class="font-serif font-bold text-4xl stat-num">7</p>
+          <p class="text-sm text-muted mt-1.5" data-i18n="why.s2">Тікелей бағыт</p>
+        </div>
+        <div class="reveal" data-reveal>
+          <p class="font-serif font-bold text-4xl stat-num">1</p>
+          <p class="text-sm text-muted mt-1.5" data-i18n="why.s3">Жеке гид-аудармашы, делдалсыз</p>
+        </div>
+        <div class="reveal" data-reveal>
+          <p class="font-serif font-bold text-4xl stat-num">24/7</p>
+          <p class="text-sm text-muted mt-1.5" data-i18n="why.s4">WhatsApp қолдауы</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CULTURAL STORYTELLING ============================= -->
+<section class="py-20 md:py-28 bg-bgreen noise text-white overflow-hidden">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8">
+    <div class="mb-12 max-w-xl reveal" data-reveal>
+      <p class="kicker mb-3"><span class="text-bgold">◆</span> <span data-i18n="story.kicker" class="text-white/70">Тәжірибе</span></p>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="story.title">Қытайды басқа қырынан таны</h2>
+      <p class="text-white/70 mt-4" data-i18n="story.sub">Тау шыңдары ғана емес — дәстүрлі шай рәсімі, түнгі базарлар мен қала ырғағы.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="md:row-span-2 rounded-3xl overflow-hidden img-zoom relative h-[420px] md:h-full">
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-15-1.jpg" class="w-full h-full object-cover" alt="Дәстүрлі шай рәсімі" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <p class="absolute bottom-5 left-5 text-white font-serif text-xl" data-i18n="story.c1">Дәстүрлі шай рәсімі</p>
+      </div>
+      <div class="rounded-3xl overflow-hidden img-zoom relative h-52">
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-28-1.jpg" class="w-full h-full object-cover" alt="Түнгі базар" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <p class="absolute bottom-4 left-4 text-white font-serif text-lg" data-i18n="story.c2">Түнгі базар сәттері</p>
+      </div>
+      <div class="rounded-3xl overflow-hidden img-zoom relative h-52">
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-27-1.jpg" class="w-full h-full object-cover" alt="Қала ырғағы" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <p class="absolute bottom-4 left-4 text-white font-serif text-lg" data-i18n="story.c3">Мегаполис ырғағы</p>
+      </div>
+      <div class="md:col-span-2 rounded-3xl overflow-hidden img-zoom relative h-64">
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-26-2.jpg" class="w-full h-full object-cover" alt="Ежелгі көше" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <p class="absolute bottom-5 left-5 text-white font-serif text-xl" data-i18n="story.c4">Ежелгі көшелер мен фонарлар</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= VIDEO FEATURE ============================= -->
+<section class="relative bg-ink">
+  <div class="relative aspect-[16/10] md:aspect-[21/9] w-full overflow-hidden">
+    <video id="featureVideo" class="w-full h-full object-cover opacity-80" muted loop playsinline preload="none" poster="Video/posters/18102975-uhd-2160-3840-60fps.jpg">
+      <source src="Video/gallery/18102975-uhd-2160-3840-60fps.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-ink/40"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+      <h2 class="font-serif font-semibold text-3xl md:text-6xl text-white max-w-3xl" data-i18n="video.title">Қытайды бірге сезініңіз</h2>
+      <button id="featurePlayBtn" class="mt-8 w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/95 flex items-center justify-center shadow-lift hover:scale-105 transition-transform" aria-label="Видеоны қосу">
+        <svg id="featurePlayIcon" width="24" height="24" viewBox="0 0 24 24" fill="#111"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= ABOUT KUAN ============================= -->
+<section id="about" class="py-20 md:py-28 bg-white overflow-hidden">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="order-2 lg:order-1">
+      <p class="kicker mb-3" data-i18n="about.kicker">Негізін қалаушы</p>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="about.title">Куанмен танысыңыз</h2>
+      <p class="mt-6 text-[17px] leading-[1.8] text-ink/85" data-i18n="about.p1">Мен — Куанмын, Қытай тілінде сөйлейтін аудармашы-гидмін. Instagram-дағы @quan_travel_ парақшасы арқылы Қазақстаннан Қытайға саяхаттаған 87 600-ден астам жазылушыдан тұратын қоғамдастықты біріктірдім.</p>
+      <p class="mt-4 text-[17px] leading-[1.8] text-ink/85" data-i18n="about.p2">Әр сапарда сізбен жеке өзім — делдалсыз, аудармашысыз шатасусыз. Аудармашы, гид, логистика және бағдарлама — бір қолда, бір адамда.</p>
+      <blockquote class="mt-8 pl-6 border-l-4 border-bgold font-serif italic text-xl text-bgreen" data-i18n="about.quote">«Әр қазақ — менің жалғызым»</blockquote>
+      <a href="https://www.instagram.com/quan_travel_/" target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2 font-bold text-[15px] hover:text-bred transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+        <span data-i18n="about.ig">Instagram-да қадағалау — @quan_travel_</span>
+      </a>
+    </div>
+    <div class="order-1 lg:order-2 relative">
+      <div class="rounded-[2rem] overflow-hidden shadow-lift aspect-[3/4] max-w-md mx-auto">
+        <img src="Photo/web/whatsapp-image-2026-08-17-at-23-50-28-2.jpg" alt="Куан, Шанхай Бунд жағалауында" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="hidden md:flex absolute top-6 -left-6 bg-bred text-white rounded-2xl shadow-lift px-5 py-4 items-center gap-3">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M22.5 6.5l-9.7 11.5a2 2 0 01-3 .06L2.5 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="font-bold text-sm" data-i18n="about.badge">Meta Verified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= REVIEWS ============================= -->
+<section id="reviews" class="py-20 md:py-28 bg-paper">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8">
+    <div class="mb-10 reveal" data-reveal>
+      <p class="kicker mb-3" data-i18n="reviews.kicker">Әлеуметтік дәлел</p>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="reviews.title">Бізбен саяхаттағандар не дейді?</h2>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      <button class="review-tab tab-btn active px-1 py-2 text-[15px]" data-tab="video" data-i18n="reviews.tab_video">Видео</button>
+      <span class="text-line px-1">/</span>
+      <button class="review-tab tab-btn px-1 py-2 text-[15px]" data-tab="text" data-i18n="reviews.tab_text">Жазбаша</button>
+      <span class="text-line px-1">/</span>
+      <button class="review-tab tab-btn px-1 py-2 text-[15px]" data-tab="audio" data-i18n="reviews.tab_audio">Аудио</button>
+      <span class="text-line px-1">/</span>
+      <button class="review-tab tab-btn px-1 py-2 text-[15px]" data-tab="2gis" data-i18n="reviews.tab_2gis">2GIS</button>
+    </div>
+
+    <!-- video/text/audio panels -->
+    <div id="reviewPanels">
+      <div class="review-panel" data-panel="video">
+        <div class="relative">
+          <div id="revCarVideo" class="carousel gap-5 pb-2"></div>
+          <div class="hidden md:flex gap-3 justify-end mt-5">
+            <button class="car-btn car-prev" data-target="revCarVideo" aria-label="Алдыңғы"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="car-btn car-next" data-target="revCarVideo" aria-label="Келесі"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="review-panel hidden" data-panel="text">
+        <div class="relative">
+          <div id="revCarText" class="carousel gap-5 pb-2"></div>
+          <div class="hidden md:flex gap-3 justify-end mt-5">
+            <button class="car-btn car-prev" data-target="revCarText" aria-label="Алдыңғы"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="car-btn car-next" data-target="revCarText" aria-label="Келесі"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="review-panel hidden" data-panel="audio">
+        <div class="relative">
+          <div id="revCarAudio" class="carousel gap-5 pb-2"></div>
+          <div class="hidden md:flex gap-3 justify-end mt-5">
+            <button class="car-btn car-prev" data-target="revCarAudio" aria-label="Алдыңғы"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="car-btn car-next" data-target="revCarAudio" aria-label="Келесі"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="review-panel hidden" data-panel="2gis">
+        <div class="max-w-md">
+          <div class="card p-7 shadow-card">
+            <div class="w-12 h-12 rounded-xl bg-[#12CF61]/10 flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-12a7 7 0 10-14 0c0 5.9 7 12 7 12z" stroke="#12CF61" stroke-width="1.8"/><circle cx="12" cy="9" r="2.5" stroke="#12CF61" stroke-width="1.8"/></svg>
+            </div>
+            <p class="font-serif font-semibold text-xl" data-i18n="reviews.gis_title">2GIS-тегі пікірлер</p>
+            <p class="text-sm text-muted mt-2" data-i18n="reviews.gis_desc">Офис орны бойынша шынайы пікірлерді 2GIS картасынан оқи аласыз.</p>
+            <a href="#" id="gisLink" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 bg-[#12CF61] text-white font-bold text-sm px-5 py-3 rounded-xl hover:brightness-95 transition">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-12a7 7 0 10-14 0c0 5.9 7 12 7 12z" stroke="white" stroke-width="2"/><circle cx="12" cy="9" r="2.2" fill="white"/></svg>
+              <span data-i18n="reviews.gis_btn">2GIS-те қарау</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PHOTO GALLERY ============================= -->
+<section id="gallery" class="py-20 md:py-28 bg-white">
+  <div class="max-w-[1360px] mx-auto">
+    <div class="px-5 md:px-8 mb-10 flex flex-wrap items-end justify-between gap-6 reveal" data-reveal>
+      <div>
+        <p class="kicker mb-3" data-i18n="pgallery.kicker">Объектив арқылы</p>
+        <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="pgallery.title">Фотогалерея</h2>
+      </div>
+      <div class="flex gap-3">
+        <button class="car-btn car-prev" data-target="photoCar" aria-label="Алдыңғы"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="car-btn car-next" data-target="photoCar" aria-label="Келесі"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div id="photoCar" class="carousel gap-4 px-5 md:px-8"></div>
+  </div>
+</section>
+
+<!-- ============================= VIDEO GALLERY ============================= -->
+<section class="py-20 md:py-28 bg-paper">
+  <div class="max-w-[1360px] mx-auto">
+    <div class="px-5 md:px-8 mb-10 flex flex-wrap items-end justify-between gap-6 reveal" data-reveal>
+      <div>
+        <p class="kicker mb-3" data-i18n="vgallery.kicker">Қозғалыста</p>
+        <h2 class="font-serif font-semibold text-3xl md:text-5xl tracking-tight" data-i18n="vgallery.title">Видеогалерея</h2>
+      </div>
+      <div class="flex gap-3">
+        <button class="car-btn car-prev" data-target="videoCar" aria-label="Алдыңғы"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="car-btn car-next" data-target="videoCar" aria-label="Келесі"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div id="videoCar" class="carousel gap-4 px-5 md:px-8"></div>
+  </div>
+</section>
+
+<!-- ============================= CTA ============================= -->
+<section class="bg-ink noise relative overflow-hidden">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8 py-16 md:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+    <div>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl text-white tracking-tight" data-i18n="cta.title">Саяхатты қазірден бастаңыз</h2>
+      <p class="text-white/60 mt-3 max-w-md" data-i18n="cta.sub">Маманымыз сізге ең қолайлы турды таңдауға көмектеседі — тек хабарласыңыз.</p>
+    </div>
+    <div class="flex items-center gap-4 shrink-0">
+      <a href="https://wa.me/77014407499" target="_blank" rel="noopener" class="btn btn-primary rounded-full px-7 py-4 text-[15px]" data-i18n="cta.btn">Қолдауға хабарласу</a>
+      <a href="https://wa.me/77014407499" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shrink-0 hover:scale-105 transition-transform">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.24.68-1.4 1.3-1.94 1.35-.5.06-1.1.1-3.4-.72-2.86-1.02-4.68-3.9-4.83-4.08-.14-.18-1.15-1.52-1.15-2.9s.72-2.05.98-2.33c.24-.27.53-.34.7-.34h.5c.16 0 .38-.03.58.44.24.56.8 1.95.87 2.09.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.28.7 1.16 1.52 1.88 1.05.93 1.93 1.22 2.2 1.36.28.14.44.12.6-.07.16-.18.68-.8.87-1.07.18-.28.36-.23.6-.14.25.09 1.6.75 1.87.89.27.14.45.2.51.32.07.12.07.68-.16 1.36z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="bg-bgreen-dark bg-[#0F1E17] text-white pt-16 pb-8">
+  <div class="max-w-[1360px] mx-auto px-5 md:px-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+      <div class="lg:col-span-2">
+        <img src="logo/logo.png" alt="Quan Travel" class="h-10 w-auto object-contain brightness-0 invert opacity-95">
+        <p class="text-white/55 text-sm mt-5 max-w-xs leading-relaxed" data-i18n="footer.desc">Қазақстаннан Қытайдың кез келген қаласына жеке гид-аудармашымен сенімді саяхат.</p>
+      </div>
+      <div>
+        <p class="font-bold text-sm uppercase tracking-wider text-white/40 mb-4" data-i18n="footer.h_tours">Турлар</p>
+        <ul class="space-y-2.5 text-sm text-white/70">
+          <li><a href="#tours" class="hover:text-white transition-colors" data-i18n="footer.l_tours">Барлық турлар</a></li>
+          <li><a href="#destinations" class="hover:text-white transition-colors" data-i18n="footer.l_dest">Бағыттар</a></li>
+          <li><a href="#gallery" class="hover:text-white transition-colors" data-i18n="footer.l_gallery">Галерея</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-bold text-sm uppercase tracking-wider text-white/40 mb-4" data-i18n="footer.h_company">Компания</p>
+        <ul class="space-y-2.5 text-sm text-white/70">
+          <li><a href="#about" class="hover:text-white transition-colors" data-i18n="footer.l_about">Біз туралы</a></li>
+          <li><a href="#reviews" class="hover:text-white transition-colors" data-i18n="footer.l_reviews">Пікірлер</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-bold text-sm uppercase tracking-wider text-white/40 mb-4" data-i18n="footer.h_contact">Байланыс</p>
+        <ul class="space-y-2.5 text-sm text-white/70">
+          <li><a href="tel:+77014407499" class="hover:text-white transition-colors">+7 701 440 74 99</a></li>
+          <li><a href="https://wa.me/77014407499" target="_blank" rel="noopener" class="hover:text-white transition-colors">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/quan_travel_/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Instagram · @quan_travel_</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+      <p data-i18n="footer.copyright">© 2026 Quan Travel. Барлық құқықтар қорғалған.</p>
+      <p data-i18n="footer.legal">Пайдаланушы келісімі · Құпиялылық саясаты</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================= VIDEO MODAL ============================= -->
+<div id="videoModal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-ink/90 p-4 backdrop-blur-sm">
+  <button id="closeVideoModal" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white" aria-label="Жабу">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </button>
+  <video id="modalVideo" class="max-w-full max-h-[85vh] rounded-2xl" controls playsinline></video>
+</div>
+
+<!-- ============================= WHATSAPP / TELEGRAM / WECHAT FAB ============================= -->
+<div id="fab" class="fixed z-[150] bottom-5 right-5 md:bottom-8 md:right-8 flex flex-col items-end gap-3">
+  <a href="#" id="fabWechat" target="_blank" rel="noopener" class="fab-item w-12 h-12 rounded-full bg-[#07C160] shadow-lift flex items-center justify-center" aria-label="WeChat">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8.7 3.5C4.6 3.5 1.4 6.3 1.4 9.7c0 2 1 3.7 2.6 4.9l-.6 2 2.2-1.1c.8.2 1.4.3 2 .3h.5a5.6 5.6 0 01-.2-1.5c0-3.5 3.3-6.3 7.5-6.3h.4c-.6-3-3.9-4.5-7.1-4.5zm-2.6 3.9a1 1 0 110 2 1 1 0 010-2zm5.2 0a1 1 0 110 2 1 1 0 010-2z"/><path d="M16.1 9.9c-3.6 0-6.5 2.4-6.5 5.4s2.9 5.4 6.5 5.4c.6 0 1.2 0 1.7-.2l1.9.9-.5-1.7c1.3-1 2.1-2.3 2.1-3.9 0-3-2.9-5.4-6.5-5.4h.3zm-2.3 3.3a.85.85 0 110 1.7.85.85 0 010-1.7zm4.5 0a.85.85 0 110 1.7.85.85 0 010-1.7z"/></svg>
+  </a>
+  <a href="#" id="fabTelegram" target="_blank" rel="noopener" class="fab-item w-12 h-12 rounded-full bg-[#26A5E4] shadow-lift flex items-center justify-center" aria-label="Telegram">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M21.9 4.3L2.5 11.9c-1 .4-1 1.7.1 2l4.6 1.4 1.8 5.6c.2.7 1.1.9 1.6.3l2.6-2.8 4.9 3.6c.7.5 1.7.1 1.9-.7l3.5-15.6c.2-.9-.7-1.7-1.6-1.4zM8.5 14.8l9.4-7c.3-.2.6.2.3.4l-7.8 7.5-.3 3.3-1.6-4.2z"/></svg>
+  </a>
+  <a href="https://wa.me/77014407499" id="fabWhatsapp" target="_blank" rel="noopener" class="fab-item w-12 h-12 rounded-full bg-[#25D366] shadow-lift flex items-center justify-center" aria-label="WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.24.68-1.4 1.3-1.94 1.35-.5.06-1.1.1-3.4-.72-2.86-1.02-4.68-3.9-4.83-4.08-.14-.18-1.15-1.52-1.15-2.9s.72-2.05.98-2.33c.24-.27.53-.34.7-.34h.5c.16 0 .38-.03.58.44.24.56.8 1.95.87 2.09.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.28.7 1.16 1.52 1.88 1.05.93 1.93 1.22 2.2 1.36.28.14.44.12.6-.07.16-.18.68-.8.87-1.07.18-.28.36-.23.6-.14.25.09 1.6.75 1.87.89.27.14.45.2.51.32.07.12.07.68-.16 1.36z"/></svg>
+  </a>
+  <button id="fabMain" class="relative w-16 h-16 rounded-full bg-gradient-to-br from-bgold to-bgreen shadow-lift flex items-center justify-center" aria-label="Байланыс арналары">
+    <span class="fab-pulse bg-bgold/40"></span>
+    <span class="fab-pulse p2 bg-bgreen/40"></span>
+    <svg class="fab-plus relative z-10" width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.6" stroke-linecap="round"/></svg>
+  </button>
+</div>
+
+<script>
+/* ======================================================================
+   DATA
+====================================================================== */
+const HERO_VIDEOS = [
+  'Video/web/12139819-1440-2560-30fps.mp4',
+  'Video/web/12374022-uhd-2160-3840-30fps.mp4',
+  'Video/web/13596083-2160-3840-30fps.mp4',
+  'Video/web/13606836-1080-1920-30fps.mp4',
+  'Video/web/14904296-1080-1920-60fps.mp4',
+  'Video/web/15683017-1080-1920-60fps.mp4',
+  'Video/web/18102975-uhd-2160-3840-60fps.mp4',
+];
+const HERO_POSTERS = [
+  'Video/posters/12139819-1440-2560-30fps.jpg',
+  'Video/posters/12374022-uhd-2160-3840-30fps.jpg',
+  'Video/posters/13596083-2160-3840-30fps.jpg',
+  'Video/posters/13606836-1080-1920-30fps.jpg',
+  'Video/posters/14904296-1080-1920-60fps.jpg',
+  'Video/posters/15683017-1080-1920-60fps.jpg',
+  'Video/posters/18102975-uhd-2160-3840-60fps.jpg',
+];
+
+const GALLERY_VIDEOS = [
+  '12139819-1440-2560-30fps','12374022-uhd-2160-3840-30fps','13596083-2160-3840-30fps',
+  '13606836-1080-1920-30fps','14904296-1080-1920-60fps','15683017-1080-1920-60fps',
+  '18102975-uhd-2160-3840-60fps','5996220-hd-1920-1080-30fps'
+];
+
+const GALLERY_PHOTOS = [
+  'whatsapp-image-2026-08-17-at-23-50-15','whatsapp-image-2026-08-17-at-23-50-15-1',
+  'whatsapp-image-2026-08-17-at-23-50-25','whatsapp-image-2026-08-17-at-23-50-25-1',
+  'whatsapp-image-2026-08-17-at-23-50-26','whatsapp-image-2026-08-17-at-23-50-26-1','whatsapp-image-2026-08-17-at-23-50-26-2',
+  'whatsapp-image-2026-08-17-at-23-50-27','whatsapp-image-2026-08-17-at-23-50-27-1',
+  'whatsapp-image-2026-08-17-at-23-50-28','whatsapp-image-2026-08-17-at-23-50-28-1','whatsapp-image-2026-08-17-at-23-50-28-2',
+  'chenyang1912-hjf36lehxy8-unsplash','emanuele-bono-kotsedzmw9w-unsplash','hao-fan-ktzp-z7c3hg-unsplash',
+  'jakub-tomasik-tl59z1dqcfk-unsplash','joylynn-goh-v0zuvtsp47e-unsplash',
+  'sergio-kian-ghy74n6fwg-unsplash','sergio-kian-np-zf7h7c2c-unsplash','sergio-kian-tpyud2-lupc-unsplash','sergio-kian-zuzs8f1rmys-unsplash',
+  'texco-kwok-f-pfrx7sy4k-unsplash',
+  'zheng-xue-2gx9-r6i-ro-unsplash','zheng-xue-b-altawygn0-unsplash','zheng-xue-fefdobuw7i4-unsplash','zheng-xue-ltoq3n1hwxc-unsplash','zheng-xue-qs4ek7lkog-unsplash'
+];
+
+/* ======================================================================
+   TRANSLATIONS
+====================================================================== */
+const I18N = {
+kk: {
+  "nav.home":"Басты бет","nav.tours":"Турлар","nav.destinations":"Бағыттар","nav.gallery":"Галерея","nav.reviews":"Пікірлер","nav.about":"Біз туралы","nav.contact":"Байланыс","nav.cta":"Турларды көру",
+  "hero.kicker":"ҚЫТАЙҒА САЯХАТ","hero.h1_1":"ҚЫТАЙДЫ","hero.h1_2":"БІРГЕ АШУҒА","hero.h1_3":"ДАЙЫНСЫҢ БА?",
+  "hero.sub":"Quan Travel — Қазақстаннан Қытайдың кез келген қаласына қазақ тілінде сөйлейтін жеке гид-аудармашымен сенімді саяхат. Аудармашы, гид және бағдарлама — бір қолда.",
+  "hero.cta1":"Турларды көру","hero.cta2":"Бейнеролик көру",
+  "trust.t1":"Сенімді әрі тексерілген","trust.d1":"Instagram-да 87 600+ жазылушы, Meta Verified мәртебесі",
+  "trust.t2":"7 бағыт, бір гид","trust.d2":"Чжанцзяцзе, Шанхай, Гонконг, Гуанчжоу, Чунцин, Сиань, Чэнду",
+  "trust.t3":"Қазақ тілінде тікелей байланыс","trust.d3":"WhatsApp арқылы жедел жауап, делдалсыз",
+  "search.city":"Қала","search.city_all":"Барлық қала","search.type":"Тур түрі","search.type_all":"Барлық түрі","search.type_group":"Топтық тур","search.type_private":"Жеке тур",
+  "search.date":"Күні","search.date_any":"Кез келген уақыт","search.date_soon":"Жақын арада","search.date_season":"Маусымдық топ","search.submit":"Тур іздеу","search.empty":"Сәйкес тур табылмады. WhatsApp арқылы сұраңыз — жеке ұсыныс дайындаймыз.",
+  "tours.kicker":"Бағдарламалар","tours.title":"Ең танымал турлар","tours.sub":"Әр саяхат жеке жасалады — сондықтан бағаны WhatsApp арқылы дәл сұрап алыңыз.","tours.all":"Барлық турлар туралы сұрау →",
+  "tours.badge_flagship":"Флагман тур","tours.duration_custom":"Ұзақтығы жеке кестеге сай","tours.price_from":"Бастап","tours.price_ask":"Бағасы","tours.price_request":"Сұраныс бойынша",
+  "tours.t1.title":"Чжанцзяцзе + Чунцин: Аватар таулары","tours.t1.desc":"Шыны көпір, Тяньмэнь тауының 999 баспалдағы және Аватар таулары — бір бағдарламада.",
+  "tours.t2.title":"Тяньмэнь тауы: Аспан қақпасы","tours.t2.desc":"Әлемдегі ең ұзын аспалы жол мен табиғи тас қақпаға дейінгі 999 баспалдақ.",
+  "tours.t3.title":"Шыны көпір және канатты жол","tours.t3.desc":"Әлемдегі ең биік әрі ұзын шыны көпірден өту — адреналинге толы тәжірибе.",
+  "tours.t4.title":"Шанхай: кескінді мегаполис","tours.t4.desc":"Бунд жағалауы, Пудун панорамасы және заманауи Қытайдың жүрегі.",
+  "dest.kicker":"География","dest.title":"7 бағыт — бір гидпен",
+  "dest.zhangjiajie":"«Аватар» фильміндегі тау бағаны, шыны көпір мен аспалы жолдар.",
+  "why.kicker":"Артықшылықтар","why.title":"Неге бізді таңдайды?","why.sub":"Сапалы қызмет пен жеке көзқарас — саяхатыңыздың әр қадамын бірге сүйемелдейміз.",
+  "why.ig":"Instagram жазылушысы · Meta Verified","why.s1":"Instagram жазылушы","why.s2":"Тікелей бағыт","why.s3":"Жеке гид-аудармашы, делдалсыз","why.s4":"WhatsApp қолдауы",
+  "story.kicker":"Тәжірибе","story.title":"Қытайды басқа қырынан таны","story.sub":"Тау шыңдары ғана емес — дәстүрлі шай рәсімі, түнгі базарлар мен қала ырғағы.",
+  "story.c1":"Дәстүрлі шай рәсімі","story.c2":"Түнгі базар сәттері","story.c3":"Мегаполис ырғағы","story.c4":"Ежелгі көшелер мен фонарлар",
+  "video.title":"Қытайды бірге сезініңіз",
+  "about.kicker":"Негізін қалаушы","about.title":"Куанмен танысыңыз",
+  "about.p1":"Мен — Куанмын, Қытай тілінде сөйлейтін аудармашы-гидмін. Instagram-дағы @quan_travel_ парақшасы арқылы Қазақстаннан Қытайға саяхаттаған 87 600-ден астам жазылушыдан тұратын қоғамдастықты біріктірдім.",
+  "about.p2":"Әр сапарда сізбен жеке өзім — делдалсыз, аудармашысыз шатасусыз. Аудармашы, гид, логистика және бағдарлама — бір қолда, бір адамда.",
+  "about.quote":"«Әр қазақ — менің жалғызым»","about.ig":"Instagram-да қадағалау — @quan_travel_","about.badge":"Meta Verified",
+  "reviews.kicker":"Әлеуметтік дәлел","reviews.title":"Бізбен саяхаттағандар не дейді?",
+  "reviews.tab_video":"Видео","reviews.tab_text":"Жазбаша","reviews.tab_audio":"Аудио","reviews.tab_2gis":"2GIS",
+  "reviews.gis_title":"2GIS-тегі пікірлер","reviews.gis_desc":"Офис орны бойынша шынайы пікірлерді 2GIS картасынан оқи аласыз.","reviews.gis_btn":"2GIS-те қарау",
+  "reviews.soon_video":"Видео пікір жақында қосылады","reviews.soon_text":"Жазбаша пікір жақында қосылады","reviews.soon_audio":"Аудио пікір жақында қосылады","reviews.soon_badge":"Жақында",
+  "pgallery.kicker":"Объектив арқылы","pgallery.title":"Фотогалерея",
+  "vgallery.kicker":"Қозғалыста","vgallery.title":"Видеогалерея",
+  "cta.title":"Саяхатты қазірден бастаңыз","cta.sub":"Маманымыз сізге ең қолайлы турды таңдауға көмектеседі — тек хабарласыңыз.","cta.btn":"Қолдауға хабарласу",
+  "footer.desc":"Қазақстаннан Қытайдың кез келген қаласына жеке гид-аудармашымен сенімді саяхат.",
+  "footer.h_tours":"Турлар","footer.l_tours":"Барлық турлар","footer.l_dest":"Бағыттар","footer.l_gallery":"Галерея",
+  "footer.h_company":"Компания","footer.l_about":"Біз туралы","footer.l_reviews":"Пікірлер",
+  "footer.h_contact":"Байланыс","footer.copyright":"© 2026 Quan Travel. Барлық құқықтар қорғалған.","footer.legal":"Пайдаланушы келісімі · Құпиялылық саясаты",
+  "gallery.alt":"Quan Travel — саяхат сәті","video.alt":"Quan Travel — видео"
+},
+ru: {
+  "nav.home":"Главная","nav.tours":"Туры","nav.destinations":"Направления","nav.gallery":"Галерея","nav.reviews":"Отзывы","nav.about":"О нас","nav.contact":"Контакты","nav.cta":"Смотреть туры",
+  "hero.kicker":"ПУТЕШЕСТВИЕ В КИТАЙ","hero.h1_1":"ГОТОВЫ","hero.h1_2":"ОТКРЫТЬ КИТАЙ","hero.h1_3":"ВМЕСТЕ С НАМИ?",
+  "hero.sub":"Quan Travel — надёжные путешествия из Казахстана в любой город Китая с личным гидом-переводчиком, говорящим на казахском языке. Переводчик, гид и программа — в одних руках.",
+  "hero.cta1":"Смотреть туры","hero.cta2":"Смотреть видео",
+  "trust.t1":"Надёжно и проверено","trust.d1":"87 600+ подписчиков в Instagram, статус Meta Verified",
+  "trust.t2":"7 направлений, один гид","trust.d2":"Чжанцзяцзе, Шанхай, Гонконг, Гуанчжоу, Чунцин, Сиань, Чэнду",
+  "trust.t3":"Прямая связь на казахском языке","trust.d3":"Быстрый ответ через WhatsApp, без посредников",
+  "search.city":"Город","search.city_all":"Все города","search.type":"Тип тура","search.type_all":"Любой тип","search.type_group":"Групповой тур","search.type_private":"Индивидуальный тур",
+  "search.date":"Дата","search.date_any":"Любое время","search.date_soon":"Ближайшие даты","search.date_season":"Сезонная группа","search.submit":"Найти тур","search.empty":"Подходящих туров не найдено. Напишите в WhatsApp — подготовим индивидуальное предложение.",
+  "tours.kicker":"Программы","tours.title":"Самые популярные туры","tours.sub":"Каждое путешествие создаётся индивидуально — точную стоимость уточняйте в WhatsApp.","tours.all":"Узнать обо всех турах →",
+  "tours.badge_flagship":"Флагманский тур","tours.duration_custom":"Длительность по индивидуальному графику","tours.price_from":"От","tours.price_ask":"Стоимость","tours.price_request":"По запросу",
+  "tours.t1.title":"Чжанцзяцзе + Чунцин: горы «Аватара»","tours.t1.desc":"Стеклянный мост, 999 ступеней горы Тяньмэнь и горы «Аватара» — в одной программе.",
+  "tours.t2.title":"Гора Тяньмэнь: Небесные врата","tours.t2.desc":"Самая длинная канатная дорога в мире и 999 ступеней к природным каменным вратам.",
+  "tours.t3.title":"Стеклянный мост и канатная дорога","tours.t3.desc":"Переход по самому высокому и длинному стеклянному мосту в мире — незабываемые эмоции.",
+  "tours.t4.title":"Шанхай: живописный мегаполис","tours.t4.desc":"Набережная Бунд, панорама Пудуна и сердце современного Китая.",
+  "dest.kicker":"География","dest.title":"7 направлений — один гид",
+  "dest.zhangjiajie":"Горные колонны из фильма «Аватар», стеклянный мост и подвесные тропы.",
+  "why.kicker":"Преимущества","why.title":"Почему выбирают нас?","why.sub":"Качественный сервис и индивидуальный подход на каждом этапе вашего путешествия.",
+  "why.ig":"подписчиков в Instagram · Meta Verified","why.s1":"подписчиков в Instagram","why.s2":"прямых направлений","why.s3":"личный гид-переводчик, без посредников","why.s4":"поддержка в WhatsApp",
+  "story.kicker":"Впечатления","story.title":"Откройте Китай с другой стороны","story.sub":"Не только горные вершины — традиционная чайная церемония, ночные рынки и ритм города.",
+  "story.c1":"Традиционная чайная церемония","story.c2":"Моменты ночного рынка","story.c3":"Ритм мегаполиса","story.c4":"Древние улицы и фонари",
+  "video.title":"Почувствуйте Китай вместе с нами",
+  "about.kicker":"Основатель","about.title":"Знакомьтесь — Куан",
+  "about.p1":"Я — Куан, гид-переводчик, говорящий на китайском языке. Через страницу @quan_travel_ в Instagram я объединил сообщество из более чем 87 600 подписчиков, путешествующих из Казахстана в Китай.",
+  "about.p2":"В каждой поездке я рядом лично — без посредников и путаницы с переводом. Переводчик, гид, логистика и программа — в одних руках.",
+  "about.quote":"«Каждый казах — мой единственный»","about.ig":"Подписывайтесь в Instagram — @quan_travel_","about.badge":"Meta Verified",
+  "reviews.kicker":"Социальное доказательство","reviews.title":"Что говорят наши путешественники?",
+  "reviews.tab_video":"Видео","reviews.tab_text":"Текст","reviews.tab_audio":"Аудио","reviews.tab_2gis":"2GIS",
+  "reviews.gis_title":"Отзывы на 2GIS","reviews.gis_desc":"Реальные отзывы по местоположению офиса можно прочитать на карте 2GIS.","reviews.gis_btn":"Смотреть на 2GIS",
+  "reviews.soon_video":"Видеоотзыв скоро появится","reviews.soon_text":"Текстовый отзыв скоро появится","reviews.soon_audio":"Аудиоотзыв скоро появится","reviews.soon_badge":"Скоро",
+  "pgallery.kicker":"Через объектив","pgallery.title":"Фотогалерея",
+  "vgallery.kicker":"В движении","vgallery.title":"Видеогалерея",
+  "cta.title":"Начните путешествие уже сейчас","cta.sub":"Наш специалист поможет подобрать оптимальный тур — просто напишите нам.","cta.btn":"Связаться с нами",
+  "footer.desc":"Надёжные путешествия из Казахстана в любой город Китая с личным гидом-переводчиком.",
+  "footer.h_tours":"Туры","footer.l_tours":"Все туры","footer.l_dest":"Направления","footer.l_gallery":"Галерея",
+  "footer.h_company":"Компания","footer.l_about":"О нас","footer.l_reviews":"Отзывы",
+  "footer.h_contact":"Контакты","footer.copyright":"© 2026 Quan Travel. Все права защищены.","footer.legal":"Пользовательское соглашение · Политика конфиденциальности",
+  "gallery.alt":"Quan Travel — момент путешествия","video.alt":"Quan Travel — видео"
+},
+en: {
+  "nav.home":"Home","nav.tours":"Tours","nav.destinations":"Destinations","nav.gallery":"Gallery","nav.reviews":"Reviews","nav.about":"About","nav.contact":"Contact","nav.cta":"View tours",
+  "hero.kicker":"TRAVEL TO CHINA","hero.h1_1":"READY TO","hero.h1_2":"DISCOVER CHINA","hero.h1_3":"TOGETHER?",
+  "hero.sub":"Quan Travel — trusted journeys from Kazakhstan to any city in China with a personal Kazakh-speaking guide-translator. Translator, guide and itinerary — all in one hand.",
+  "hero.cta1":"View tours","hero.cta2":"Watch video",
+  "trust.t1":"Trusted & verified","trust.d1":"87,600+ Instagram followers, Meta Verified status",
+  "trust.t2":"7 destinations, one guide","trust.d2":"Zhangjiajie, Shanghai, Hong Kong, Guangzhou, Chongqing, Xi'an, Chengdu",
+  "trust.t3":"Direct contact in Kazakh","trust.d3":"Fast response via WhatsApp, no intermediaries",
+  "search.city":"City","search.city_all":"All cities","search.type":"Tour type","search.type_all":"Any type","search.type_group":"Group tour","search.type_private":"Private tour",
+  "search.date":"Date","search.date_any":"Any time","search.date_soon":"Coming soon","search.date_season":"Seasonal group","search.submit":"Search tour","search.empty":"No matching tours found. Message us on WhatsApp — we'll prepare a personal offer.",
+  "tours.kicker":"Itineraries","tours.title":"Most popular tours","tours.sub":"Every trip is tailor-made — please confirm exact pricing on WhatsApp.","tours.all":"Ask about all tours →",
+  "tours.badge_flagship":"Flagship tour","tours.duration_custom":"Duration by individual schedule","tours.price_from":"From","tours.price_ask":"Price","tours.price_request":"On request",
+  "tours.t1.title":"Zhangjiajie + Chongqing: Avatar Mountains","tours.t1.desc":"Glass bridge, the 999 steps of Tianmen Mountain and the Avatar Mountains — in one itinerary.",
+  "tours.t2.title":"Tianmen Mountain: Heaven's Gate","tours.t2.desc":"The world's longest cableway and 999 steps up to a natural stone gate.",
+  "tours.t3.title":"Glass bridge & cableway","tours.t3.desc":"Crossing the world's highest and longest glass bridge — a pure adrenaline experience.",
+  "tours.t4.title":"Shanghai: the picturesque megacity","tours.t4.desc":"The Bund waterfront, the Pudong skyline and the heart of modern China.",
+  "dest.kicker":"Geography","dest.title":"7 destinations — one guide",
+  "dest.zhangjiajie":"The mountain pillars from Avatar, a glass bridge and skywalks.",
+  "why.kicker":"Advantages","why.title":"Why choose us?","why.sub":"Quality service and a personal approach at every step of your journey.",
+  "why.ig":"Instagram followers · Meta Verified","why.s1":"Instagram followers","why.s2":"direct destinations","why.s3":"personal guide-translator, no intermediaries","why.s4":"WhatsApp support",
+  "story.kicker":"Experience","story.title":"Discover China from another side","story.sub":"Not just mountain peaks — traditional tea ceremony, night markets and city rhythm.",
+  "story.c1":"Traditional tea ceremony","story.c2":"Night market moments","story.c3":"Megacity rhythm","story.c4":"Ancient streets and lanterns",
+  "video.title":"Feel China with us",
+  "about.kicker":"Founder","about.title":"Meet Kuan",
+  "about.p1":"I'm Kuan, a Chinese-speaking guide-translator. Through the @quan_travel_ page on Instagram I've united a community of more than 87,600 followers travelling from Kazakhstan to China.",
+  "about.p2":"On every trip I'm with you in person — no intermediaries, no translation mix-ups. Translator, guide, logistics and itinerary — in one hand, one person.",
+  "about.quote":"\"Every Kazakh is my only one\"","about.ig":"Follow on Instagram — @quan_travel_","about.badge":"Meta Verified",
+  "reviews.kicker":"Social proof","reviews.title":"What our travellers say",
+  "reviews.tab_video":"Video","reviews.tab_text":"Written","reviews.tab_audio":"Audio","reviews.tab_2gis":"2GIS",
+  "reviews.gis_title":"Reviews on 2GIS","reviews.gis_desc":"Read genuine reviews for our office location on the 2GIS map.","reviews.gis_btn":"View on 2GIS",
+  "reviews.soon_video":"Video review coming soon","reviews.soon_text":"Written review coming soon","reviews.soon_audio":"Audio review coming soon","reviews.soon_badge":"Coming soon",
+  "pgallery.kicker":"Through the lens","pgallery.title":"Photo gallery",
+  "vgallery.kicker":"In motion","vgallery.title":"Video gallery",
+  "cta.title":"Start your journey today","cta.sub":"Our specialist will help you choose the best tour — just get in touch.","cta.btn":"Contact us",
+  "footer.desc":"Trusted journeys from Kazakhstan to any city in China with a personal guide-translator.",
+  "footer.h_tours":"Tours","footer.l_tours":"All tours","footer.l_dest":"Destinations","footer.l_gallery":"Gallery",
+  "footer.h_company":"Company","footer.l_about":"About us","footer.l_reviews":"Reviews",
+  "footer.h_contact":"Contact","footer.copyright":"© 2026 Quan Travel. All rights reserved.","footer.legal":"Terms of use · Privacy policy",
+  "gallery.alt":"Quan Travel — travel moment","video.alt":"Quan Travel — video"
+},
+zh: {
+  "nav.home":"首页","nav.tours":"行程","nav.destinations":"目的地","nav.gallery":"图库","nav.reviews":"评价","nav.about":"关于我们","nav.contact":"联系方式","nav.cta":"查看行程",
+  "hero.kicker":"中国之旅","hero.h1_1":"准备好","hero.h1_2":"一起探索中国","hero.h1_3":"了吗？",
+  "hero.sub":"Quan Travel —— 由讲哈萨克语的专属导游兼翻译陪同，从哈萨克斯坦出发，安心前往中国任意城市。翻译、向导与行程安排，一站式服务。",
+  "hero.cta1":"查看行程","hero.cta2":"观看视频",
+  "trust.t1":"值得信赖 · 已认证","trust.d1":"Instagram 粉丝超过 87,600 人，已获 Meta 认证",
+  "trust.t2":"7 大目的地，一位向导","trust.d2":"张家界、上海、香港、广州、重庆、西安、成都",
+  "trust.t3":"哈萨克语直接沟通","trust.d3":"通过 WhatsApp 快速回复，无中间商",
+  "search.city":"城市","search.city_all":"全部城市","search.type":"行程类型","search.type_all":"全部类型","search.type_group":"团队游","search.type_private":"私人定制游",
+  "search.date":"日期","search.date_any":"不限时间","search.date_soon":"近期出发","search.date_season":"季节团期","search.submit":"搜索行程","search.empty":"未找到符合条件的行程。请通过 WhatsApp 联系我们，我们将为您定制方案。",
+  "tours.kicker":"行程方案","tours.title":"最受欢迎的行程","tours.sub":"每一次旅行都是量身定制 —— 具体价格请通过 WhatsApp 咨询确认。","tours.all":"咨询全部行程 →",
+  "tours.badge_flagship":"旗舰行程","tours.duration_custom":"行程天数按个人安排","tours.price_from":"起价","tours.price_ask":"价格","tours.price_request":"询价",
+  "tours.t1.title":"张家界 + 重庆：阿凡达仙境之旅","tours.t1.desc":"玻璃桥、天门山 999 级天梯与阿凡达悬浮山 —— 一站式行程。",
+  "tours.t2.title":"天门山：天门洞奇观","tours.t2.desc":"世界最长索道，直达天然石门的 999 级天梯。",
+  "tours.t3.title":"玻璃桥与索道体验","tours.t3.desc":"穿越世界最高最长的玻璃桥 —— 肾上腺素飙升的体验。",
+  "tours.t4.title":"上海：如画的国际大都会","tours.t4.desc":"外滩江畔、浦东天际线，感受现代中国的心脏地带。",
+  "dest.kicker":"目的地","dest.title":"7 大目的地 · 一位向导",
+  "dest.zhangjiajie":"电影《阿凡达》取景的悬浮山峰、玻璃桥与云端栈道。",
+  "why.kicker":"我们的优势","why.title":"为什么选择我们？","why.sub":"优质的服务与个性化的关怀，陪伴您旅程的每一步。",
+  "why.ig":"Instagram 粉丝 · Meta 已认证","why.s1":"Instagram 粉丝","why.s2":"直达目的地","why.s3":"专属导游兼翻译，无中间商","why.s4":"WhatsApp 全天候支持",
+  "story.kicker":"深度体验","story.title":"从另一个角度认识中国","story.sub":"不只是高山峻岭 —— 还有传统茶道、夜市与城市的节奏。",
+  "story.c1":"传统茶道","story.c2":"夜市时光","story.c3":"都市的节奏","story.c4":"古街与灯笼",
+  "video.title":"与我们一起感受中国",
+  "about.kicker":"创始人","about.title":"认识 Kuan（关）",
+  "about.p1":"我是 Kuan，一名会说中文的导游兼翻译。通过 Instagram 上的 @quan_travel_ 主页，我汇聚了超过 87,600 名从哈萨克斯坦前往中国旅行的粉丝社群。",
+  "about.p2":"每一次旅程，我都亲自全程陪同 —— 没有中间商，也不会有翻译上的误会。翻译、向导、后勤与行程安排，全部由我一人负责。",
+  "about.quote":"「每一位哈萨克朋友，都是我唯一的客人」","about.ig":"在 Instagram 关注我们 —— @quan_travel_","about.badge":"Meta 已认证",
+  "reviews.kicker":"口碑见证","reviews.title":"旅行者们怎么说",
+  "reviews.tab_video":"视频","reviews.tab_text":"文字","reviews.tab_audio":"语音","reviews.tab_2gis":"2GIS 地图",
+  "reviews.gis_title":"2GIS 上的评价","reviews.gis_desc":"您可以在 2GIS 地图上查看我们办公地点的真实评价。","reviews.gis_btn":"前往 2GIS 查看",
+  "reviews.soon_video":"视频评价即将上线","reviews.soon_text":"文字评价即将上线","reviews.soon_audio":"语音评价即将上线","reviews.soon_badge":"即将上线",
+  "pgallery.kicker":"镜头之下","pgallery.title":"照片图库",
+  "vgallery.kicker":"动态影像","vgallery.title":"视频图库",
+  "cta.title":"现在就开始您的旅程","cta.sub":"我们的专属顾问将帮您选择最合适的行程 —— 立即联系我们。","cta.btn":"联系客服",
+  "footer.desc":"由专属导游兼翻译陪同，从哈萨克斯坦安心前往中国任意城市。",
+  "footer.h_tours":"行程","footer.l_tours":"全部行程","footer.l_dest":"目的地","footer.l_gallery":"图库",
+  "footer.h_company":"公司","footer.l_about":"关于我们","footer.l_reviews":"评价",
+  "footer.h_contact":"联系方式","footer.copyright":"© 2026 Quan Travel。保留所有权利。","footer.legal":"用户协议 · 隐私政策",
+  "gallery.alt":"Quan Travel —— 旅行瞬间","video.alt":"Quan Travel —— 视频"
+}
+};
+
+/* ======================================================================
+   I18N ENGINE
+====================================================================== */
+const LANG_LABELS = { kk:'ҚАЗ', ru:'РУС', en:'ENG', zh:'中文' };
+let currentLang = localStorage.getItem('qt_lang') || 'kk';
+
+function applyLang(lang){
+  if(!I18N[lang]) lang = 'kk';
+  currentLang = lang;
+  localStorage.setItem('qt_lang', lang);
+  document.documentElement.lang = lang;
+  document.getElementById('langLabel').textContent = LANG_LABELS[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(I18N[lang][key] !== undefined) el.textContent = I18N[lang][key];
+  });
+  renderGalleries();
+}
+
+document.querySelectorAll('.lang-opt').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    applyLang(btn.getAttribute('data-lang'));
+    document.getElementById('langSwitch').classList.remove('lang-open');
+  });
+});
+const langSwitch = document.getElementById('langSwitch');
+document.getElementById('langBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  langSwitch.classList.toggle('lang-open');
+});
+document.addEventListener('click', ()=> langSwitch.classList.remove('lang-open'));
+
+/* ======================================================================
+   HEADER / MOBILE MENU
+====================================================================== */
+const body = document.body;
+const burgerBtn = document.getElementById('burgerBtn');
+burgerBtn.addEventListener('click', ()=>{
+  const open = body.classList.toggle('menu-open');
+  burgerBtn.setAttribute('aria-expanded', open);
+  document.documentElement.style.overflow = open ? 'hidden' : '';
+});
+document.querySelectorAll('[data-close-menu]').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    body.classList.remove('menu-open');
+    document.documentElement.style.overflow = '';
+  });
+});
+
+/* nav active link on scroll */
+const sections = ['home','tours','destinations','gallery','reviews','about','contact'];
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', ()=>{
+  let current = 'home';
+  sections.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && el.getBoundingClientRect().top <= 120) current = id;
+  });
+  navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href') === '#'+current));
+}, { passive:true });
+
+/* ======================================================================
+   HERO VIDEO CROSSFADE CAROUSEL
+====================================================================== */
+const heroContainer = document.getElementById('heroVideos');
+const dotsContainer = document.getElementById('heroDots');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let heroIndex = 0;
+let heroTimer = null;
+
+HERO_VIDEOS.forEach((src, i)=>{
+  const v = document.createElement('video');
+  v.className = 'hero-video' + (i===0 ? ' is-active' : '');
+  v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline','');
+  v.preload = i < 2 ? 'auto' : 'metadata';
+  v.poster = HERO_POSTERS[i];
+  v.src = src;
+  heroContainer.appendChild(v);
+
+  const dot = document.createElement('button');
+  dot.className = 'w-6 h-1.5 rounded-full transition-colors ' + (i===0 ? 'bg-white' : 'bg-white/35');
+  dot.setAttribute('aria-label', 'Слайд ' + (i+1));
+  dot.addEventListener('click', ()=> goToHero(i));
+  dotsContainer.appendChild(dot);
+});
+const heroVideoEls = () => heroContainer.querySelectorAll('video');
+const heroDotEls = () => dotsContainer.querySelectorAll('button');
+
+function goToHero(i){
+  const vids = heroVideoEls();
+  vids[heroIndex].classList.remove('is-active');
+  heroIndex = i;
+  vids[heroIndex].classList.add('is-active');
+  try{ vids[heroIndex].play().catch(()=>{}); }catch(e){}
+  heroDotEls().forEach((d,idx)=> d.className = 'w-6 h-1.5 rounded-full transition-colors ' + (idx===heroIndex ? 'bg-white' : 'bg-white/35'));
+}
+function nextHero(){ goToHero((heroIndex+1) % HERO_VIDEOS.length); }
+
+function startHeroCycle(){
+  if(reduceMotion) return;
+  if(heroTimer) clearInterval(heroTimer);
+  heroTimer = setInterval(nextHero, 5000);
+}
+function stopHeroCycle(){ if(heroTimer) clearInterval(heroTimer); }
+
+if(!reduceMotion){
+  const firstVid = heroVideoEls()[0];
+  const playAll = ()=> heroVideoEls().forEach(v=> v.play().catch(()=>{}));
+  if(firstVid.readyState >= 2) playAll(); else firstVid.addEventListener('loadeddata', playAll, { once:true });
+  startHeroCycle();
+
+  const heroObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ startHeroCycle(); heroVideoEls().forEach(v=>v.play().catch(()=>{})); }
+      else { stopHeroCycle(); heroVideoEls().forEach(v=>v.pause()); }
+    });
+  }, { threshold: 0.15 });
+  heroObserver.observe(document.getElementById('home'));
+}
+
+/* ======================================================================
+   MODAL VIDEO (hero "watch video" + feature section)
+====================================================================== */
+const videoModal = document.getElementById('videoModal');
+const modalVideo = document.getElementById('modalVideo');
+function openModalVideo(src){
+  modalVideo.src = src;
+  videoModal.classList.remove('hidden');
+  videoModal.classList.add('flex');
+  modalVideo.play().catch(()=>{});
+  document.documentElement.style.overflow = 'hidden';
+}
+function closeModalVideo(){
+  modalVideo.pause(); modalVideo.src = '';
+  videoModal.classList.add('hidden');
+  videoModal.classList.remove('flex');
+  document.documentElement.style.overflow = '';
+}
+document.getElementById('openVideoBtn').addEventListener('click', ()=> openModalVideo('Video/gallery/15683017-1080-1920-60fps.mp4'));
+document.getElementById('closeVideoModal').addEventListener('click', closeModalVideo);
+videoModal.addEventListener('click', (e)=>{ if(e.target === videoModal) closeModalVideo(); });
+
+/* feature (cinematic) video play/pause */
+const featureVideo = document.getElementById('featureVideo');
+const featurePlayBtn = document.getElementById('featurePlayBtn');
+const featurePlayIcon = document.getElementById('featurePlayIcon');
+featurePlayBtn.addEventListener('click', ()=>{
+  if(featureVideo.paused){
+    featureVideo.play();
+    featureVideo.classList.remove('opacity-80');
+    featurePlayIcon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
+  } else {
+    featureVideo.pause();
+    featurePlayIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+  }
+});
+
+/* ======================================================================
+   CAROUSELS (manual drag / arrows, wrap-to-start at the end)
+====================================================================== */
+function cardStep(el){
+  const first = el.firstElementChild;
+  if(!first) return 320;
+  const style = getComputedStyle(el);
+  const gap = parseFloat(style.columnGap || style.gap || 24);
+  return first.getBoundingClientRect().width + gap;
+}
+function wireCarouselWrap(el){
+  let wrapTimer = null;
+  el.addEventListener('scroll', ()=>{
+    clearTimeout(wrapTimer);
+    wrapTimer = setTimeout(()=>{
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if(maxScroll > 4 && el.scrollLeft >= maxScroll - 4){
+        el.scrollTo({ left: 0, behavior:'smooth' });
+      }
+    }, 900);
+  }, { passive:true });
+}
+document.querySelectorAll('.carousel').forEach(wireCarouselWrap);
+
+document.querySelectorAll('.car-prev, .car-next').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-target'));
+    if(!target) return;
+    const step = cardStep(target);
+    const maxScroll = target.scrollWidth - target.clientWidth;
+    if(btn.classList.contains('car-next')){
+      if(target.scrollLeft >= maxScroll - 4) target.scrollTo({ left:0, behavior:'smooth' });
+      else target.scrollBy({ left: step, behavior:'smooth' });
+    } else {
+      if(target.scrollLeft <= 4) target.scrollTo({ left:maxScroll, behavior:'smooth' });
+      else target.scrollBy({ left: -step, behavior:'smooth' });
+    }
+  });
+});
+
+/* ======================================================================
+   RENDER GALLERIES (photo / video / review placeholders)
+====================================================================== */
+function renderGalleries(){
+  const t = I18N[currentLang];
+
+  // photo carousel
+  const photoCar = document.getElementById('photoCar');
+  photoCar.innerHTML = GALLERY_PHOTOS.map((name,i)=>`
+    <figure class="w-[240px] sm:w-[280px] h-[340px] rounded-2xl overflow-hidden shadow-card img-zoom bg-line">
+      <img src="Photo/web/${name}.jpg" alt="${t['gallery.alt']} ${i+1}" class="w-full h-full object-cover" loading="lazy">
+    </figure>
+  `).join('');
+
+  // video carousel
+  const videoCar = document.getElementById('videoCar');
+  videoCar.innerHTML = GALLERY_VIDEOS.map((name,i)=>`
+    <div class="relative w-[220px] sm:w-[260px] h-[380px] rounded-2xl overflow-hidden shadow-card bg-ink group cursor-pointer gal-video" data-src="Video/gallery/${name}.mp4">
+      <img src="Video/posters/${name}.jpg" alt="${t['video.alt']} ${i+1}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+      <div class="absolute inset-0 bg-ink/25 flex items-center justify-center">
+        <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lift">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </div>
+    </div>
+  `).join('');
+  videoCar.querySelectorAll('.gal-video').forEach(el=>{
+    el.addEventListener('click', ()=> openModalVideo(el.getAttribute('data-src')));
+  });
+
+  // review placeholder carousels
+  const mk = (icon, label) => `
+    <div class="w-[260px] sm:w-[300px] shrink-0 card p-6 shadow-card relative">
+      <span class="absolute top-4 right-4 bg-bgold/10 text-bgold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">${t['reviews.soon_badge']}</span>
+      <div class="w-11 h-11 rounded-xl bg-paper flex items-center justify-center text-bgreen mb-4">${icon}</div>
+      <p class="font-serif text-lg leading-snug">${label}</p>
+      <div class="mt-5 flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-line"></div>
+        <div class="h-2 w-24 bg-line rounded-full"></div>
+      </div>
+    </div>`;
+  const iconVideo = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M17 9.5l4-2.5v10l-4-2.5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+  const iconText = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 5h14M5 12h14M5 19h9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+  const iconAudio = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+
+  document.getElementById('revCarVideo').innerHTML = Array.from({length:3}).map(()=> mk(iconVideo, t['reviews.soon_video'])).join('');
+  document.getElementById('revCarText').innerHTML = Array.from({length:3}).map(()=> mk(iconText, t['reviews.soon_text'])).join('');
+  document.getElementById('revCarAudio').innerHTML = Array.from({length:3}).map(()=> mk(iconAudio, t['reviews.soon_audio'])).join('');
+}
+
+/* review tabs */
+document.querySelectorAll('.review-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.review-tab').forEach(b=> b.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = btn.getAttribute('data-tab');
+    document.querySelectorAll('.review-panel').forEach(p=>{
+      p.classList.toggle('hidden', p.getAttribute('data-panel') !== tab);
+    });
+  });
+});
+
+/* TODO: replace with the real 2GIS office link when provided */
+document.getElementById('gisLink').href = '#';
+
+/* ======================================================================
+   TOUR SEARCH FILTER
+====================================================================== */
+document.getElementById('tourSearch').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const city = document.getElementById('fCity').value;
+  const type = document.getElementById('fType').value;
+  const cards = document.querySelectorAll('#tourGrid > article');
+  let visible = 0;
+  cards.forEach(card=>{
+    const cities = (card.getAttribute('data-city')||'').split(' ');
+    const types = (card.getAttribute('data-type')||'').split(' ');
+    const matchCity = !city || cities.includes(city);
+    const matchType = !type || types.includes(type);
+    const show = matchCity && matchType;
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  document.getElementById('tours').scrollIntoView({ behavior:'smooth', block:'start' });
+});
+
+/* ======================================================================
+   FAB (WhatsApp / Telegram / WeChat)
+====================================================================== */
+const fab = document.getElementById('fab');
+const fabMain = document.getElementById('fabMain');
+fabMain.addEventListener('click', ()=> fab.classList.toggle('fab-open'));
+document.addEventListener('click', (e)=>{
+  if(!fab.contains(e.target)) fab.classList.remove('fab-open');
+});
+/* TODO: replace with real Telegram / WeChat links when provided */
+document.getElementById('fabTelegram').href = '#';
+document.getElementById('fabWechat').href = '#';
+
+/* ======================================================================
+   SCROLL REVEAL (GSAP)
+====================================================================== */
+if(window.gsap && window.ScrollTrigger && !reduceMotion){
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll('[data-reveal]').forEach(el=>{
+    gsap.to(el, {
+      opacity:1, y:0, duration:0.9, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 88%' }
+    });
+  });
+} else {
+  document.querySelectorAll('[data-reveal]').forEach(el=> el.classList.add('in'));
+}
+
+/* ======================================================================
+   INIT
+====================================================================== */
+applyLang(currentLang);
+</script>
+</body>
+</html>
