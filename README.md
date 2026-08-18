@@ -37,3 +37,17 @@ A few links are placeholders (`href="#"`) pending real values, marked `TODO` in 
 - Only verified facts are shown (87,600+ Instagram followers, Meta Verified, the 7 real destinations). No invented statistics, prices, or reviews.
 - Only one tour has a confirmed price (480,000 ₸, Zhangjiajie + Chongqing); all others link to WhatsApp with a pre-filled inquiry message.
 - The testimonials section is a clearly-labeled "coming soon" placeholder until real reviews are supplied.
+
+## Image credits
+
+Most photography is original (Quan Travel / Unsplash). Five destination-card photos (Chongqing, Xi'an, Guangzhou, Hong Kong, Chengdu — no in-house photos exist for these cities yet) are sourced from Wikimedia Commons and require attribution if reused elsewhere:
+
+| File | Photographer | License |
+|---|---|---|
+| `Photo/web/city-chongqing.jpg` | Jonashtand | CC BY-SA 4.0 |
+| `Photo/web/city-xian.jpg` | Gary Todd | CC0 |
+| `Photo/web/city-guangzhou.jpg` | jo.sau | CC BY 2.0 |
+| `Photo/web/city-hongkong.jpg` | Daniel Case | CC BY-SA 3.0 |
+| `Photo/web/city-chengdu.jpg` | SONORAMA (English Wikivoyage) | CC BY-SA 1.0 |
+
+Replace these with your own photography as it becomes available.

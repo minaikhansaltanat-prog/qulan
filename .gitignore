@@ -9,6 +9,7 @@ temporary screenshots/
 # Video/gallery and Video/posters are what the site actually serves)
 Photo/*.jpg
 Photo/*.jpeg
+Photo/cities/
 Video/*.mp4
 
 # Reference-only mockup, not part of the shipped site
