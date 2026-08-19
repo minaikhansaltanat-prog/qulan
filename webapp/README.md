@@ -13,16 +13,21 @@ keeps working untouched while the admin platform is built out.
   own S3-compatible buckets, region `sin` — used instead of Cloudflare R2 so
   everything stays on one platform/bill; swap later if you'd rather use R2)
 - URL: https://web-production-4c0eb.up.railway.app (no custom domain attached yet)
-- Deploy method: **CLI-only** (`railway up`), not GitHub auto-deploy. The repo's
-  `Video/`/`Photo/` folders make the full git repo ~900MB, which made Railway's
-  GitHub-snapshot-based build step slow/flaky. To redeploy after a change:
-  ```bash
-  cd webapp
-  railway up --service web --project 300ba903-e416-4fa6-8a0d-85007c094bd2 --environment production
-  ```
-  Re-connecting GitHub auto-deploy (`railway service source connect --repo ...`) is
-  possible later if you'd rather push-to-deploy — worth revisiting once the repo's
-  media files are trimmed down or moved out of git history.
+- Deploy method: **GitHub auto-deploy** (`git push` → Railway builds automatically).
+  `railway service source connect --repo minaikhansaltanat-prog/qulan --branch main`
+  is what wires this up; `rootDirectory` on the service is set to `webapp`. Just
+  `git push origin main` to redeploy — no manual `railway up` needed.
+
+  This wasn't always true: earlier deploys hit a genuine Railway platform incident
+  ("Degraded Performance — Deployments", since resolved), which I initially — and
+  incorrectly — worked around by disconnecting the GitHub source and pushing via CLI
+  tarball (`railway up`) instead, blaming the repo's ~900MB `Video/`/`Photo/` folders
+  for slow snapshotting. That CLI-only path turned out to reliably fail at the
+  "Build image" step with no useful logs. Reconnecting GitHub fixed it immediately —
+  so the CLI path itself was the actual problem, not repo size. If deploys ever start
+  failing silently again, check whether the service is still GitHub-connected
+  (`railway service source` or the Railway dashboard's Settings tab) before assuming
+  it's a Railway-side incident.
 - Migrations run automatically on every deploy via a pre-deploy command
   (`npx prisma migrate deploy`).
 - The bucket has CORS enabled (`PUT`/`POST`/`GET` from `localhost:3000-3002` and the
