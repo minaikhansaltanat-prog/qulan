@@ -56,3 +56,195 @@ model AuditLog {
   @@index([entityType, entityId])
   @@map("audit_logs")
 }
+
+// ---------------------------------------------------------------------------
+// Phase 2: content schema. UI for most of this lands in Phase 3/4 — this
+// migration exists so later phases only need to build screens, not models.
+// ---------------------------------------------------------------------------
+
+enum Destination {
+  ZHANGJIAJIE
+  CHONGQING
+  XIAN
+  SHANGHAI
+  GUANGZHOU
+  HONGKONG
+  CHENGDU
+}
+
+enum TourAudience {
+  GROUP
+  PRIVATE
+  BOTH
+}
+
+enum TourStatus {
+  PUBLISHED
+  DRAFT
+  ARCHIVED
+}
+
+model Tour {
+  id          String       @id @default(cuid())
+  title       String
+  slogan      String?
+  destinations Destination[]
+  durationDays Int
+  audience    TourAudience
+  priceTenge  Int?
+  includes    String[]
+  excludes    String[]
+  // Day-by-day itinerary: [{ day: 1, title: "...", description: "..." }, ...]
+  itinerary   Json?
+  difficulty  String?
+  status      TourStatus   @default(DRAFT)
+  seoTitle    String?
+  seoDescription String?
+  slug        String       @unique
+  displayOrder Int         @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  galleryItems GalleryItem[]
+  reviews      Review[]
+  departures   GroupTourDeparture[]
+  leads        Lead[]
+
+  @@map("tours")
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+}
+
+enum MediaSource {
+  UPLOAD
+  EXTERNAL
+}
+
+// General media library (site's "Фотогалерея" / "Видеогалерея" blocks).
+// tourId is optional since Tour CRUD doesn't exist until Phase 3 — uploads
+// start as unattached library items and get associated to a tour later.
+model GalleryItem {
+  id          String      @id @default(cuid())
+  type        MediaType
+  source      MediaSource @default(UPLOAD)
+  // Bucket object key when source=UPLOAD, null when source=EXTERNAL.
+  key         String?
+  // YouTube/Vimeo/Instagram Reels link when source=EXTERNAL.
+  externalUrl String?
+  posterKey   String?
+  altText     String
+  isCover     Boolean     @default(false)
+  displayOrder Int        @default(0)
+  tourId      String?
+  tour        Tour?       @relation(fields: [tourId], references: [id], onDelete: SetNull)
+  createdAt   DateTime    @default(now())
+
+  @@index([tourId])
+  @@map("gallery_items")
+}
+
+enum ReviewType {
+  VIDEO
+  TEXT
+  AUDIO
+}
+
+model Review {
+  id             String     @id @default(cuid())
+  clientName     String
+  clientPhotoKey String?
+  type           ReviewType
+  textContent    String?
+  mediaKey       String?
+  rating         Int
+  tourId         String?
+  tour           Tour?      @relation(fields: [tourId], references: [id], onDelete: SetNull)
+  isPublished    Boolean    @default(false)
+  isFeatured     Boolean    @default(false)
+  createdAt      DateTime   @default(now())
+
+  @@index([tourId])
+  @@map("reviews")
+}
+
+// Generic block-content store for the homepage editor (Hero, УТП, "Тәжірибе"
+// mosaic, "Куанмен танысыңыз", footer, ...). `key` matches the site's real
+// block names from index.html so Phase 4's editor maps 1:1 onto real content.
+model HomepageBlock {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  content   Json
+  updatedAt DateTime @updatedAt
+
+  @@map("homepage_blocks")
+}
+
+model FaqItem {
+  id           String   @id @default(cuid())
+  question     String
+  answer       String
+  displayOrder Int      @default(0)
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  @@map("faq_items")
+}
+
+model GroupTourDeparture {
+  id            String   @id @default(cuid())
+  tourId        String
+  tour          Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  departureDate DateTime
+  totalSeats    Int
+  bookedSeats   Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  @@index([tourId])
+  @@map("group_tour_departures")
+}
+
+enum BlogStatus {
+  PUBLISHED
+  DRAFT
+}
+
+model BlogPost {
+  id             String     @id @default(cuid())
+  title          String
+  coverKey       String?
+  contentHtml    String
+  category       String?
+  seoTitle       String?
+  seoDescription String?
+  slug           String     @unique
+  status         BlogStatus @default(DRAFT)
+  publishedAt    DateTime?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@map("blog_posts")
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+  CLOSED
+}
+
+model Lead {
+  id           String     @id @default(cuid())
+  name         String
+  phone        String
+  message      String?
+  sourceTourId String?
+  sourceTour   Tour?      @relation(fields: [sourceTourId], references: [id], onDelete: SetNull)
+  status       LeadStatus @default(NEW)
+  createdAt    DateTime   @default(now())
+
+  @@index([sourceTourId])
+  @@map("leads")
+}

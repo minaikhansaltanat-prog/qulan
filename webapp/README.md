@@ -1,4 +1,4 @@
-# Quan Travel — Admin Platform (Phase 1)
+# Quan Travel — Admin Platform (Phase 1 + 2)
 
 Next.js app that will eventually host the `/admin` panel described in the technical
 spec, deployed as a single Railway service alongside (eventually replacing) the
@@ -25,6 +25,35 @@ keeps working untouched while the admin platform is built out.
   media files are trimmed down or moved out of git history.
 - Migrations run automatically on every deploy via a pre-deploy command
   (`npx prisma migrate deploy`).
+- The bucket has CORS enabled (`PUT`/`POST`/`GET` from `localhost:3000-3002` and the
+  production domain) so the browser can upload video files directly — see
+  "Media / Phase 2" below. Re-run `PutBucketCorsCommand` if the production domain
+  changes (e.g. after attaching a custom domain).
+
+## Media / Phase 2
+
+Railway Buckets are **private** — there's no public bucket URL (unlike S3 or R2 with
+a public bucket policy). Two consequences that shaped this implementation:
+
+- **Uploads**: photos go through our server (`POST /api/admin/media/photos`), which
+  converts them to WebP with `sharp` before storing — fits easily under Railway's
+  request size limits at ≤20MB. Videos (≤200MB) skip the server entirely: the client
+  gets a presigned `PUT` URL (`requestVideoUploadUrl` server action) and uploads
+  straight to the bucket, which is why CORS had to be configured.
+- **Serving**: every public-facing media URL is `/api/media/<key>`, a route handler
+  that streams the object from the bucket with a one-year `Cache-Control` header
+  (`src/app/api/media/[...key]/route.ts`). There's no CDN in front of it yet — if
+  gallery traffic grows, put Cloudflare (or similar) in front of the Railway domain,
+  or reconsider Cloudflare R2 (which does support public buckets + its own CDN).
+
+The Gallery admin page (`/admin/gallery`) is a working general media library — upload,
+list, delete — not yet tied to individual tours (`GalleryItem.tourId` is nullable
+until the Tours module exists in Phase 3).
+
+The full Phase 2 content schema (Tour, GalleryItem, Review, HomepageBlock, FaqItem,
+GroupTourDeparture, BlogPost, Lead) is in `prisma/schema.prisma` now, even though most
+of it doesn't have admin UI yet — Phase 3/4 build screens against a schema that's
+already settled instead of changing models mid-build.
 
 ## What Phase 1 delivers
 
