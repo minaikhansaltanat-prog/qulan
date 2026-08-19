@@ -6,6 +6,26 @@ static marketing site at the repo root. **This phase does not touch the existing
 `index.html` site** — it lives entirely in this `webapp/` folder so the live site
 keeps working untouched while the admin platform is built out.
 
+## Production (Railway)
+
+- Project: **quan-travel-admin** (Railway workspace `minaikhansaltanat-prog's Projects`)
+- Services: `web` (this app), `Postgres`, and a `media` object storage bucket (Railway's
+  own S3-compatible buckets, region `sin` — used instead of Cloudflare R2 so
+  everything stays on one platform/bill; swap later if you'd rather use R2)
+- URL: https://web-production-4c0eb.up.railway.app (no custom domain attached yet)
+- Deploy method: **CLI-only** (`railway up`), not GitHub auto-deploy. The repo's
+  `Video/`/`Photo/` folders make the full git repo ~900MB, which made Railway's
+  GitHub-snapshot-based build step slow/flaky. To redeploy after a change:
+  ```bash
+  cd webapp
+  railway up --service web --project 300ba903-e416-4fa6-8a0d-85007c094bd2 --environment production
+  ```
+  Re-connecting GitHub auto-deploy (`railway service source connect --repo ...`) is
+  possible later if you'd rather push-to-deploy — worth revisiting once the repo's
+  media files are trimmed down or moved out of git history.
+- Migrations run automatically on every deploy via a pre-deploy command
+  (`npx prisma migrate deploy`).
+
 ## What Phase 1 delivers
 
 - Next.js 16 (App Router, TypeScript, Tailwind v4) project scaffold.
