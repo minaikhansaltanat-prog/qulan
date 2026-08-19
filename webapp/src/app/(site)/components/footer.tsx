@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useI18n } from "@/lib/i18n-context";
 import { WeChatPopover } from "./wechat-popover";
 
@@ -91,7 +92,12 @@ export function Footer() {
           </div>
         </div>
         <div className="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-          <p>{t("footer.copyright")}</p>
+          <div className="flex items-center gap-4">
+            <p>{t("footer.copyright")}</p>
+            <Link href="/admin/login" className="hover:text-white/70 transition-colors">
+              Кіру
+            </Link>
+          </div>
           <p>{t("footer.legal")}</p>
         </div>
       </div>
