@@ -1,4 +1,4 @@
-# Quan Travel — Admin Platform (Phase 1 + 2)
+# Quan Travel — Admin Platform (Phase 1–4)
 
 Next.js app that will eventually host the `/admin` panel described in the technical
 spec, deployed as a single Railway service alongside (eventually replacing) the
@@ -119,15 +119,49 @@ npx prisma dev              # prints a local DATABASE_URL, keep it running
 
 Generate a real `AUTH_SECRET` with `npx auth secret`.
 
+## Phase 3: Tours, Reviews, Gallery↔Tour linking
+
+- Tours (`/admin/tours`): full CRUD, destination multiselect, dynamic
+  includes/excludes lists, a day-by-day itinerary builder, SEO fields, slug
+  auto-generated from the Kazakh title via Cyrillic→Latin transliteration
+  (`src/lib/slug.ts`), publish/draft/archived status, up/down reordering
+  (no drag-and-drop — kept it to simple move buttons to avoid pulling in a
+  DnD library for an admin tool).
+- Reviews (`/admin/reviews`): matches the live site's real four tabs — Video,
+  Text, Audio, and 2GIS (2GIS is an external link, not a stored review type).
+  Client photo + video/audio upload reuse the same presigned-URL pattern as
+  Gallery. Publish/feature toggles, filterable by type.
+- Gallery items (existing or newly uploaded) can now be assigned to a Tour.
+
+## Phase 4: Homepage block editor, FAQ, Leads inbox
+
+- Homepage editor (`/admin/homepage`) edits `HomepageBlock` rows (generic
+  `{ key, content: Json }`) through typed forms per block — see
+  `src/lib/homepage-blocks.ts` for the Zod schema + Kazakh-language default
+  content for each key (`hero`, `why`, `about`, `trust`, `footer`). `why` has
+  a dynamic УТП-card list like Tours' includes/itinerary editors.
+- FAQ items live in their own `FaqItem` model, managed from the same page
+  (add/publish-toggle/delete) since the real site's FAQ block logically
+  belongs with the rest of the homepage content.
+- Leads (`/admin/leads`): status update per row, CSV export
+  (`/api/admin/leads/export`, UTF-8 BOM so Kazakh text opens correctly in
+  Excel). No delete action — matches the spec's Admin-role restriction
+  (view + edit only) and there was no delete requirement for Owner either.
+  The table will be empty until the public site's contact forms write into
+  the `Lead` model — that wiring happens when the public site is migrated
+  into this app (see below).
+
 ## What's deliberately not done yet
 
-- No real Postgres/R2/S3 provisioned on Railway — Phase 2 per the spec.
-- Tours/gallery/reviews/homepage/calendar/blog/leads/analytics are placeholder
-  pages that explain what's coming, not working CRUD yet — Phase 3/4.
 - The public marketing site (`index.html` at the repo root) has not been
-  migrated into this Next.js app. Decide when that migration happens before
-  starting Phase 3, since the spec wants `/admin` and the public site on one
-  Next.js app / one Railway service.
+  migrated into this Next.js app, so none of the admin-edited content
+  (tours, reviews, homepage blocks, leads) is wired into the live site yet.
+  Decide when that migration happens — the spec wants `/admin` and the
+  public site on one Next.js app / one Railway service.
+- Blog and the group-tour departure calendar have schema (`BlogPost`,
+  `GroupTourDeparture`) but no admin UI yet.
+- Analytics dashboard, Settings (SEO/analytics codes), and Users self-service
+  password change are still placeholders.
 - `npm audit` flags a stack-exhaustion advisory in `@prisma/config`'s
   `deepmerge-ts` dependency (dev-time CLI tooling only, not shipped to
   production runtime) — low practical risk, tracked for a future `prisma`
