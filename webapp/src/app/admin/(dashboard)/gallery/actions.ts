@@ -129,6 +129,29 @@ export async function addExternalVideo(_prevState: { error?: string } | undefine
   return { error: undefined };
 }
 
+export async function assignGalleryItemTour(itemId: string, tourId: string) {
+  const session = await requireGalleryAccess();
+
+  await prisma.galleryItem.update({
+    where: { id: itemId },
+    data: { tourId: tourId || null },
+  });
+
+  await prisma.auditLog.create({
+    data: {
+      actorId: session.user.id,
+      actorEmail: session.user.email ?? "",
+      actorRole: session.user.role,
+      action: "gallery.assign-tour",
+      entityType: "GalleryItem",
+      entityId: itemId,
+      metadata: { tourId: tourId || null },
+    },
+  });
+
+  revalidatePath("/admin/gallery");
+}
+
 export async function deleteGalleryItem(id: string) {
   const session = await requireGalleryAccess();
 

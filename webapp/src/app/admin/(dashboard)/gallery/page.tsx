@@ -6,10 +6,14 @@ import { PhotoUploadForm } from "./photo-upload-form";
 import { VideoUploadForm } from "./video-upload-form";
 import { ExternalVideoForm } from "./external-video-form";
 import { DeleteItemButton } from "./delete-item-button";
+import { TourSelect } from "./tour-select";
 
 export default async function GalleryPage() {
   await requireModuleAccess("gallery");
-  const items = await prisma.galleryItem.findMany({ orderBy: { createdAt: "desc" } });
+  const [items, tours] = await Promise.all([
+    prisma.galleryItem.findMany({ orderBy: { createdAt: "desc" } }),
+    prisma.tour.findMany({ select: { id: true, title: true }, orderBy: { title: "asc" } }),
+  ]);
 
   return (
     <div>
@@ -18,22 +22,22 @@ export default async function GalleryPage() {
       </h1>
       <p className="mt-2 max-w-2xl text-[15px] leading-[1.7] text-muted">
         Жалпы медиа кітапхана — сайттың «Фотогалерея» және «Видеогалерея» блоктарын осы жерден
-        толтырасыз. Турға тағайындау Турлар модулі іске қосылған соң (Фаза 3) қолжетімді болады.
+        толтырасыз. Әр файлды турға тағайындауға болады (міндетті емес).
       </p>
 
       <div className="mt-8 space-y-4 rounded-xl border border-line bg-white p-5">
         <h2 className="font-display text-[18px] text-ink">Фото қосу</h2>
-        <PhotoUploadForm />
+        <PhotoUploadForm tours={tours} />
       </div>
 
       <div className="mt-4 space-y-4 rounded-xl border border-line bg-white p-5">
         <h2 className="font-display text-[18px] text-ink">Видео жүктеу</h2>
-        <VideoUploadForm />
+        <VideoUploadForm tours={tours} />
       </div>
 
       <div className="mt-4 space-y-4 rounded-xl border border-line bg-white p-5">
         <h2 className="font-display text-[18px] text-ink">Немесе сыртқы видео сілтемесі</h2>
-        <ExternalVideoForm />
+        <ExternalVideoForm tours={tours} />
       </div>
 
       {items.length === 0 ? (
@@ -75,9 +79,12 @@ export default async function GalleryPage() {
               <div className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                 <DeleteItemButton id={item.id} />
               </div>
-              <p className="pointer-events-none absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-ink/70 to-transparent px-2 py-1.5 text-[11px] text-paper/90">
-                {item.altText}
-              </p>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-1 bg-gradient-to-t from-ink/80 to-transparent px-2 pb-2 pt-4">
+                <p className="truncate text-[11px] text-paper/90">{item.altText}</p>
+                <div className="pointer-events-auto opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+                  <TourSelect itemId={item.id} currentTourId={item.tourId} tours={tours} />
+                </div>
+              </div>
             </div>
           ))}
         </div>

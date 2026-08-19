@@ -39,7 +39,4 @@ export async function deleteObject(key: string) {
   await s3.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }));
 }
 
-/** Public URL for our own /api/media proxy — Railway buckets have no public URLs. */
-export function mediaProxyUrl(key: string) {
-  return `/api/media/${key}`;
-}
+export { mediaProxyUrl } from "./s3-client";

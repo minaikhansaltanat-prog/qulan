@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { requestVideoUploadUrl, confirmVideoUpload } from "./actions";
 
-export function VideoUploadForm() {
+export function VideoUploadForm({ tours }: { tours: { id: string; title: string }[] }) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [pending, setPending] = useState(false);
@@ -16,6 +16,7 @@ export function VideoUploadForm() {
     const formData = new FormData(event.currentTarget);
     const file = formData.get("file") as File;
     const altText = String(formData.get("altText") ?? "");
+    const tourId = String(formData.get("tourId") ?? "");
     if (!file?.size) {
       setError("Файлды таңдаңыз");
       return;
@@ -43,7 +44,7 @@ export function VideoUploadForm() {
         return;
       }
 
-      const confirmed = await confirmVideoUpload({ key, altText });
+      const confirmed = await confirmVideoUpload({ key, altText, tourId: tourId || null });
       if (confirmed.error) {
         setError(confirmed.error);
         return;
@@ -85,6 +86,24 @@ export function VideoUploadForm() {
           className="h-9 rounded-lg border border-line bg-white px-3 text-[14px] outline-none
                      focus-visible:border-bgold focus-visible:ring-2 focus-visible:ring-bgold/30"
         />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="video-tour" className="text-[13px] font-medium text-ink">
+          Тур (міндетті емес)
+        </label>
+        <select
+          id="video-tour"
+          name="tourId"
+          className="h-9 rounded-lg border border-line bg-white px-3 text-[14px] outline-none
+                     focus-visible:border-bgold focus-visible:ring-2 focus-visible:ring-bgold/30"
+        >
+          <option value="">— Жоқ —</option>
+          {tours.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.title}
+            </option>
+          ))}
+        </select>
       </div>
       <button
         type="submit"

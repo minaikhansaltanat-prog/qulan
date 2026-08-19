@@ -19,7 +19,7 @@ function SubmitButton() {
   );
 }
 
-export function ExternalVideoForm() {
+export function ExternalVideoForm({ tours }: { tours: { id: string; title: string }[] }) {
   const [state, formAction] = useActionState(addExternalVideo, undefined);
 
   return (
@@ -49,6 +49,24 @@ export function ExternalVideoForm() {
           className="h-9 rounded-lg border border-line bg-white px-3 text-[14px] outline-none
                      focus-visible:border-bgold focus-visible:ring-2 focus-visible:ring-bgold/30"
         />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="ext-tour" className="text-[13px] font-medium text-ink">
+          Тур
+        </label>
+        <select
+          id="ext-tour"
+          name="tourId"
+          className="h-9 rounded-lg border border-line bg-white px-3 text-[14px] outline-none
+                     focus-visible:border-bgold focus-visible:ring-2 focus-visible:ring-bgold/30"
+        >
+          <option value="">— Жоқ —</option>
+          {tours.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.title}
+            </option>
+          ))}
+        </select>
       </div>
       <SubmitButton />
       {state?.error && (
