@@ -1,0 +1,209 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/lib/i18n-context";
+import { useVideoModal } from "./video-modal-context";
+import { Reveal } from "./reveal";
+
+const HERO_VIDEOS = [
+  "/Video/web/12139819-1440-2560-30fps.mp4",
+  "/Video/web/12374022-uhd-2160-3840-30fps.mp4",
+  "/Video/web/13596083-2160-3840-30fps.mp4",
+  "/Video/web/13606836-1080-1920-30fps.mp4",
+  "/Video/web/14904296-1080-1920-60fps.mp4",
+  "/Video/web/15683017-1080-1920-60fps.mp4",
+  "/Video/web/18102975-uhd-2160-3840-60fps.mp4",
+];
+const HERO_POSTERS = [
+  "/Video/posters/12139819-1440-2560-30fps.jpg",
+  "/Video/posters/12374022-uhd-2160-3840-30fps.jpg",
+  "/Video/posters/13596083-2160-3840-30fps.jpg",
+  "/Video/posters/13606836-1080-1920-30fps.jpg",
+  "/Video/posters/14904296-1080-1920-60fps.jpg",
+  "/Video/posters/15683017-1080-1920-60fps.jpg",
+  "/Video/posters/18102975-uhd-2160-3840-60fps.jpg",
+];
+
+export function Hero() {
+  const { t } = useI18n();
+  const { openVideo } = useVideoModal();
+  const [heroIndex, setHeroIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    function startCycle() {
+      if (timerRef.current) clearInterval(timerRef.current);
+      timerRef.current = setInterval(() => {
+        setHeroIndex((i) => (i + 1) % HERO_VIDEOS.length);
+      }, 5000);
+    }
+    function stopCycle() {
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+
+    startCycle();
+    videoRefs.current.forEach((v) => v?.play().catch(() => {}));
+
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          startCycle();
+          videoRefs.current.forEach((v) => v?.play().catch(() => {}));
+        } else {
+          stopCycle();
+          videoRefs.current.forEach((v) => v?.pause());
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => {
+      stopCycle();
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    videoRefs.current[heroIndex]?.play().catch(() => {});
+  }, [heroIndex]);
+
+  return (
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative min-h-[100svh] flex items-end md:items-center overflow-hidden bg-ink"
+    >
+      <div className="absolute inset-0">
+        {HERO_VIDEOS.map((src, i) => (
+          <video
+            key={src}
+            ref={(el) => {
+              videoRefs.current[i] = el;
+            }}
+            className={`hero-video ${i === heroIndex ? "is-active" : ""}`}
+            muted
+            loop
+            playsInline
+            preload={i < 2 ? "auto" : "metadata"}
+            poster={HERO_POSTERS[i]}
+            src={src}
+          />
+        ))}
+      </div>
+      <div className="absolute inset-0 hero-scrim-l"></div>
+      <div className="absolute inset-0 hero-scrim-b"></div>
+
+      <div className="relative z-10 max-w-[1360px] mx-auto w-full px-5 md:px-8 pb-10 md:pb-0 pt-32 md:pt-24">
+        <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
+          <Reveal className="glass-dark md:bg-transparent md:backdrop-blur-0 rounded-3xl p-6 md:p-0 max-w-2xl">
+            <p className="kicker text-white/90 mb-4">{t("hero.kicker")}</p>
+            <h1 className="font-black text-[2.6rem] leading-[1.04] sm:text-6xl md:text-7xl tracking-tight text-white">
+              <span>{t("hero.h1_1")}</span>
+              <br />
+              <span className="text-bred">{t("hero.h1_2")}</span>
+              <br />
+              <span>{t("hero.h1_3")}</span>
+            </h1>
+            <p className="mt-6 text-white/85 text-base md:text-lg max-w-lg">{t("hero.sub")}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-5">
+              {/* Matches the live site's actual behavior: `data-i18n` sits on
+                  this same <a>, so its JS overwrites textContent (including
+                  the arrow icon markup) on every language switch — the arrow
+                  never actually renders. Kept icon-less here for fidelity. */}
+              <a href="#tours" className="btn btn-primary rounded-full px-7 py-4 text-[15px]">
+                {t("hero.cta1")}
+              </a>
+              <button
+                type="button"
+                onClick={() => openVideo(HERO_VIDEOS[5])}
+                className="btn btn-ghost text-white text-[15px]"
+              >
+                <span className="w-11 h-11 rounded-full border border-white/50 flex items-center justify-center shrink-0">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+                <span>{t("hero.cta2")}</span>
+              </button>
+            </div>
+          </Reveal>
+
+          <Reveal
+            as="aside"
+            className="glass-light rounded-3xl shadow-glow p-6 w-full lg:w-[320px] shrink-0"
+          >
+            <ul className="space-y-5">
+              <li className="flex gap-3.5 items-start">
+                <span className="w-10 h-10 rounded-xl bg-bred/10 text-bred flex items-center justify-center shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M12 2l8 4v6c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-4z"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9 12l2 2 4-4"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                <div>
+                  <p className="font-bold text-[15px]">{t("trust.t1")}</p>
+                  <p className="text-sm text-muted mt-0.5">{t("trust.d1")}</p>
+                </div>
+              </li>
+              <li className="flex gap-3.5 items-start">
+                <span className="w-10 h-10 rounded-xl bg-bgold/10 text-bgold flex items-center justify-center shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
+                    <path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="font-bold text-[15px]">{t("trust.t2")}</p>
+                  <p className="text-sm text-muted mt-0.5">{t("trust.d2")}</p>
+                </div>
+              </li>
+              <li className="flex gap-3.5 items-start">
+                <span className="w-10 h-10 rounded-xl bg-bgreen/10 text-bgreen flex items-center justify-center shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 13a8 8 0 0116 0" stroke="currentColor" strokeWidth="1.7" />
+                    <rect x="3" y="13" width="4" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.7" />
+                    <rect x="17" y="13" width="4" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.7" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="font-bold text-[15px]">{t("trust.t3")}</p>
+                  <p className="text-sm text-muted mt-0.5">{t("trust.d3")}</p>
+                </div>
+              </li>
+            </ul>
+          </Reveal>
+        </div>
+      </div>
+
+      <div className="absolute z-10 bottom-5 right-5 md:right-8 flex gap-1.5">
+        {HERO_VIDEOS.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setHeroIndex(i)}
+            aria-label={`Слайд ${i + 1}`}
+            className={`w-6 h-1.5 rounded-full transition-colors ${i === heroIndex ? "bg-white" : "bg-white/35"}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
