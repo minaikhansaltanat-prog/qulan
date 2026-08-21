@@ -95,7 +95,7 @@ export function ToursSection() {
                     )}
                   </div>
                   <a
-                    href={`https://wa.me/77479545771?text=${encodeURIComponent(tour.waText)}`}
+                    href={`https://wa.me/77072841148?text=${encodeURIComponent(tour.waText)}`}
                     target="_blank"
                     rel="noopener"
                     className="car-btn"

@@ -68,8 +68,8 @@ export const ABOUT_DEFAULT: AboutContent = {
 export const TRUST_DEFAULT: TrustContent = { number: "87 600+", label: "Instagram жазылушысы · Meta Verified" };
 
 export const FOOTER_DEFAULT: FooterContent = {
-  phone: "+7 747 954 57 71",
-  whatsapp: "https://wa.me/77479545771",
+  phone: "+7 707 284 11 48",
+  whatsapp: "https://wa.me/77072841148",
   instagram: "https://www.instagram.com/quan_travel_/",
   description: "Quan Travel — Қазақстаннан Қытайға сенімді саяхат.",
 };

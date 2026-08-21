@@ -61,7 +61,7 @@ export function FaqSection() {
               <p className="font-serif text-2xl text-white leading-snug">{t("faq.aside_title")}</p>
               <p className="text-white/70 text-sm mt-3">{t("faq.aside_sub")}</p>
               <a
-                href="https://wa.me/77479545771"
+                href="https://wa.me/77072841148"
                 target="_blank"
                 rel="noopener"
                 className="btn btn-primary rounded-full px-6 py-3.5 text-sm mt-6"

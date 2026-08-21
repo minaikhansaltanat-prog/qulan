@@ -23,9 +23,8 @@ export function Fab() {
           iconSize={22}
         />
       </div>
-      {/* TODO: replace with the real Telegram link when provided */}
       <a
-        href="#"
+        href="https://t.me/+77072841148"
         target="_blank"
         rel="noopener"
         className="fab-item w-12 h-12 rounded-full bg-[#26A5E4] shadow-lift flex items-center justify-center"
@@ -36,7 +35,7 @@ export function Fab() {
         </svg>
       </a>
       <a
-        href="https://wa.me/77479545771"
+        href="https://wa.me/77072841148"
         target="_blank"
         rel="noopener"
         className="fab-item w-12 h-12 rounded-full bg-[#25D366] shadow-lift flex items-center justify-center"

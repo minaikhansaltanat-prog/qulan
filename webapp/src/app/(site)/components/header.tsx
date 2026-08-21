@@ -85,7 +85,7 @@ export function Header() {
 
           <div className="flex items-center gap-3 md:gap-4">
             <a
-              href="tel:+77479545771"
+              href="tel:+77072841148"
               className="hidden xl:flex items-center gap-2 text-[15px] font-bold hover:text-bred transition-colors"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -94,7 +94,7 @@ export function Header() {
                   fill="currentColor"
                 />
               </svg>
-              <span>+7&nbsp;747&nbsp;954&nbsp;57&nbsp;71</span>
+              <span>+7&nbsp;707&nbsp;284&nbsp;11&nbsp;48</span>
             </a>
 
             <div id="langSwitch" ref={langSwitchRef} className={`relative ${langOpen ? "lang-open" : ""}`}>
@@ -174,17 +174,17 @@ export function Header() {
             </a>
           ))}
           <div className="mt-8 flex flex-col gap-3">
-            <a href="tel:+77479545771" className="flex items-center gap-3 font-bold text-lg">
+            <a href="tel:+77072841148" className="flex items-center gap-3 font-bold text-lg">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"
                   fill="currentColor"
                 />
               </svg>
-              +7 747 954 57 71
+              +7 707 284 11 48
             </a>
             <a
-              href="https://wa.me/77479545771"
+              href="https://wa.me/77072841148"
               target="_blank"
               rel="noopener"
               className="btn btn-primary rounded-full px-6 py-3.5 text-base w-full mt-2"

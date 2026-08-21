@@ -16,11 +16,11 @@ export function CtaSection() {
           <p className="text-white/60 mt-3 max-w-md">{t("cta.sub")}</p>
         </div>
         <div className="flex items-center gap-4 shrink-0">
-          <a href="https://wa.me/77479545771" target="_blank" rel="noopener" className="btn btn-primary rounded-full px-7 py-4 text-[15px]">
+          <a href="https://wa.me/77072841148" target="_blank" rel="noopener" className="btn btn-primary rounded-full px-7 py-4 text-[15px]">
             {t("cta.btn")}
           </a>
           <a
-            href="https://wa.me/77479545771"
+            href="https://wa.me/77072841148"
             target="_blank"
             rel="noopener"
             aria-label="WhatsApp"
