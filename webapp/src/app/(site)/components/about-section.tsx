@@ -11,7 +11,7 @@ export function AboutSection() {
       <div className="max-w-[1360px] mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
         <div className="order-2 lg:order-1">
           <p className="kicker mb-3">{t("about.kicker")}</p>
-          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("about.title")}</h2>
+          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("about.title")}</h2>
           <p className="mt-6 text-[17px] leading-[1.8] text-ink/85">{t("about.p1")}</p>
           <p className="mt-4 text-[17px] leading-[1.8] text-ink/85">{t("about.p2")}</p>
           <blockquote className="mt-8 pl-6 border-l-4 border-bgold font-serif italic text-xl text-bgreen">

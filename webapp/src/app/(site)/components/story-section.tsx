@@ -30,7 +30,7 @@ export function StorySection() {
           <p className="kicker mb-3">
             <span className="text-bgold">◆</span> <span className="text-white/70">{t("story.kicker")}</span>
           </p>
-          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("story.title")}</h2>
+          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("story.title")}</h2>
           <p className="text-white/70 mt-4">{t("story.sub")}</p>
         </Reveal>
 

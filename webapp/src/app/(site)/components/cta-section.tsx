@@ -15,7 +15,7 @@ export function CtaSection() {
     >
       <div className="max-w-[1360px] mx-auto px-5 md:px-8 py-16 md:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
-          <h2 className="font-serif font-semibold text-3xl md:text-5xl text-white tracking-tight">{t("cta.title")}</h2>
+          <h2 className="font-serif font-semibold text-3xl md:text-5xl text-white tracking-tight uppercase">{t("cta.title")}</h2>
           <p className="text-white/70 mt-3 max-w-md">{t("cta.sub")}</p>
         </div>
         <div className="flex items-center gap-4 shrink-0">

@@ -54,7 +54,7 @@ export function ToursSection() {
         <Reveal className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <p className="kicker mb-3">{t("tours.kicker")}</p>
-            <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("tours.title")}</h2>
+            <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("tours.title")}</h2>
             <p className="text-muted mt-3 max-w-xl">{t("tours.sub")}</p>
           </div>
           <a href="#contact" className="hidden md:inline-flex btn btn-ghost font-bold text-[15px] border-b-2 border-bred pb-0.5">
@@ -70,7 +70,7 @@ export function ToursSection() {
               data-city={tour.cities}
               data-type={tour.types}
             >
-              <div className="img-zoom relative h-56">
+              <div className="img-zoom relative aspect-[16/10]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={tour.img} alt={tour.alt} className="w-full h-full object-cover" loading="lazy" />
                 {tour.badge && (
@@ -79,11 +79,11 @@ export function ToursSection() {
                   </span>
                 )}
               </div>
-              <div className="p-6 flex flex-col grow">
-                <h3 className="font-serif font-semibold text-xl leading-snug">{t(tour.titleKey)}</h3>
-                <p className="text-sm text-muted mt-2 grow">{t(tour.descKey)}</p>
-                <p className="text-xs text-muted mt-4">{t("tours.duration_custom")}</p>
-                <div className="flex items-end justify-between mt-2 pt-4 border-t border-line">
+              <div className="p-5 flex flex-col grow">
+                <h3 className="font-serif font-semibold text-lg leading-snug">{t(tour.titleKey)}</h3>
+                <p className="text-sm text-muted mt-2 grow line-clamp-2">{t(tour.descKey)}</p>
+                <p className="text-xs text-muted mt-3">{t("tours.duration_custom")}</p>
+                <div className="flex items-end justify-between mt-2 pt-3 border-t border-line">
                   <div>
                     <p className="text-[11px] text-muted uppercase tracking-wide">
                       {t(tour.priceLabelKey ?? "tours.price_ask")}

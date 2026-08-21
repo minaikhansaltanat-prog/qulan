@@ -60,7 +60,7 @@ export function ReviewsSection() {
       <div className="max-w-[1360px] mx-auto px-5 md:px-8">
         <Reveal className="mb-10">
           <p className="kicker mb-3">{t("reviews.kicker")}</p>
-          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("reviews.title")}</h2>
+          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("reviews.title")}</h2>
         </Reveal>
 
         <div className="flex flex-wrap gap-2 mb-8">

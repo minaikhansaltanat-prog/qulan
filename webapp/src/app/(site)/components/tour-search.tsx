@@ -22,11 +22,11 @@ export function TourSearch() {
   }
 
   return (
-    <section className="relative z-20 -mt-8 md:-mt-10 px-5 md:px-8">
-      <div
-        className="max-w-[1360px] mx-auto rounded-2xl md:rounded-[1.5rem] shadow-lift"
-        style={{ background: "linear-gradient(120deg, #7c211c 0%, #9f2b25 55%, #6f1e19 100%)" }}
-      >
+    <section
+      className="relative z-20"
+      style={{ background: "linear-gradient(120deg, #7c211c 0%, #9f2b25 55%, #6f1e19 100%)" }}
+    >
+      <div className="max-w-[1360px] mx-auto">
         <form
           onSubmit={handleSubmit}
           className="grid md:grid-cols-[1fr_1fr_1fr_auto] gap-4 md:gap-0 md:divide-x md:divide-white/15 px-5 md:px-8 py-6"

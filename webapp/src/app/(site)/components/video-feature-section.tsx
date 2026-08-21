@@ -26,7 +26,7 @@ export function VideoFeatureSection() {
       <div className="max-w-[1360px] mx-auto px-5 md:px-8 py-20 md:py-28 grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-center">
         <Reveal>
           <p className="kicker mb-3">{t("story.kicker")}</p>
-          <h2 className="font-serif font-semibold text-3xl md:text-4xl tracking-tight text-white leading-tight">
+          <h2 className="font-serif font-semibold text-3xl md:text-4xl tracking-tight text-white leading-tight uppercase">
             {t("video.title")}
           </h2>
           <p className="text-white/60 mt-4 max-w-sm leading-relaxed">{t("story.sub")}</p>

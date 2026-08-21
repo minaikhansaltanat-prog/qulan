@@ -99,7 +99,7 @@ export function GallerySection() {
           <Reveal className="px-5 md:px-8 mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="kicker mb-3">{t("pgallery.kicker")}</p>
-              <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("pgallery.title")}</h2>
+              <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("pgallery.title")}</h2>
             </div>
             <CarouselButtons goPrev={photoNav.goPrev} goNext={photoNav.goNext} />
           </Reveal>
@@ -119,7 +119,7 @@ export function GallerySection() {
           <Reveal className="px-5 md:px-8 mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="kicker mb-3">{t("vgallery.kicker")}</p>
-              <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("vgallery.title")}</h2>
+              <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("vgallery.title")}</h2>
             </div>
             <CarouselButtons goPrev={videoNav.goPrev} goNext={videoNav.goNext} />
           </Reveal>

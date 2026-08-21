@@ -23,7 +23,7 @@ export function DestinationsSection() {
       <div className="max-w-[1360px] mx-auto px-5 md:px-8">
         <Reveal className="mb-12">
           <p className="kicker mb-3">{t("dest.kicker")}</p>
-          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("dest.title")}</h2>
+          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("dest.title")}</h2>
         </Reveal>
 
         <div className="grid md:grid-cols-4 md:grid-rows-2 gap-5">

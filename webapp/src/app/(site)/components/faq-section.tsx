@@ -19,7 +19,7 @@ export function FaqSection() {
       <div className="max-w-[1360px] mx-auto px-5 md:px-8">
         <Reveal className="max-w-2xl mb-12">
           <p className="kicker mb-3">{t("faq.kicker")}</p>
-          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight">{t("faq.title")}</h2>
+          <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("faq.title")}</h2>
           <p className="text-muted mt-4">{t("faq.sub")}</p>
         </Reveal>
 

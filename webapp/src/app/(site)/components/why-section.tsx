@@ -62,7 +62,7 @@ export function WhySection() {
         className="max-w-[1360px] mx-auto rounded-[1.75rem] px-6 py-12 md:px-14 md:py-14 text-center"
         style={{ background: "linear-gradient(135deg, #1c0a08 0%, #3a1310 55%, #1f3a2e 130%)" }}
       >
-        <h2 className="font-serif font-semibold text-2xl md:text-3xl tracking-tight text-white">
+        <h2 className="font-serif font-semibold text-2xl md:text-3xl tracking-tight text-white uppercase">
           {t("why.title")} <span className="text-bgold-light">—</span>
         </h2>
 
