@@ -25,13 +25,30 @@ const HERO_POSTERS = [
   "/Video/posters/18102975-uhd-2160-3840-60fps.jpg",
 ];
 
+// Real opening banner: Kuan's own Shanghai photo (same asset used in the
+// founder card and the Destinations "Шанхай" tile) — shown bright and
+// unfiltered for the first 2s, matching the reference mockup's editorial
+// hero-photo composition, then crossfades into the video carousel.
+const HERO_INTRO_PHOTO = "/Photo/web/whatsapp-image-2026-08-17-at-23-50-28-2.jpg";
+
 export function Hero() {
   const { t } = useI18n();
   const { openVideo } = useVideoModal();
   const [heroIndex, setHeroIndex] = useState(0);
+  const [introVisible, setIntroVisible] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setIntroVisible(false);
+      return;
+    }
+    const introTimeout = setTimeout(() => setIntroVisible(false), 2000);
+    return () => clearTimeout(introTimeout);
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -98,6 +115,15 @@ export function Hero() {
           />
         ))}
       </div>
+      <Image
+        src={HERO_INTRO_PHOTO}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className={`hero-video ${introVisible ? "is-active" : ""}`}
+        aria-hidden="true"
+      />
       {/* Slightly richer scrim than the original — the redesign leans on a
           deeper red-black gradient instead of flat ink, so the CHINA
           wordmark's red/gold split has enough contrast to read as premium
