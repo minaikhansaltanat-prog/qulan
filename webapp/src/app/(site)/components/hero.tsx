@@ -6,7 +6,14 @@ import { useI18n } from "@/lib/i18n-context";
 import { useVideoModal } from "./video-modal-context";
 import { Reveal } from "./reveal";
 
+// Client's own trip footage (real Zhangjiajie/Furong tour clips) leads the
+// carousel; the previous generic stock nature clips now play afterwards.
 const HERO_VIDEOS = [
+  "/Video/gallery/new-9034.mp4",
+  "/Video/gallery/new-4602.mp4",
+  "/Video/gallery/new-8460.mp4",
+  "/Video/gallery/new-9036.mp4",
+  "/Video/gallery/new-9049.mp4",
   "/Video/web/12139819-1440-2560-30fps.mp4",
   "/Video/web/12374022-uhd-2160-3840-30fps.mp4",
   "/Video/web/13596083-2160-3840-30fps.mp4",
@@ -16,6 +23,11 @@ const HERO_VIDEOS = [
   "/Video/web/18102975-uhd-2160-3840-60fps.mp4",
 ];
 const HERO_POSTERS = [
+  "/Video/posters/new-9034.jpg",
+  "/Video/posters/new-4602.jpg",
+  "/Video/posters/new-8460.jpg",
+  "/Video/posters/new-9036.jpg",
+  "/Video/posters/new-9049.jpg",
   "/Video/posters/12139819-1440-2560-30fps.jpg",
   "/Video/posters/12374022-uhd-2160-3840-30fps.jpg",
   "/Video/posters/13596083-2160-3840-30fps.jpg",
@@ -177,7 +189,7 @@ export function Hero() {
               </a>
               <button
                 type="button"
-                onClick={() => openVideo(HERO_VIDEOS[5])}
+                onClick={() => openVideo(HERO_VIDEOS[0])}
                 className="btn btn-ghost !text-white hover:!text-bgold-light text-[15px]"
               >
                 <span className="w-11 h-11 rounded-full border border-white/50 flex items-center justify-center shrink-0">

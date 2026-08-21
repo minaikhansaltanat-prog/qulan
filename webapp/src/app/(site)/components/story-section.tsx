@@ -3,12 +3,22 @@
 import { useI18n } from "@/lib/i18n-context";
 import { Reveal } from "./reveal";
 
+// New trip photos lead the mosaic (big + secondary slots); the previous
+// four photos now follow in the medium tiles and the closing wide banner.
 const PHOTOS = [
-  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-15-1.jpg", alt: "Дәстүрлі шай рәсімі", key: "story.c1", big: true },
-  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-28-1.jpg", alt: "Түнгі базар", key: "story.c2" },
-  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-27-1.jpg", alt: "Қала ырғағы", key: "story.c3" },
-  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-26-2.jpg", alt: "Ежелгі көше", key: "story.c4", wide: true },
+  { img: "/Photo/web/new-zhangjiajie-lake-reflection.jpg", alt: "Айнадай көл беті", key: "story.c5", tile: "big" },
+  { img: "/Photo/web/new-misty-pillars-aerial.jpg", alt: "Тас мұнаралар", key: "story.c6", tile: "regular" },
+  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-15-1.jpg", alt: "Дәстүрлі шай рәсімі", key: "story.c1", tile: "regular" },
+  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-28-1.jpg", alt: "Түнгі базар", key: "story.c2", tile: "regular" },
+  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-27-1.jpg", alt: "Қала ырғағы", key: "story.c3", tile: "regular" },
+  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-26-2.jpg", alt: "Ежелгі көше", key: "story.c4", tile: "wide" },
 ];
+
+const TILE_CLASSES: Record<string, string> = {
+  big: "md:row-span-2 h-[420px] md:h-full",
+  regular: "h-52",
+  wide: "md:col-span-3 h-64",
+};
 
 export function StorySection() {
   const { t } = useI18n();
@@ -26,25 +36,16 @@ export function StorySection() {
 
         <div className="grid md:grid-cols-3 gap-5">
           {PHOTOS.map((p) => (
-            <div
-              key={p.key}
-              className={`rounded-3xl overflow-hidden img-zoom relative ${
-                p.big
-                  ? "md:row-span-2 h-[420px] md:h-full"
-                  : p.wide
-                    ? "md:col-span-2 h-64"
-                    : "h-52"
-              }`}
-            >
+            <div key={p.key} className={`rounded-3xl overflow-hidden img-zoom relative ${TILE_CLASSES[p.tile]}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={p.img}
                 alt={p.alt}
-                className={`w-full h-full object-cover ${p.wide ? "object-[50%_22%] md:object-[50%_37%]" : ""}`}
+                className={`w-full h-full object-cover ${p.tile === "wide" ? "object-[50%_22%] md:object-[50%_37%]" : ""}`}
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
-              <p className={`absolute text-white font-serif ${p.big || p.wide ? "bottom-5 left-5 text-xl" : "bottom-4 left-4 text-lg"}`}>
+              <p className={`absolute text-white font-serif ${p.tile !== "regular" ? "bottom-5 left-5 text-xl" : "bottom-4 left-4 text-lg"}`}>
                 {t(p.key)}
               </p>
             </div>

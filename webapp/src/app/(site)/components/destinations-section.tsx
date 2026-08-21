@@ -3,7 +3,7 @@
 import { useI18n } from "@/lib/i18n-context";
 import { Reveal } from "./reveal";
 
-const BIG = { img: "/Photo/web/chenyang1912-hjf36lehxy8-unsplash.jpg", alt: "Чжанцзяцзе", zh: "张家界", key: "dest.city.zhangjiajie", descKey: "dest.zhangjiajie" };
+const BIG = { img: "/Photo/web/new-glass-bridge-valley.jpg", alt: "Чжанцзяцзе", zh: "张家界", key: "dest.city.zhangjiajie", descKey: "dest.zhangjiajie" };
 const MEDIUM = { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-28-2.jpg", alt: "Шанхай", zh: "上海", key: "dest.city.shanghai" };
 const SMALL_TOP = [
   { img: "/Photo/web/city-chongqing.jpg", alt: "Чунцин, Хунъядун", zh: "重庆", key: "dest.city.chongqing" },

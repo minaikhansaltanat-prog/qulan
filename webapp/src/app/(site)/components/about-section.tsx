@@ -34,8 +34,8 @@ export function AboutSection() {
         <div className="order-1 lg:order-2 relative">
           <div className="rounded-[2rem] overflow-hidden shadow-lift aspect-[3/4] max-w-md mx-auto">
             <Image
-              src="/Photo/web/whatsapp-image-2026-08-17-at-23-50-28-2.jpg"
-              alt="Куан, Шанхай Бунд жағалауында"
+              src="/Photo/web/new-kuan-zhangjiajie-portrait.jpg"
+              alt="Куан, Чжанцзяцзе тау шыңдарында"
               width={480}
               height={640}
               className="w-full h-full object-cover"
