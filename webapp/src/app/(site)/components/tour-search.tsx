@@ -22,65 +22,80 @@ export function TourSearch() {
   }
 
   return (
-    <section className="bg-ink relative z-20">
-      <div className="max-w-[1360px] mx-auto px-5 md:px-8 py-6">
+    <section className="relative z-20 -mt-8 md:-mt-10 px-5 md:px-8">
+      <div
+        className="max-w-[1360px] mx-auto rounded-2xl md:rounded-[1.5rem] shadow-lift"
+        style={{ background: "linear-gradient(120deg, #7c211c 0%, #9f2b25 55%, #6f1e19 100%)" }}
+      >
         <form
           onSubmit={handleSubmit}
-          className="grid md:grid-cols-[1fr_1fr_1fr_auto] gap-3 md:gap-0 md:divide-x md:divide-white/10"
+          className="grid md:grid-cols-[1fr_1fr_1fr_auto] gap-4 md:gap-0 md:divide-x md:divide-white/15 px-5 md:px-8 py-6"
         >
           <div className="px-0 md:px-6 first:pl-0">
-            <label className="block text-[11px] uppercase tracking-wider text-white/50 font-bold mb-1.5">
+            <label className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-white/60 font-bold mb-1.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s7-6.1 7-12a7 7 0 10-14 0c0 5.9 7 12 7 12z" stroke="currentColor" strokeWidth="2" />
+                <circle cx="12" cy="9" r="2.3" stroke="currentColor" strokeWidth="2" />
+              </svg>
               {t("search.city")}
             </label>
             <select
               name="fCity"
               className="w-full bg-transparent text-white font-semibold text-[15px] outline-none cursor-pointer"
             >
-              <option value="">{t("search.city_all")}</option>
-              <option value="zhangjiajie">{t("dest.city.zhangjiajie")}</option>
-              <option value="shanghai">{t("dest.city.shanghai")}</option>
-              <option value="chongqing">{t("dest.city.chongqing")}</option>
-              <option value="xian">{t("dest.city.xian")}</option>
-              <option value="guangzhou">{t("dest.city.guangzhou")}</option>
-              <option value="hongkong">{t("dest.city.hongkong")}</option>
-              <option value="chengdu">{t("dest.city.chengdu")}</option>
+              <option className="text-ink" value="">{t("search.city_all")}</option>
+              <option className="text-ink" value="zhangjiajie">{t("dest.city.zhangjiajie")}</option>
+              <option className="text-ink" value="shanghai">{t("dest.city.shanghai")}</option>
+              <option className="text-ink" value="chongqing">{t("dest.city.chongqing")}</option>
+              <option className="text-ink" value="xian">{t("dest.city.xian")}</option>
+              <option className="text-ink" value="guangzhou">{t("dest.city.guangzhou")}</option>
+              <option className="text-ink" value="hongkong">{t("dest.city.hongkong")}</option>
+              <option className="text-ink" value="chengdu">{t("dest.city.chengdu")}</option>
             </select>
           </div>
           <div className="px-0 md:px-6">
-            <label className="block text-[11px] uppercase tracking-wider text-white/50 font-bold mb-1.5">
+            <label className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-white/60 font-bold mb-1.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
+                <path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
               {t("search.type")}
             </label>
             <select
               name="fType"
               className="w-full bg-transparent text-white font-semibold text-[15px] outline-none cursor-pointer"
             >
-              <option value="">{t("search.type_all")}</option>
-              <option value="group">{t("search.type_group")}</option>
-              <option value="private">{t("search.type_private")}</option>
+              <option className="text-ink" value="">{t("search.type_all")}</option>
+              <option className="text-ink" value="group">{t("search.type_group")}</option>
+              <option className="text-ink" value="private">{t("search.type_private")}</option>
             </select>
           </div>
           <div className="px-0 md:px-6">
-            <label className="block text-[11px] uppercase tracking-wider text-white/50 font-bold mb-1.5">
+            <label className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-white/60 font-bold mb-1.5">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 8v4l2.5 2.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+              </svg>
               {t("search.date")}
             </label>
             <select
               name="fDate"
               className="w-full bg-transparent text-white font-semibold text-[15px] outline-none cursor-pointer"
             >
-              <option value="">{t("search.date_any")}</option>
-              <option value="soon">{t("search.date_soon")}</option>
-              <option value="season">{t("search.date_season")}</option>
+              <option className="text-ink" value="">{t("search.date_any")}</option>
+              <option className="text-ink" value="soon">{t("search.date_soon")}</option>
+              <option className="text-ink" value="season">{t("search.date_season")}</option>
             </select>
           </div>
-          {/* Both the button and its inner span carry `data-i18n="search.submit"`
-              on the live site, so the outer element's JS overwrite wipes out
-              the inner span and the search icon on every render — no icon
-              actually shows. Matched here for fidelity. */}
           <button
             type="submit"
-            className="btn btn-primary rounded-xl md:rounded-2xl px-7 py-4 text-sm mt-2 md:mt-0 md:ml-6"
+            className="btn rounded-xl px-7 py-4 text-sm font-bold mt-2 md:mt-0 md:ml-6 bg-bgold text-ink hover:bg-bgold-light transition-colors"
           >
-            {t("search.submit")}
+            <span>{t("search.submit")}</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2.2" />
+              <path d="M21 21l-4.3-4.3" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+            </svg>
           </button>
         </form>
       </div>

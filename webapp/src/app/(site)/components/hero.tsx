@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n-context";
 import { useVideoModal } from "./video-modal-context";
 import { Reveal } from "./reveal";
@@ -97,33 +98,61 @@ export function Hero() {
           />
         ))}
       </div>
-      <div className="absolute inset-0 hero-scrim-l"></div>
+      {/* Slightly richer scrim than the original — the redesign leans on a
+          deeper red-black gradient instead of flat ink, so the CHINA
+          wordmark's red/gold split has enough contrast to read as premium
+          rather than washed out. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(100deg, rgba(17,17,17,.90) 0%, rgba(35,15,13,.72) 30%, rgba(17,17,17,.22) 62%, rgba(17,17,17,0) 82%)",
+        }}
+      />
       <div className="absolute inset-0 hero-scrim-b"></div>
 
       <div className="relative z-10 max-w-[1360px] mx-auto w-full px-5 md:px-8 pb-10 md:pb-0 pt-32 md:pt-24">
         <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
           <Reveal className="glass-dark md:bg-transparent md:backdrop-blur-0 rounded-3xl p-6 md:p-0 max-w-2xl">
             <p className="kicker text-white/90 mb-4">{t("hero.kicker")}</p>
-            <h1 className="font-black text-[2.6rem] leading-[1.04] sm:text-6xl md:text-7xl tracking-tight text-white">
-              <span>{t("hero.h1_1")}</span>
-              <br />
-              <span className="text-bred">{t("hero.h1_2")}</span>
-              <br />
-              <span>{t("hero.h1_3")}</span>
+
+            {/* CHINA wordmark — the reference's central art-direction move.
+                Split-color treatment (deep red → gold) instead of a flat
+                gradient, matching the brand's existing red/gold palette. */}
+            <p
+              className="font-serif font-bold leading-[0.9] tracking-tight text-[4.2rem] sm:text-[6rem] md:text-[7.5rem]"
+              aria-hidden="true"
+            >
+              <span className="text-bred-light">{t("hero.wordmark_1")}</span>
+              <span className="text-bgold-light">{t("hero.wordmark_2")}</span>
+            </p>
+
+            <h1 className="sr-only">
+              {t("hero.h1_1")} {t("hero.h1_2")} {t("hero.h1_3")}
             </h1>
-            <p className="mt-6 text-white/85 text-base md:text-lg max-w-lg">{t("hero.sub")}</p>
+
+            <p className="mt-3 text-white/90 text-sm md:text-base font-semibold tracking-[0.14em] uppercase max-w-lg">
+              {t("hero.tagline")}
+            </p>
+            <p className="mt-5 text-white/80 text-base md:text-lg max-w-lg leading-relaxed">{t("hero.sub")}</p>
+
             <div className="mt-8 flex flex-wrap items-center gap-5">
-              {/* Matches the live site's actual behavior: `data-i18n` sits on
-                  this same <a>, so its JS overwrites textContent (including
-                  the arrow icon markup) on every language switch — the arrow
-                  never actually renders. Kept icon-less here for fidelity. */}
               <a href="#tours" className="btn btn-primary rounded-full px-7 py-4 text-[15px]">
                 {t("hero.cta1")}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="ml-1" aria-hidden="true">
+                  <path
+                    d="M5 12h14M13 6l6 6-6 6"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </a>
               <button
                 type="button"
                 onClick={() => openVideo(HERO_VIDEOS[5])}
-                className="btn btn-ghost text-white text-[15px]"
+                className="btn btn-ghost !text-white hover:!text-bgold-light text-[15px]"
               >
                 <span className="w-11 h-11 rounded-full border border-white/50 flex items-center justify-center shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="white" aria-hidden="true">
@@ -133,12 +162,36 @@ export function Hero() {
                 <span>{t("hero.cta2")}</span>
               </button>
             </div>
+
+            {/* Real trust fact (87,600+ Instagram followers, Meta Verified) —
+                not the reference's invented "1000+ saved travellers" chip. */}
+            <div className="mt-7 inline-flex flex-wrap items-center gap-x-2.5 gap-y-1.5 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 pl-2 pr-4 py-2 max-w-full">
+              <span className="inline-flex items-center gap-2.5 shrink-0 whitespace-nowrap">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-bred text-white shrink-0">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                <span className="text-white text-[13px] font-bold">87 600+</span>
+              </span>
+              <span className="text-white/70 text-[13px]">{t("trust.d1")}</span>
+            </div>
           </Reveal>
 
-          <Reveal
-            as="aside"
-            className="glass-light rounded-3xl shadow-glow p-6 w-full lg:w-[320px] shrink-0"
-          >
+          <Reveal as="aside" className="glass-light rounded-3xl shadow-glow p-6 w-full lg:w-[320px] shrink-0">
+            <div className="flex items-center gap-3 pb-5 mb-5 border-b border-line">
+              <Image
+                src="/Photo/web/whatsapp-image-2026-08-17-at-23-50-28-2.jpg"
+                alt="Куан — Quan Travel негізін қалаушы"
+                width={56}
+                height={56}
+                className="size-14 rounded-full object-cover object-top ring-2 ring-bgold/40"
+              />
+              <div>
+                <p className="font-bold text-[15px] leading-tight">Куан</p>
+                <p className="text-[13px] text-muted mt-0.5">Негізін қалаушы · жеке гид</p>
+              </div>
+            </div>
             <ul className="space-y-5">
               <li className="flex gap-3.5 items-start">
                 <span className="w-10 h-10 rounded-xl bg-bred/10 text-bred flex items-center justify-center shrink-0">

@@ -9,13 +9,20 @@ export function Footer() {
   const { t } = useI18n();
 
   return (
-    <footer className="bg-bgreen-dark bg-[#0F1E17] text-white pt-16 pb-8">
+    <footer
+      className="text-white pt-16 pb-8 border-t"
+      style={{
+        background: "linear-gradient(160deg, #0F1E17 0%, #0a1610 70%, #0c1512 100%)",
+        borderTopColor: "rgba(184,134,11,0.25)",
+      }}
+    >
       <div className="max-w-[1360px] mx-auto px-5 md:px-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
           <div className="lg:col-span-2">
             <Image src="/logo/logo.png" alt="Quan Travel" width={160} height={40} className="h-10 w-auto object-contain brightness-0 invert opacity-95" />
             <p className="text-white/55 text-sm mt-5 max-w-xs leading-relaxed">{t("footer.desc")}</p>
-            <div className="flex items-center gap-3 mt-6">
+            <p className="font-bold text-[11px] uppercase tracking-wider text-bgold-light/80 mt-7 mb-3">{t("footer.h_social")}</p>
+            <div className="flex items-center gap-3">
               <a
                 href="https://www.instagram.com/quan_travel_/"
                 target="_blank"
@@ -53,26 +60,26 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <p className="font-bold text-sm uppercase tracking-wider text-white/40 mb-4">{t("footer.h_tours")}</p>
+            <p className="font-bold text-sm uppercase tracking-wider text-bgold-light/70 mb-4">{t("footer.h_tours")}</p>
             <ul className="space-y-2.5 text-sm text-white/70">
-              <li><a href="#tours" className="hover:text-white transition-colors">{t("footer.l_tours")}</a></li>
-              <li><a href="#destinations" className="hover:text-white transition-colors">{t("footer.l_dest")}</a></li>
-              <li><a href="#gallery" className="hover:text-white transition-colors">{t("footer.l_gallery")}</a></li>
+              <li><a href="#tours" className="hover:text-bgold-light transition-colors">{t("footer.l_tours")}</a></li>
+              <li><a href="#destinations" className="hover:text-bgold-light transition-colors">{t("footer.l_dest")}</a></li>
+              <li><a href="#gallery" className="hover:text-bgold-light transition-colors">{t("footer.l_gallery")}</a></li>
             </ul>
           </div>
           <div>
-            <p className="font-bold text-sm uppercase tracking-wider text-white/40 mb-4">{t("footer.h_company")}</p>
+            <p className="font-bold text-sm uppercase tracking-wider text-bgold-light/70 mb-4">{t("footer.h_company")}</p>
             <ul className="space-y-2.5 text-sm text-white/70">
-              <li><a href="#about" className="hover:text-white transition-colors">{t("footer.l_about")}</a></li>
-              <li><a href="#reviews" className="hover:text-white transition-colors">{t("footer.l_reviews")}</a></li>
+              <li><a href="#about" className="hover:text-bgold-light transition-colors">{t("footer.l_about")}</a></li>
+              <li><a href="#reviews" className="hover:text-bgold-light transition-colors">{t("footer.l_reviews")}</a></li>
             </ul>
           </div>
           <div>
-            <p className="font-bold text-sm uppercase tracking-wider text-white/40 mb-4">{t("footer.h_contact")}</p>
+            <p className="font-bold text-sm uppercase tracking-wider text-bgold-light/70 mb-4">{t("footer.h_contact")}</p>
             <ul className="space-y-2.5 text-sm text-white/70">
-              <li><a href="tel:+77072841148" className="hover:text-white transition-colors">+7 707 284 11 48</a></li>
-              <li><a href="https://wa.me/77072841148" target="_blank" rel="noopener" className="hover:text-white transition-colors">WhatsApp</a></li>
-              <li><a href="https://www.instagram.com/quan_travel_/" target="_blank" rel="noopener" className="hover:text-white transition-colors">Instagram · @quan_travel_</a></li>
+              <li><a href="tel:+77072841148" className="hover:text-bgold-light transition-colors">+7 707 284 11 48</a></li>
+              <li><a href="https://wa.me/77072841148" target="_blank" rel="noopener" className="hover:text-bgold-light transition-colors">WhatsApp</a></li>
+              <li><a href="https://www.instagram.com/quan_travel_/" target="_blank" rel="noopener" className="hover:text-bgold-light transition-colors">Instagram · @quan_travel_</a></li>
             </ul>
             <div className="mt-6 flex items-center gap-3">
               <Image src="/logo/wechat-qr.jpg" alt="WeChat QR коды" width={80} height={80} className="w-20 h-20 rounded-lg object-cover border border-white/15 shrink-0" />
@@ -93,7 +100,7 @@ export function Footer() {
         <div className="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
           <div className="flex items-center gap-4">
             <p>{t("footer.copyright")}</p>
-            <Link href="/admin/login" className="hover:text-white/70 transition-colors">
+            <Link href="/admin/login" className="hover:text-bgold-light/80 transition-colors">
               Кіру
             </Link>
           </div>

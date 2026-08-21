@@ -9,15 +9,26 @@ export function CtaSection() {
   // links (nav, destination cards, "Барлық турлар туралы сұрау") don't
   // actually resolve to anything either; matched for fidelity.
   return (
-    <section className="bg-ink noise relative overflow-hidden">
+    <section
+      className="noise relative overflow-hidden"
+      style={{ background: "linear-gradient(115deg, #7c211c 0%, #9f2b25 60%, #6f1e19 100%)" }}
+    >
       <div className="max-w-[1360px] mx-auto px-5 md:px-8 py-16 md:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
           <h2 className="font-serif font-semibold text-3xl md:text-5xl text-white tracking-tight">{t("cta.title")}</h2>
-          <p className="text-white/60 mt-3 max-w-md">{t("cta.sub")}</p>
+          <p className="text-white/70 mt-3 max-w-md">{t("cta.sub")}</p>
         </div>
         <div className="flex items-center gap-4 shrink-0">
-          <a href="https://wa.me/77072841148" target="_blank" rel="noopener" className="btn btn-primary rounded-full px-7 py-4 text-[15px]">
+          <a
+            href="https://wa.me/77072841148"
+            target="_blank"
+            rel="noopener"
+            className="btn rounded-full px-7 py-4 text-[15px] font-bold bg-bgold text-ink hover:bg-bgold-light transition-colors"
+          >
             {t("cta.btn")}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="ml-1" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </a>
           <a
             href="https://wa.me/77072841148"

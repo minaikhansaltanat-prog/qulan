@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode, type ElementType } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type ElementType } from "react";
 
 /**
  * Port of the static site's `[data-reveal]` + GSAP ScrollTrigger fade-up.
@@ -12,10 +12,12 @@ export function Reveal({
   children,
   as: Tag = "div",
   className = "",
+  style,
 }: {
   children: ReactNode;
   as?: ElementType;
   className?: string;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -43,7 +45,7 @@ export function Reveal({
   }, []);
 
   return (
-    <Tag ref={ref} className={`reveal ${inView ? "in" : ""} ${className}`}>
+    <Tag ref={ref} className={`reveal ${inView ? "in" : ""} ${className}`} style={style}>
       {children}
     </Tag>
   );
