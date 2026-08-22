@@ -71,7 +71,7 @@ export function Header() {
             <Image src="/brand/logo.png" alt="Quan Travel logo" width={140} height={44} className="h-9 md:h-11 w-auto object-contain" priority />
           </a>
 
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-7 text-[13.5px] xl:text-[15px] font-semibold whitespace-nowrap">
+          <nav className="hidden lg:flex items-center gap-2 xl:gap-6 text-[13px] xl:text-[15px] font-semibold whitespace-nowrap">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}
@@ -86,7 +86,7 @@ export function Header() {
           <div className="flex items-center gap-3 md:gap-4">
             <a
               href="tel:+77072841148"
-              className="hidden xl:flex items-center gap-2 text-[15px] font-bold hover:text-bred transition-colors"
+              className="hidden 2xl:flex items-center gap-2 text-[15px] font-bold hover:text-bred transition-colors"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
@@ -141,7 +141,7 @@ export function Header() {
 
             <a
               href="#tours"
-              className="hidden md:inline-flex btn btn-primary rounded-full px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm whitespace-nowrap"
+              className="!hidden md:!inline-flex btn btn-primary rounded-full px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm whitespace-nowrap"
             >
               {t("nav.cta")}
             </a>

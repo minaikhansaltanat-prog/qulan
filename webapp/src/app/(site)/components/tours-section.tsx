@@ -57,7 +57,7 @@ export function ToursSection() {
             <h2 className="font-serif font-semibold text-3xl md:text-5xl tracking-tight uppercase">{t("tours.title")}</h2>
             <p className="text-muted mt-3 max-w-xl">{t("tours.sub")}</p>
           </div>
-          <a href="#contact" className="hidden md:inline-flex btn btn-ghost font-bold text-[15px] border-b-2 border-bred pb-0.5">
+          <a href="#contact" className="!hidden md:!inline-flex btn btn-ghost font-bold text-[15px] border-b-2 border-bred pb-0.5">
             {t("tours.all")}
           </a>
         </Reveal>
