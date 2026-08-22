@@ -5,10 +5,10 @@ import { Reveal } from "./reveal";
 
 // New trip photos lead the mosaic (big + secondary slots); the previous
 // four photos now follow in the medium tiles and the closing wide banner.
-const PHOTOS = [
+const PHOTOS: { img: string; alt: string; key: string; tile: string; pos?: string }[] = [
   { img: "/Photo/web/new-zhangjiajie-lake-reflection.jpg", alt: "Айнадай көл беті", key: "story.c5", tile: "big" },
   { img: "/Photo/web/new-misty-pillars-aerial.jpg", alt: "Тас мұнаралар", key: "story.c6", tile: "regular" },
-  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-15-1.jpg", alt: "Дәстүрлі шай рәсімі", key: "story.c1", tile: "regular" },
+  { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-15-1.jpg", alt: "Дәстүрлі шай рәсімі", key: "story.c1", tile: "regular", pos: "50% 20%" },
   { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-28-1.jpg", alt: "Түнгі базар", key: "story.c2", tile: "regular" },
   { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-27-1.jpg", alt: "Қала ырғағы", key: "story.c3", tile: "regular" },
   { img: "/Photo/web/whatsapp-image-2026-08-17-at-23-50-26-2.jpg", alt: "Ежелгі көше", key: "story.c4", tile: "wide" },
@@ -42,6 +42,7 @@ export function StorySection() {
                 src={p.img}
                 alt={p.alt}
                 className={`w-full h-full object-cover ${p.tile === "wide" ? "object-[50%_22%] md:object-[50%_37%]" : ""}`}
+                style={p.pos ? { objectPosition: p.pos } : undefined}
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>

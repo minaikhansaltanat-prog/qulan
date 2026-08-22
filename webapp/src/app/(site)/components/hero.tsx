@@ -151,7 +151,7 @@ export function Hero() {
 
       <div className="relative z-10 max-w-[1360px] mx-auto w-full px-5 md:px-8 pb-10 md:pb-0 pt-32 md:pt-24">
         <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
-          <Reveal className="glass-dark md:bg-transparent md:backdrop-blur-0 rounded-3xl p-6 md:p-0 max-w-2xl">
+          <Reveal className="hero-text-card max-w-2xl">
             <p className="kicker text-white/90 mb-4">{t("hero.kicker")}</p>
 
             {/* CHINA wordmark — the reference's central art-direction move.
@@ -284,14 +284,14 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="absolute z-10 bottom-5 right-5 md:right-8 flex gap-1.5">
+      <div className="absolute z-10 bottom-5 right-5 md:right-8 flex gap-1">
         {HERO_VIDEOS.map((_, i) => (
           <button
             key={i}
             type="button"
             onClick={() => setHeroIndex(i)}
             aria-label={`Слайд ${i + 1}`}
-            className={`w-6 h-1.5 rounded-full transition-colors ${i === heroIndex ? "bg-white" : "bg-white/35"}`}
+            className={`h-1 rounded-full transition-all ${i === heroIndex ? "w-5 bg-bgold-light" : "w-2.5 bg-white/30"}`}
           />
         ))}
       </div>

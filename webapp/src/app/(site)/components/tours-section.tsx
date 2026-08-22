@@ -117,7 +117,7 @@ export function ToursSection() {
           ))}
         </div>
 
-        <a href="#contact" className="md:hidden mt-8 inline-flex btn btn-ghost font-bold text-[15px] border-b-2 border-bred pb-0.5">
+        <a href="#contact" className="inline-flex md:!hidden mt-8 btn btn-ghost font-bold text-[15px] border-b-2 border-bred pb-0.5">
           {t("tours.all")}
         </a>
       </div>

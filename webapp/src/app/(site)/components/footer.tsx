@@ -61,13 +61,13 @@ export function Footer() {
           </div>
           <div>
             <p className="font-bold text-sm uppercase tracking-wider text-bgold-light/70 mb-4">{t("footer.h_social")}</p>
-            <div className="flex items-center gap-2.5 flex-wrap">
+            <div className="flex items-center gap-2 flex-nowrap">
               <a
                 href="https://www.instagram.com/quan_travel_/"
                 target="_blank"
                 rel="noopener"
                 aria-label="Instagram"
-                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
+                className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
               >
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <rect x="3" y="3" width="18" height="18" rx="5.5" stroke="currentColor" strokeWidth="1.7" />
@@ -81,7 +81,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label="YouTube"
-                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
+                className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M9.3 8.4v7.2l6.4-3.6-6.4-3.6z" />
@@ -92,7 +92,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label="WhatsApp"
-                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
+                className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.24.68-1.4 1.3-1.94 1.35-.5.06-1.1.1-3.4-.72-2.86-1.02-4.68-3.9-4.83-4.08-.14-.18-1.15-1.52-1.15-2.9s.72-2.05.98-2.33c.24-.27.53-.34.7-.34h.5c.16 0 .38-.03.58.44.24.56.8 1.95.87 2.09.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.28.7 1.16 1.52 1.88 1.05.93 1.93 1.22 2.2 1.36.28.14.44.12.6-.07.16-.18.68-.8.87-1.07.18-.28.36-.23.6-.14.25.09 1.6.75 1.87.89.27.14.45.2.51.32.07.12.07.68-.16 1.36z" />
@@ -103,14 +103,14 @@ export function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label="Telegram"
-                className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
+                className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M21.9 4.3L2.5 11.9c-1 .4-1 1.7.1 2l4.6 1.4 1.8 5.6c.2.7 1.1.9 1.6.3l2.6-2.8 4.9 3.6c.7.5 1.7.1 1.9-.7l3.5-15.6c.2-.9-.7-1.7-1.6-1.4zM8.5 14.8l9.4-7c.3-.2.6.2.3.4l-7.8 7.5-.3 3.3-1.6-4.2z" />
                 </svg>
               </a>
               <WeChatPopover
-                triggerClassName="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
+                triggerClassName="w-9 h-9 rounded-full flex items-center justify-center shrink-0 bg-white/8 border border-bgold-light/25 text-bgold-light hover:bg-bgold hover:text-ink hover:border-bgold transition-colors"
                 iconSize={16}
               />
             </div>
